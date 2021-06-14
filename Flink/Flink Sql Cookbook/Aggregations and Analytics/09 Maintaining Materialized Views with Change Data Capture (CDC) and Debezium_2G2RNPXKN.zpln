@@ -1,0 +1,201 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-03-05 00:53:57.822",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614905627677_70813771",
+      "id": "paragraph_1614905627677_70813771",
+      "dateCreated": "2021-03-05 00:53:47.677",
+      "status": "READY"
+    },
+    {
+      "text": "%sh\n\ncd \"/notebook/Flink Sql Cookbook/Aggregations and Analytics/09 Maintaining Materialized Views with Change Data Capture (CDC) and Debezium/\"\n\ndocker-compose build\n\ndocker-compose up -d",
+      "user": "anonymous",
+      "dateUpdated": "2021-03-05 00:56:41.056",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614905637918_1892958159",
+      "id": "paragraph_1614905637918_1892958159",
+      "dateCreated": "2021-03-05 00:53:57.918",
+      "dateStarted": "2021-03-05 00:56:41.119",
+      "dateFinished": "2021-03-05 00:56:44.655",
+      "status": "ERROR"
+    },
+    {
+      "text": "%flink.ssql\n\nCREATE TABLE accident_claims (\n    claim_id INT,\n    claim_total FLOAT,\n    claim_total_receipt VARCHAR(50),\n    claim_currency VARCHAR(3),\n    member_id INT,\n    accident_date VARCHAR(20),\n    accident_type VARCHAR(20),\n    accident_detail VARCHAR(20),\n    claim_date VARCHAR(20),\n    claim_status VARCHAR(10),\n    ts_created VARCHAR(20),\n    ts_updated VARCHAR(20)\n) WITH (\n  \u0027connector\u0027 \u003d \u0027postgres-cdc\u0027,\n  \u0027hostname\u0027 \u003d \u0027postgres\u0027,\n  \u0027port\u0027 \u003d \u00275432\u0027,\n  \u0027username\u0027 \u003d \u0027postgres\u0027,\n  \u0027password\u0027 \u003d \u0027postgres\u0027,\n  \u0027database-name\u0027 \u003d \u0027postgres\u0027,\n  \u0027schema-name\u0027 \u003d \u0027claims\u0027,\n  \u0027table-name\u0027 \u003d \u0027accident_claims\u0027\n );\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-03-05 14:56:56.842",
+      "progress": 0,
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614905801115_126329172",
+      "id": "paragraph_1614905801115_126329172",
+      "dateCreated": "2021-03-05 00:56:41.115",
+      "dateStarted": "2021-03-05 14:56:56.969",
+      "dateFinished": "2021-03-05 14:57:18.529",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql(type\u003dupdate)\n\nSELECT accident_detail,\n       SUM(claim_total) AS agg_claim_costs\nFROM accident_claims\nWHERE claim_status \u003c\u003e \u0027DENIED\u0027\nGROUP BY accident_detail;",
+      "user": "anonymous",
+      "dateUpdated": "2021-03-05 14:58:46.753",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "accident_detail": "string",
+                      "agg_claim_costs": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "FLINK JOB",
+          "tooltip": "View in Flink web UI",
+          "group": "flink",
+          "values": [
+            {
+              "jobUrl": "http://localhost:8081#/job/f9690534abe10138ff65a02f54c62bac"
+            }
+          ],
+          "interpreterSettingId": "flink"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614926445198_469424514",
+      "id": "paragraph_1614926445198_469424514",
+      "dateCreated": "2021-03-05 14:40:45.216",
+      "dateStarted": "2021-03-05 14:57:56.861",
+      "dateFinished": "2021-03-05 14:58:03.296",
+      "status": "ERROR"
+    },
+    {
+      "text": "%flink.ssql\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-03-05 14:41:10.443",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1614926470442_307078385",
+      "id": "paragraph_1614926470442_307078385",
+      "dateCreated": "2021-03-05 14:41:10.443",
+      "status": "READY"
+    }
+  ],
+  "name": "09 Maintaining Materialized Views with Change Data Capture (CDC) and Debezium",
+  "id": "2G2RNPXKN",
+  "defaultInterpreterGroup": "flink",
+  "version": "0.9.0",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

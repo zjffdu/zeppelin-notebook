@@ -1,0 +1,341 @@
+{
+  "paragraphs": [
+    {
+      "title": "Overview",
+      "text": "%md\n\nThis tutorial demonstrate how to use Flink do streaming analytics via its streaming sql + udf. Zeppelin now support 3 kinds of streaming visualization.\n\n* Single  - Single mode is for the case when the result of sql statement is always one row, such as the following example\n* Update  - Update mode is suitable for the case when the output is more than one rows, and always will be updated continuously. \n* Append  - Append mode is suitable for the scenario where output data is always appended\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-01-25 14:26:13.376",
+      "progress": 0,
+      "config": {
+        "runOnSelectionChange": true,
+        "title": true,
+        "checkEmpty": true,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1579054784565_2122156822",
+      "id": "paragraph_1579054784565_2122156822",
+      "dateCreated": "2020-01-15 10:19:44.565",
+      "dateStarted": "2021-01-25 14:26:13.376",
+      "dateFinished": "2021-01-25 14:26:13.394",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink \n\nimport org.apache.flink.streaming.api.functions.source.SourceFunction\nimport org.apache.flink.table.api.TableEnvironment\nimport org.apache.flink.streaming.api.TimeCharacteristic\nimport org.apache.flink.streaming.api.checkpoint.ListCheckpointed\nimport java.util.Collections\nimport scala.collection.JavaConversions._\n\nsenv.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)\nsenv.enableCheckpointing(1000)\n\nval data \u003d senv.addSource(new SourceFunction[(Long, String)] with ListCheckpointed[java.lang.Long] {\n\n  val pages \u003d Seq(\"home\", \"search\", \"search\", \"product\", \"product\", \"product\")\n  var count: Long \u003d 0\n  var running : Boolean \u003d true\n  // startTime is 2020/1/1\n  var startTime: Long \u003d new java.util.Date(2020 - 1900,0,1).getTime\n  var sleepInterval \u003d 100\n\n  override def run(ctx: SourceFunction.SourceContext[(Long, String)]): Unit \u003d {\n    val lock \u003d ctx.getCheckpointLock\n\n    while (count \u003c 3000 \u0026\u0026 running) {\n      lock.synchronized({\n        ctx.collect((startTime + count * sleepInterval, pages(count.toInt % pages.size)))\n        count +\u003d 1\n        Thread.sleep(sleepInterval)\n      })\n    }\n  }\n\n  override def cancel(): Unit \u003d {\n    running \u003d false\n  }\n\n  override def snapshotState(checkpointId: Long, timestamp: Long): java.util.List[java.lang.Long] \u003d {\n    Collections.singletonList(count)\n  }\n\n  override def restoreState(state: java.util.List[java.lang.Long]): Unit \u003d {\n    state.foreach(s \u003d\u003e count \u003d s)\n  }\n\n}).assignAscendingTimestamps(_._1)\n\nstenv.registerDataStream(\"log\", data, \u0027time, \u0027url, \u0027rowtime.rowtime)\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-01-25 14:27:02.042",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1611556011274_1848600588",
+      "id": "paragraph_1611556011274_1848600588",
+      "dateCreated": "2021-01-25 14:26:51.274",
+      "dateStarted": "2021-01-25 14:27:02.045",
+      "dateFinished": "2021-01-25 14:27:36.849",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Single row mode of Output",
+      "text": "%flink.ssql(type\u003dsingle,parallelism\u003d1,refreshInterval\u003d1000,template\u003d\u003ch1\u003e{1}\u003c/h1\u003e until \u003ch2\u003e{0}\u003c/h2\u003e)\n\nselect max(rowtime),count(1) from log\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-01-25 14:28:01.427",
+      "progress": 0,
+      "config": {
+        "runOnSelectionChange": true,
+        "title": true,
+        "checkEmpty": true,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql",
+        "template": "\u003ch1\u003e{1}\u003c/h1\u003e until \u003ch2\u003e{0}\u003c/h2\u003e",
+        "refreshInterval": "3000",
+        "parallelism": "1",
+        "type": "single",
+        "latest_checkpoint_path": "\u003ccheckpoint-not-externally-addressable\u003e"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "FLINK JOB",
+          "tooltip": "View in Flink web UI",
+          "group": "flink",
+          "values": [
+            {
+              "jobUrl": "http://localhost:8081#/job/1086e2a18ab8e8402b8969412c9b0e8e"
+            }
+          ],
+          "interpreterSettingId": "flink"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1578909960516_-1812187661",
+      "id": "paragraph_1578909960516_-1812187661",
+      "dateCreated": "2020-01-13 18:06:00.516",
+      "dateStarted": "2021-01-25 14:28:01.430",
+      "dateFinished": "2021-01-25 14:30:03.648",
+      "status": "ABORT"
+    },
+    {
+      "title": "Update mode of Output",
+      "text": "%flink.ssql(type\u003dupdate,parallelism\u003d1,refreshInterval\u003d2000)\n\nselect url,count(1) as pv from log group by url\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-01-25 14:28:48.633",
+      "progress": 0,
+      "config": {
+        "runOnSelectionChange": true,
+        "title": true,
+        "checkEmpty": true,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "multiBarChart": {
+                  "xLabelStatus": "default",
+                  "rotate": {
+                    "degree": "-45"
+                  }
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "url",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "pv",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql",
+        "refreshInterval": "2000",
+        "parallelism": "1",
+        "type": "update",
+        "savepointDir": "/tmp/flink_2",
+        "editorHide": false,
+        "latest_checkpoint_path": "\u003ccheckpoint-not-externally-addressable\u003e"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "FLINK JOB",
+          "tooltip": "View in Flink web UI",
+          "group": "flink",
+          "values": [
+            {
+              "jobUrl": "http://localhost:8081#/job/026f68085b98b16a9a677c2b1ba47bb3"
+            }
+          ],
+          "interpreterSettingId": "flink"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1578910004762_-286113604",
+      "id": "paragraph_1578910004762_-286113604",
+      "dateCreated": "2020-01-13 18:06:44.762",
+      "dateStarted": "2021-01-25 14:28:48.637",
+      "dateFinished": "2021-01-25 14:30:01.879",
+      "status": "ABORT"
+    },
+    {
+      "title": "Append mode of Output",
+      "text": "%flink.ssql(type\u003dappend,parallelism\u003d1,refreshInterval\u003d2000,threshold\u003d60000)\n\nselect TUMBLE_START(rowtime,INTERVAL \u00275\u0027 SECOND) start_time,url,count(1) as pv from log\ngroup by TUMBLE(rowtime,INTERVAL \u00275\u0027 SECOND),url\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-01-25 14:29:33.485",
+      "progress": 0,
+      "config": {
+        "runOnSelectionChange": true,
+        "title": true,
+        "checkEmpty": true,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "lineChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "lineChart": {
+                  "xLabelStatus": "rotate",
+                  "rotate": {
+                    "degree": "-45"
+                  }
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "start_time",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "url",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "pv",
+                  "index": 2.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql",
+        "refreshInterval": "2000",
+        "parallelism": "1",
+        "threshold": "60000",
+        "type": "append",
+        "savepointDir": "/tmp/flink_3",
+        "latest_checkpoint_path": "\u003ccheckpoint-not-externally-addressable\u003e"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1578910016872_1942851900",
+      "id": "paragraph_1578910016872_1942851900",
+      "dateCreated": "2020-01-13 18:06:56.872",
+      "dateStarted": "2021-01-25 14:29:17.122",
+      "dateFinished": "2021-01-25 14:29:53.805",
+      "status": "ABORT"
+    },
+    {
+      "text": "%flink.ssql\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-01-13 21:17:35.739",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1578921455738_-1465781668",
+      "id": "paragraph_1578921455738_-1465781668",
+      "dateCreated": "2020-01-13 21:17:35.739",
+      "status": "READY"
+    }
+  ],
+  "name": "5. Streaming Data Analytics",
+  "id": "2EYT7Q6R8",
+  "defaultInterpreterGroup": "flink",
+  "version": "0.9.0-SNAPSHOT",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "flink-shared_process": [
+      {
+        "name": "value_0",
+        "object": "2019-12-31 16:01:44.1",
+        "noteId": "2EYT7Q6R8",
+        "paragraphId": "paragraph_1578909960516_-1812187661"
+      },
+      {
+        "name": "value_1",
+        "object": "1042",
+        "noteId": "2EYT7Q6R8",
+        "paragraphId": "paragraph_1578909960516_-1812187661"
+      }
+    ]
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

@@ -1,0 +1,171 @@
+{
+  "paragraphs": [
+    {
+      "title": "Introduction",
+      "text": "%md\n\n# Introduction\n\n[Apache Flink](https://flink.apache.org/) is a framework and distributed processing engine for stateful computations over unbounded and bounded data streams. This is Flink tutorial for running classical wordcount in both batch and streaming mode. \n\nThere\u0027re 3 things you need to do before using flink in Zeppelin.\n\n* Download [Flink 1.10](https://flink.apache.org/downloads.html)  (Only 1.10 afterwards are supported) for scala 2.11 (Only scala-2.11 is supported, scala-2.12 is not supported yet in Zeppelin), unpack it and set `FLINK_HOME` in flink interpreter setting to this location.\n* Copy flink-python_2.11–1.10.0.jar from flink opt folder to flink lib folder (it is used by pyflink which is supported in Zeppelin)\n* If you want to run yarn mode, you need to set `HADOOP_CONF_DIR` in flink interpreter setting. And make sure `hadoop` is in your `PATH`, because internally flink will call command `hadoop classpath` and put all the hadoop related jars in the classpath of flink interpreter process.\n\nThere\u0027re 6 sub interpreters in flink interpreter, each is used for different purpose. However they are in the the JVM and share the same ExecutionEnviroment/StremaExecutionEnvironment/BatchTableEnvironment/StreamTableEnvironment.\n\n\n* `%flink`\t- Creates ExecutionEnvironment/StreamExecutionEnvironment/BatchTableEnvironment/StreamTableEnvironment and provides a Scala environment \n* `%flink.pyflink`\t- Provides a python environment \n* `%flink.ipyflink`\t- Provides an ipython environment \n* `%flink.ssql`\t - Provides a stream sql environment \n* `%flink.bsql`\t- Provides a batch sql environment ",
+      "user": "anonymous",
+      "dateUpdated": "2021-01-25 14:14:41.500",
+      "progress": 0,
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "title": false,
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1580997898536_-1239502599",
+      "id": "paragraph_1580997898536_-1239502599",
+      "dateCreated": "2020-02-06 22:04:58.536",
+      "dateStarted": "2021-01-25 14:14:41.500",
+      "dateFinished": "2021-01-25 14:14:41.515",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Batch WordCount",
+      "text": "%flink\n\nval data \u003d benv.fromElements(\"hello world\", \"hello flink\", \"hello hadoop\")\ndata.flatMap(line \u003d\u003e line.split(\"\\\\s\"))\n             .map(w \u003d\u003e (w, 1))\n             .groupBy(0)\n             .sum(1)\n             .print()\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-29 10:57:40.471",
+      "progress": 0,
+      "config": {
+        "colWidth": 6.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1580998080340_1531975932",
+      "id": "paragraph_1580998080340_1531975932",
+      "dateCreated": "2020-02-06 22:08:00.340",
+      "dateStarted": "2020-04-29 10:57:40.495",
+      "dateFinished": "2020-04-29 10:57:56.468",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Streaming WordCount",
+      "text": "%flink\n\nval data \u003d senv.fromElements(\"hello world\", \"hello flink\", \"hello hadoop\")\ndata.flatMap(line \u003d\u003e line.split(\"\\\\s\"))\n  .map(w \u003d\u003e (w, 1))\n  .keyBy(0)\n  .sum(1)\n  .print\n\nsenv.execute()",
+      "user": "anonymous",
+      "dateUpdated": "2020-04-29 10:58:47.117",
+      "progress": 0,
+      "config": {
+        "colWidth": 6.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1580998084555_-697674675",
+      "id": "paragraph_1580998084555_-697674675",
+      "dateCreated": "2020-02-06 22:08:04.555",
+      "dateStarted": "2020-04-29 10:58:47.129",
+      "dateFinished": "2020-04-29 10:58:49.108",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Read HDFS File",
+      "text": "%flink\n\nval data \u003d benv.readTextFile(\"hdfs:///tmp/bank.csv\")\ndata.print()\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-02-25 11:11:54.292",
+      "progress": 0,
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1580998407443_936860398",
+      "id": "paragraph_1580998407443_936860398",
+      "dateCreated": "2020-02-06 22:13:27.443",
+      "dateStarted": "2020-02-25 11:10:47.604",
+      "dateFinished": "2020-02-25 11:10:55.808",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-02-25 11:10:14.096",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1582600214095_1825730071",
+      "id": "paragraph_1582600214095_1825730071",
+      "dateCreated": "2020-02-25 11:10:14.096",
+      "status": "READY"
+    }
+  ],
+  "name": "1. Flink Basics",
+  "id": "2F2YS7PCE",
+  "defaultInterpreterGroup": "flink",
+  "version": "0.9.0-SNAPSHOT",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
