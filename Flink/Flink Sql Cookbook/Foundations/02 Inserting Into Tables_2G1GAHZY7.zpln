@@ -1,9 +1,9 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n\nThis recipe shows how to insert rows into a table so that downstream applications can read them.\n\nAs outlined in the first recipe Flink SQL operates on tables, that are stored in external systems. To publish results of a query for consumption by downstream applications, you write the results of a query into a table. This table can be read by Flink SQL, or directly by connecting to the external system that is storing the data (e.g. an ElasticSearch index.)\n\nThis example takes the `server_logs` tables, filters for client errors, and writes these logs into another table called `client_errors`. Any number of external systems could back the result table, including Apache Kafka, Apache Hive, ElasticSearch, JDBC, among many others. To keep this example self-contained, `client_errors` is of type `blackhole`: instead of actually writing the data to an external system, the table discards any rows written to it.\n",
+      "text": "%md\n\nThis recipe shows how to insert rows into a table so that downstream applications can read them.\n\nAs outlined in the first recipe Flink SQL operates on tables, that are stored in external systems. To publish results of a query for consumption by downstream applications, you write the results of a query into a table. This table can be read by Flink SQL, or directly by connecting to the external system that is storing the data (e.g. an ElasticSearch index.)\n\nThis example takes the `server_logs` tables, filters for client errors, and writes these logs into another table called `client_errors`. Any number of external systems could back the result table, including Apache Kafka, Apache Hive, ElasticSearch, JDBC, among many others. To keep this example self-contained, `client_errors` is of type `blackhole`: instead of actually writing the data to an external system, the table discards any rows written to it.\n\n## Screenshot of this tutorial note\n![FlinkSqlCook-Foudation-02InsertingIntoTables](https://user-images.githubusercontent.com/164491/122319203-e0c1d780-cf52-11eb-8ffb-eb61fd81541f.gif)",
       "user": "anonymous",
-      "dateUpdated": "2021-03-18 15:07:29.035",
+      "dateUpdated": "2021-06-17 10:01:10.940",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -29,7 +29,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eThis recipe shows how to insert rows into a table so that downstream applications can read them.\u003c/p\u003e\n\u003cp\u003eAs outlined in the first recipe Flink SQL operates on tables, that are stored in external systems. To publish results of a query for consumption by downstream applications, you write the results of a query into a table. This table can be read by Flink SQL, or directly by connecting to the external system that is storing the data (e.g. an ElasticSearch index.)\u003c/p\u003e\n\u003cp\u003eThis example takes the \u003ccode\u003eserver_logs\u003c/code\u003e tables, filters for client errors, and writes these logs into another table called \u003ccode\u003eclient_errors\u003c/code\u003e. Any number of external systems could back the result table, including Apache Kafka, Apache Hive, ElasticSearch, JDBC, among many others. To keep this example self-contained, \u003ccode\u003eclient_errors\u003c/code\u003e is of type \u003ccode\u003eblackhole\u003c/code\u003e: instead of actually writing the data to an external system, the table discards any rows written to it.\u003c/p\u003e\n\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eThis recipe shows how to insert rows into a table so that downstream applications can read them.\u003c/p\u003e\n\u003cp\u003eAs outlined in the first recipe Flink SQL operates on tables, that are stored in external systems. To publish results of a query for consumption by downstream applications, you write the results of a query into a table. This table can be read by Flink SQL, or directly by connecting to the external system that is storing the data (e.g. an ElasticSearch index.)\u003c/p\u003e\n\u003cp\u003eThis example takes the \u003ccode\u003eserver_logs\u003c/code\u003e tables, filters for client errors, and writes these logs into another table called \u003ccode\u003eclient_errors\u003c/code\u003e. Any number of external systems could back the result table, including Apache Kafka, Apache Hive, ElasticSearch, JDBC, among many others. To keep this example self-contained, \u003ccode\u003eclient_errors\u003c/code\u003e is of type \u003ccode\u003eblackhole\u003c/code\u003e: instead of actually writing the data to an external system, the table discards any rows written to it.\u003c/p\u003e\n\u003ch2\u003eScreenshot of this tutorial note\u003c/h2\u003e\n\u003cp\u003e\u003cimg src\u003d\"https://user-images.githubusercontent.com/164491/122319203-e0c1d780-cf52-11eb-8ffb-eb61fd81541f.gif\" alt\u003d\"FlinkSqlCook-Foudation-02InsertingIntoTables\" /\u003e\u003c/p\u003e\n\n\u003c/div\u003e"
           }
         ]
       },
@@ -39,8 +39,8 @@
       "jobName": "paragraph_1614267802169_591840692",
       "id": "paragraph_1614267802169_591840692",
       "dateCreated": "2021-02-25 23:43:22.169",
-      "dateStarted": "2021-03-18 15:07:29.035",
-      "dateFinished": "2021-03-18 15:07:29.082",
+      "dateStarted": "2021-06-17 10:01:10.941",
+      "dateFinished": "2021-06-17 10:01:10.976",
       "status": "FINISHED"
     },
     {
@@ -89,7 +89,7 @@
     {
       "text": "%flink.ssql\n\nDROP TABLE IF EXISTS server_logs;\n\nCREATE TABLE server_logs ( \n    client_ip STRING,\n    client_identity STRING, \n    userid STRING, \n    user_agent STRING,\n    log_time TIMESTAMP(3),\n    request_line STRING, \n    status_code STRING, \n    size INT\n) WITH (\n  \u0027connector\u0027 \u003d \u0027faker\u0027, \n  \u0027fields.client_ip.expression\u0027 \u003d \u0027#{Internet.publicIpV4Address}\u0027,\n  \u0027fields.client_identity.expression\u0027 \u003d  \u0027-\u0027,\n  \u0027fields.userid.expression\u0027 \u003d  \u0027-\u0027,\n  \u0027fields.user_agent.expression\u0027 \u003d \u0027#{Internet.userAgentAny}\u0027,\n  \u0027fields.log_time.expression\u0027 \u003d  \u0027#{date.past \u0027\u002715\u0027\u0027,\u0027\u00275\u0027\u0027,\u0027\u0027SECONDS\u0027\u0027}\u0027,\n  \u0027fields.request_line.expression\u0027 \u003d \u0027#{regexify \u0027\u0027(GET|POST|PUT|PATCH){1}\u0027\u0027} #{regexify \u0027\u0027(/search\\.html|/login\\.html|/prod\\.html|cart\\.html|/order\\.html){1}\u0027\u0027} #{regexify \u0027\u0027(HTTP/1\\.1|HTTP/2|/HTTP/1\\.0){1}\u0027\u0027}\u0027,\n  \u0027fields.status_code.expression\u0027 \u003d \u0027#{regexify \u0027\u0027(200|201|204|400|401|403|301){1}\u0027\u0027}\u0027,\n  \u0027fields.size.expression\u0027 \u003d \u0027#{number.numberBetween \u0027\u0027100\u0027\u0027,\u0027\u002710000000\u0027\u0027}\u0027\n);\n\nDROP TABLE IF EXISTS client_errors;\n\nCREATE TABLE client_errors (\n  log_time TIMESTAMP(3),\n  request_line STRING,\n  status_code STRING,\n  size INT\n)\nWITH (\n  \u0027connector\u0027 \u003d \u0027blackhole\u0027\n);\n\n\n",
       "user": "anonymous",
-      "dateUpdated": "2021-02-26 11:21:45.704",
+      "dateUpdated": "2021-06-17 09:59:53.011",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -107,6 +107,15 @@
       "settings": {
         "params": {},
         "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Table has been dropped.\nTable has been created.\nTable has been dropped.\nTable has been created.\n"
+          }
+        ]
       },
       "apps": [],
       "runtimeInfos": {},
@@ -114,14 +123,14 @@
       "jobName": "paragraph_1614264261687_1276008773",
       "id": "paragraph_1614264261687_1276008773",
       "dateCreated": "2021-02-25 22:44:21.687",
-      "dateStarted": "2021-02-26 11:21:45.713",
-      "dateFinished": "2021-02-26 11:21:46.702",
+      "dateStarted": "2021-06-17 09:59:53.013",
+      "dateFinished": "2021-06-17 09:59:53.168",
       "status": "FINISHED"
     },
     {
       "text": "%flink.ssql\n\nINSERT INTO client_errors\nSELECT \n  log_time,\n  request_line,\n  status_code,\n  size\nFROM server_logs\nWHERE \n  status_code SIMILAR TO \u00274[0-9][0-9]\u0027\n  ",
       "user": "anonymous",
-      "dateUpdated": "2021-02-26 11:21:49.117",
+      "dateUpdated": "2021-06-17 10:00:04.186",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -139,6 +148,19 @@
       "settings": {
         "params": {},
         "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "ANGULAR",
+            "data": "\u003ch1\u003eDuration: {{duration}} \u003c/h1\u003e\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "Fail to run sql command: INSERT INTO client_errors\nSELECT \n  log_time,\n  request_line,\n  status_code,\n  size\nFROM server_logs\nWHERE \n  status_code SIMILAR TO \u00274[0-9][0-9]\u0027\njava.io.IOException: org.apache.flink.client.program.ProgramInvocationException: Job failed (JobID: f2e75e6b7f791f06da05be20005429ac)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.callInsertInto(FlinkSqlInterrpeter.java:531)\n\tat org.apache.zeppelin.flink.FlinkStreamSqlInterpreter.callInsertInto(FlinkStreamSqlInterpreter.java:97)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.callCommand(FlinkSqlInterrpeter.java:265)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.runSqlList(FlinkSqlInterrpeter.java:152)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.internalInterpret(FlinkSqlInterrpeter.java:110)\n\tat org.apache.zeppelin.interpreter.AbstractInterpreter.interpret(AbstractInterpreter.java:47)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:110)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:849)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:741)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:172)\n\tat org.apache.zeppelin.scheduler.AbstractScheduler.runJob(AbstractScheduler.java:132)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler.lambda$runJobInScheduler$0(ParallelScheduler.java:46)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.flink.client.program.ProgramInvocationException: Job failed (JobID: f2e75e6b7f791f06da05be20005429ac)\n\tat org.apache.flink.client.deployment.ClusterClientJobClientAdapter.lambda$null$6(ClusterClientJobClientAdapter.java:125)\n\tat java.util.concurrent.CompletableFuture.uniApply(CompletableFuture.java:616)\n\tat java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:591)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:1975)\n\tat org.apache.flink.runtime.concurrent.FutureUtils.lambda$retryOperationWithDelay$9(FutureUtils.java:394)\n\tat java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:774)\n\tat java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:750)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:1975)\n\tat org.apache.flink.client.program.rest.RestClusterClient.lambda$pollResourceAsync$24(RestClusterClient.java:670)\n\tat java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:774)\n\tat java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:750)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:1975)\n\tat org.apache.flink.runtime.concurrent.FutureUtils.lambda$retryOperationWithDelay$9(FutureUtils.java:394)\n\tat java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:774)\n\tat java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:750)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:575)\n\tat java.util.concurrent.CompletableFuture$UniCompose.tryFire(CompletableFuture.java:943)\n\tat java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:456)\n\t... 3 more\nCaused by: org.apache.flink.runtime.client.JobCancellationException: Job was cancelled.\n\tat org.apache.flink.runtime.jobmaster.JobResult.toJobExecutionResult(JobResult.java:146)\n\tat org.apache.flink.client.deployment.ClusterClientJobClientAdapter.lambda$null$6(ClusterClientJobClientAdapter.java:123)\n\t... 24 more\n\n"
+          }
+        ]
       },
       "apps": [],
       "runtimeInfos": {
@@ -149,7 +171,7 @@
           "group": "flink",
           "values": [
             {
-              "jobUrl": "http://localhost:8081#/job/35a2d342bc8e4a0423dbcc29c0ef362d"
+              "jobUrl": "http://localhost:8085#/job/f2e75e6b7f791f06da05be20005429ac"
             }
           ],
           "interpreterSettingId": "flink"
@@ -159,14 +181,14 @@
       "jobName": "paragraph_1614264274230_70413416",
       "id": "paragraph_1614264274230_70413416",
       "dateCreated": "2021-02-25 22:44:34.231",
-      "dateStarted": "2021-02-26 11:21:49.125",
-      "dateFinished": "2021-02-26 11:22:45.789",
+      "dateStarted": "2021-06-17 10:00:04.188",
+      "dateFinished": "2021-06-17 10:02:27.685",
       "status": "ABORT"
     },
     {
       "text": "%flink.ssql(type\u003dupdate)\n\nSELECT \n  log_time,\n  request_line,\n  status_code,\n  size\nFROM server_logs\nWHERE \n  status_code SIMILAR TO \u00274[0-9][0-9]\u0027 order by log_time desc limit 10",
       "user": "anonymous",
-      "dateUpdated": "2021-02-25 22:55:03.460",
+      "dateUpdated": "2021-06-17 10:00:21.148",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -216,6 +238,19 @@
         "params": {},
         "forms": {}
       },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "log_time\trequest_line\tstatus_code\tsize\n2021-06-17T15:02:16\tPATCH /login.html /HTTP/1.0\t403\t3499143\n2021-06-17T15:02:16\tPOST cart.html HTTP/2\t401\t4045316\n2021-06-17T15:02:16\tPUT /login.html /HTTP/1.0\t400\t2047439\n2021-06-17T15:02:16\tGET cart.html /HTTP/1.0\t403\t2974365\n2021-06-17T15:02:16\tPATCH /login.html HTTP/2\t400\t82105\n2021-06-17T15:02:16\tPUT /prod.html /HTTP/1.0\t403\t8303026\n2021-06-17T15:02:16\tPATCH cart.html HTTP/2\t401\t5092700\n2021-06-17T15:02:16\tPUT cart.html HTTP/2\t403\t7528902\n2021-06-17T15:02:16\tGET /order.html HTTP/2\t400\t7079443\n2021-06-17T15:02:16\tPOST /search.html /HTTP/1.0\t401\t6985951\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "Fail to run sql command: SELECT \n  log_time,\n  request_line,\n  status_code,\n  size\nFROM server_logs\nWHERE \n  status_code SIMILAR TO \u00274[0-9][0-9]\u0027 order by log_time desc limit 10\njava.io.IOException: Fail to run stream sql job\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:172)\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:105)\n\tat org.apache.zeppelin.flink.FlinkStreamSqlInterpreter.callInnerSelect(FlinkStreamSqlInterpreter.java:89)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.callSelect(FlinkSqlInterrpeter.java:495)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.callCommand(FlinkSqlInterrpeter.java:258)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.runSqlList(FlinkSqlInterrpeter.java:152)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.internalInterpret(FlinkSqlInterrpeter.java:110)\n\tat org.apache.zeppelin.interpreter.AbstractInterpreter.interpret(AbstractInterpreter.java:47)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:110)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:849)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:741)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:172)\n\tat org.apache.zeppelin.scheduler.AbstractScheduler.runJob(AbstractScheduler.java:132)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler.lambda$runJobInScheduler$0(ParallelScheduler.java:46)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.flink.client.program.ProgramInvocationException: Job failed (JobID: b341a45a0af9d9a915ce4422f595e020)\n\tat org.apache.flink.client.deployment.ClusterClientJobClientAdapter.lambda$null$6(ClusterClientJobClientAdapter.java:125)\n\tat java.util.concurrent.CompletableFuture.uniApply(CompletableFuture.java:616)\n\tat java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:591)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:1975)\n\tat org.apache.flink.runtime.concurrent.FutureUtils.lambda$retryOperationWithDelay$9(FutureUtils.java:394)\n\tat java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:774)\n\tat java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:750)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:1975)\n\tat org.apache.flink.client.program.rest.RestClusterClient.lambda$pollResourceAsync$24(RestClusterClient.java:670)\n\tat java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:774)\n\tat java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:750)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:1975)\n\tat org.apache.flink.runtime.concurrent.FutureUtils.lambda$retryOperationWithDelay$9(FutureUtils.java:394)\n\tat java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:774)\n\tat java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:750)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:575)\n\tat java.util.concurrent.CompletableFuture$UniCompose.tryFire(CompletableFuture.java:943)\n\tat java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:456)\n\t... 3 more\nCaused by: org.apache.flink.runtime.client.JobCancellationException: Job was cancelled.\n\tat org.apache.flink.runtime.jobmaster.JobResult.toJobExecutionResult(JobResult.java:146)\n\tat org.apache.flink.client.deployment.ClusterClientJobClientAdapter.lambda$null$6(ClusterClientJobClientAdapter.java:123)\n\t... 24 more\n\n"
+          }
+        ]
+      },
       "apps": [],
       "runtimeInfos": {
         "jobUrl": {
@@ -225,7 +260,7 @@
           "group": "flink",
           "values": [
             {
-              "jobUrl": "http://localhost:8081#/job/9415a68521cc97c502af147db472b0da"
+              "jobUrl": "http://localhost:8085#/job/b341a45a0af9d9a915ce4422f595e020"
             }
           ],
           "interpreterSettingId": "flink"
@@ -235,8 +270,8 @@
       "jobName": "paragraph_1614264279156_1925150514",
       "id": "paragraph_1614264279156_1925150514",
       "dateCreated": "2021-02-25 22:44:39.156",
-      "dateStarted": "2021-02-25 22:52:52.486",
-      "dateFinished": "2021-02-25 22:53:19.389",
+      "dateStarted": "2021-06-17 10:00:21.150",
+      "dateFinished": "2021-06-17 10:02:24.937",
       "status": "ABORT"
     },
     {
@@ -268,7 +303,7 @@
     "flink-shared_process": [
       {
         "name": "duration",
-        "object": "52 seconds",
+        "object": "2 minutes 21 seconds",
         "noteId": "2G1GAHZY7",
         "paragraphId": "paragraph_1614264274230_70413416"
       }
