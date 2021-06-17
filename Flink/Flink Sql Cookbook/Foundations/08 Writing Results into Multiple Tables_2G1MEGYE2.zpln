@@ -1,9 +1,9 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n\nIn this recipe, you will learn how to use `runAsOne` which is only supported by Zeppelin to run multiple `INSERT INTO` statements in a single, optimized Flink Job.\n\nMany product requirements involve outputting the results of a streaming application to two or more sinks, such as Apache Kafka for real-time use cases, or a Filesystem for offline ones. Other times, two queries are not the same but share some extensive intermediate operations.\n\nWhen working with server logs, the support team would like to see the number of status codes per browser every 5 minutes to have real-time insights into a web pages\u0027 status. Additionally, they would like the same information on an hourly basis made available as partitioned Apache Parquet files so they can perform historical analysis.\n\nWe could quickly write two Flink SQL queries to solve both these requirements, but that would not be efficient. These queries have a lot of duplicated work, like reading the source logs Kafka topic and cleansing the data.\n\nZeppelin includes a feature called `runAsOne`, that allows for multiplexing `INSERT INTO` statements into a single query holistically optimized by Apache Flink and deployed as a single application.\n",
+      "text": "%md\n\nIn this recipe, you will learn how to use `runAsOne` which is only supported by Zeppelin to run multiple `INSERT INTO` statements in a single, optimized Flink Job.\n\nMany product requirements involve outputting the results of a streaming application to two or more sinks, such as Apache Kafka for real-time use cases, or a Filesystem for offline ones. Other times, two queries are not the same but share some extensive intermediate operations.\n\nWhen working with server logs, the support team would like to see the number of status codes per browser every 5 minutes to have real-time insights into a web pages\u0027 status. Additionally, they would like the same information on an hourly basis made available as partitioned Apache Parquet files so they can perform historical analysis.\n\nWe could quickly write two Flink SQL queries to solve both these requirements, but that would not be efficient. These queries have a lot of duplicated work, like reading the source logs Kafka topic and cleansing the data.\n\nZeppelin includes a feature called `runAsOne`, that allows for multiplexing `INSERT INTO` statements into a single query holistically optimized by Apache Flink and deployed as a single application.\n\n## Screenshot of this tutorial\n![FlinkSqlCook-Foudation-08WritingIntoMultipleTables](https://user-images.githubusercontent.com/164491/122322465-14533080-cf58-11eb-9d57-419ac11e5800.gif)\n",
       "user": "anonymous",
-      "dateUpdated": "2021-03-18 15:45:10.264",
+      "dateUpdated": "2021-06-17 10:38:41.777",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -29,7 +29,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eIn this recipe, you will learn how to use \u003ccode\u003erunAsOne\u003c/code\u003e which is only supported by Zeppelin to run multiple \u003ccode\u003eINSERT INTO\u003c/code\u003e statements in a single, optimized Flink Job.\u003c/p\u003e\n\u003cp\u003eMany product requirements involve outputting the results of a streaming application to two or more sinks, such as Apache Kafka for real-time use cases, or a Filesystem for offline ones. Other times, two queries are not the same but share some extensive intermediate operations.\u003c/p\u003e\n\u003cp\u003eWhen working with server logs, the support team would like to see the number of status codes per browser every 5 minutes to have real-time insights into a web pages\u0026rsquo; status. Additionally, they would like the same information on an hourly basis made available as partitioned Apache Parquet files so they can perform historical analysis.\u003c/p\u003e\n\u003cp\u003eWe could quickly write two Flink SQL queries to solve both these requirements, but that would not be efficient. These queries have a lot of duplicated work, like reading the source logs Kafka topic and cleansing the data.\u003c/p\u003e\n\u003cp\u003eZeppelin includes a feature called \u003ccode\u003erunAsOne\u003c/code\u003e, that allows for multiplexing \u003ccode\u003eINSERT INTO\u003c/code\u003e statements into a single query holistically optimized by Apache Flink and deployed as a single application.\u003c/p\u003e\n\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eIn this recipe, you will learn how to use \u003ccode\u003erunAsOne\u003c/code\u003e which is only supported by Zeppelin to run multiple \u003ccode\u003eINSERT INTO\u003c/code\u003e statements in a single, optimized Flink Job.\u003c/p\u003e\n\u003cp\u003eMany product requirements involve outputting the results of a streaming application to two or more sinks, such as Apache Kafka for real-time use cases, or a Filesystem for offline ones. Other times, two queries are not the same but share some extensive intermediate operations.\u003c/p\u003e\n\u003cp\u003eWhen working with server logs, the support team would like to see the number of status codes per browser every 5 minutes to have real-time insights into a web pages\u0026rsquo; status. Additionally, they would like the same information on an hourly basis made available as partitioned Apache Parquet files so they can perform historical analysis.\u003c/p\u003e\n\u003cp\u003eWe could quickly write two Flink SQL queries to solve both these requirements, but that would not be efficient. These queries have a lot of duplicated work, like reading the source logs Kafka topic and cleansing the data.\u003c/p\u003e\n\u003cp\u003eZeppelin includes a feature called \u003ccode\u003erunAsOne\u003c/code\u003e, that allows for multiplexing \u003ccode\u003eINSERT INTO\u003c/code\u003e statements into a single query holistically optimized by Apache Flink and deployed as a single application.\u003c/p\u003e\n\u003ch2\u003eScreenshot of this tutorial\u003c/h2\u003e\n\u003cp\u003e\u003cimg src\u003d\"https://user-images.githubusercontent.com/164491/122322465-14533080-cf58-11eb-9d57-419ac11e5800.gif\" alt\u003d\"FlinkSqlCook-Foudation-08WritingIntoMultipleTables\" /\u003e\u003c/p\u003e\n\n\u003c/div\u003e"
           }
         ]
       },
@@ -39,8 +39,8 @@
       "jobName": "paragraph_1614268141191_633824219",
       "id": "paragraph_1614268141191_633824219",
       "dateCreated": "2021-02-25 23:49:01.191",
-      "dateStarted": "2021-03-18 15:45:10.264",
-      "dateFinished": "2021-03-18 15:45:10.284",
+      "dateStarted": "2021-06-17 10:38:41.779",
+      "dateFinished": "2021-06-17 10:38:41.790",
       "status": "FINISHED"
     },
     {
@@ -89,7 +89,7 @@
     {
       "text": "%flink.ssql\n\nDROP TEMPORARY TABLE IF EXISTS server_logs_temp;\n\nCREATE TEMPORARY TABLE server_logs_temp ( \n    client_ip       STRING,\n    client_identity STRING, \n    userid          STRING, \n    user_agent      STRING,\n    log_time        TIMESTAMP(3),\n    request_line    STRING, \n    status_code     STRING, \n    size            INT,\n    WATERMARK FOR log_time AS log_time - INTERVAL \u002730\u0027 SECONDS\n) WITH (\n  \u0027connector\u0027 \u003d \u0027faker\u0027, \n  \u0027fields.client_ip.expression\u0027 \u003d \u0027#{Internet.publicIpV4Address}\u0027,\n  \u0027fields.client_identity.expression\u0027 \u003d  \u0027-\u0027,\n  \u0027fields.userid.expression\u0027 \u003d  \u0027-\u0027,\n  \u0027fields.user_agent.expression\u0027 \u003d \u0027#{Internet.userAgentAny}\u0027,\n  \u0027fields.log_time.expression\u0027 \u003d  \u0027#{date.past \u0027\u002715\u0027\u0027,\u0027\u00275\u0027\u0027,\u0027\u0027SECONDS\u0027\u0027}\u0027,\n  \u0027fields.request_line.expression\u0027 \u003d \u0027#{regexify \u0027\u0027(GET|POST|PUT|PATCH){1}\u0027\u0027} #{regexify \u0027\u0027(/search\\.html|/login\\.html|/prod\\.html|cart\\.html|/order\\.html){1}\u0027\u0027} #{regexify \u0027\u0027(HTTP/1\\.1|HTTP/2|/HTTP/1\\.0){1}\u0027\u0027}\u0027,\n  \u0027fields.status_code.expression\u0027 \u003d \u0027#{regexify \u0027\u0027(200|201|204|400|401|403|301){1}\u0027\u0027}\u0027,\n  \u0027fields.size.expression\u0027 \u003d \u0027#{number.numberBetween \u0027\u0027100\u0027\u0027,\u0027\u002710000000\u0027\u0027}\u0027\n);",
       "user": "anonymous",
-      "dateUpdated": "2021-03-06 12:37:48.310",
+      "dateUpdated": "2021-06-17 10:28:09.290",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -107,6 +107,15 @@
       "settings": {
         "params": {},
         "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Table has been dropped.\nTable has been created.\n"
+          }
+        ]
       },
       "apps": [],
       "runtimeInfos": {},
@@ -114,14 +123,14 @@
       "jobName": "paragraph_1614266965392_2093520683",
       "id": "paragraph_1614266965392_2093520683",
       "dateCreated": "2021-02-25 23:29:25.392",
-      "dateStarted": "2021-03-06 12:37:48.455",
-      "dateFinished": "2021-03-06 12:37:50.413",
+      "dateStarted": "2021-06-17 10:28:09.297",
+      "dateFinished": "2021-06-17 10:28:09.535",
       "status": "FINISHED"
     },
     {
       "text": "%flink.ssql\n\n\nDROP TEMPORARY TABLE IF EXISTS realtime_aggregations_temp;\n\nCREATE TEMPORARY TABLE realtime_aggregations_temp (\n  `browser`     STRING,\n  `status_code` STRING,\n  `end_time`    TIMESTAMP(3),\n  `requests`    BIGINT NOT NULL\n) WITH (\n  \u0027connector\u0027 \u003d \u0027filesystem\u0027,\n  \u0027path\u0027 \u003d \u0027file:///tmp/realtime_aggregations\u0027,\n  \u0027sink.partition-commit.trigger\u0027 \u003d \u0027partition-time\u0027, \n  \u0027format\u0027 \u003d \u0027csv\u0027 \n);\n",
       "user": "anonymous",
-      "dateUpdated": "2021-03-06 12:51:56.712",
+      "dateUpdated": "2021-06-17 10:28:11.821",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -139,6 +148,15 @@
       "settings": {
         "params": {},
         "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Table has been dropped.\nTable has been created.\n"
+          }
+        ]
       },
       "apps": [],
       "runtimeInfos": {},
@@ -146,14 +164,14 @@
       "jobName": "paragraph_1614266979082_1973127487",
       "id": "paragraph_1614266979082_1973127487",
       "dateCreated": "2021-02-25 23:29:39.083",
-      "dateStarted": "2021-03-06 12:51:56.767",
-      "dateFinished": "2021-03-06 12:51:57.217",
+      "dateStarted": "2021-06-17 10:28:11.835",
+      "dateFinished": "2021-06-17 10:28:12.048",
       "status": "FINISHED"
     },
     {
       "text": "%flink.ssql\n\n\nDROP TEMPORARY TABLE IF EXISTS offline_datawarehouse_temp;\n\nCREATE TEMPORARY TABLE offline_datawarehouse_temp (\n    `browser`     STRING,\n    `status_code` STRING,\n    `dt`          STRING,\n    `hour`        STRING,\n    `requests`    BIGINT NOT NULL\n) PARTITIONED BY (`dt`, `hour`) WITH (\n  \u0027connector\u0027 \u003d \u0027filesystem\u0027,\n  \u0027path\u0027 \u003d \u0027file:///tmp/offline_datawarehouse\u0027,\n  \u0027sink.partition-commit.trigger\u0027 \u003d \u0027partition-time\u0027, \n  \u0027format\u0027 \u003d \u0027csv\u0027 \n);",
       "user": "anonymous",
-      "dateUpdated": "2021-03-06 12:52:00.115",
+      "dateUpdated": "2021-06-17 10:28:13.978",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -171,6 +189,15 @@
       "settings": {
         "params": {},
         "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Table has been dropped.\nTable has been created.\n"
+          }
+        ]
       },
       "apps": [],
       "runtimeInfos": {},
@@ -178,14 +205,14 @@
       "jobName": "paragraph_1614267087710_1500021598",
       "id": "paragraph_1614267087710_1500021598",
       "dateCreated": "2021-02-25 23:31:27.710",
-      "dateStarted": "2021-03-06 12:52:00.171",
-      "dateFinished": "2021-03-06 12:52:00.587",
+      "dateStarted": "2021-06-17 10:28:13.979",
+      "dateFinished": "2021-06-17 10:28:14.213",
       "status": "FINISHED"
     },
     {
       "text": "%flink.ssql\n\n-- This is a shared view that will be used by both \n-- insert into statements\nDROP TEMPORARY VIEW IF EXISTS browsers_temp;\n\nCREATE TEMPORARY VIEW browsers_temp AS  \nSELECT \n  REGEXP_EXTRACT(user_agent,\u0027[^\\/]+\u0027) AS browser,\n  status_code,\n  log_time\nFROM server_logs_temp;",
       "user": "anonymous",
-      "dateUpdated": "2021-03-06 12:52:05.194",
+      "dateUpdated": "2021-06-17 10:28:15.853",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -204,20 +231,29 @@
         "params": {},
         "forms": {}
       },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "View has been dropped.\nView has been created.\n"
+          }
+        ]
+      },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1614267108142_227560020",
       "id": "paragraph_1614267108142_227560020",
       "dateCreated": "2021-02-25 23:31:48.148",
-      "dateStarted": "2021-03-06 12:52:05.244",
-      "dateFinished": "2021-03-06 12:52:06.166",
+      "dateStarted": "2021-06-17 10:28:15.855",
+      "dateFinished": "2021-06-17 10:28:16.156",
       "status": "FINISHED"
     },
     {
       "text": "%flink.ssql(runAsOne\u003dtrue)\n\nINSERT INTO realtime_aggregations_temp\nSELECT\n    browser,\n    status_code,\n    TUMBLE_ROWTIME(log_time, INTERVAL \u00275\u0027 MINUTE) AS end_time,\n    COUNT(*) requests\nFROM browsers_temp\nGROUP BY \n    browser,\n    status_code,\n    TUMBLE(log_time, INTERVAL \u00275\u0027 MINUTE);\n    \nINSERT INTO offline_datawarehouse_temp\nSELECT\n    browser,\n    status_code,\n    DATE_FORMAT(TUMBLE_ROWTIME(log_time, INTERVAL \u00271\u0027 HOUR), \u0027yyyy-MM-dd\u0027) AS `dt`,\n    DATE_FORMAT(TUMBLE_ROWTIME(log_time, INTERVAL \u00271\u0027 HOUR), \u0027HH\u0027) AS `hour`,\n    COUNT(*) requests\nFROM browsers_temp\nGROUP BY \n    browser,\n    status_code,\n    TUMBLE(log_time, INTERVAL \u00271\u0027 HOUR);\n",
       "user": "anonymous",
-      "dateUpdated": "2021-03-06 12:53:27.697",
+      "dateUpdated": "2021-06-17 10:28:18.079",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -245,7 +281,7 @@
           "group": "flink",
           "values": [
             {
-              "jobUrl": "http://localhost:8081#/job/90ffa75345c515c217dce8ae51859fbd"
+              "jobUrl": "http://localhost:8085#/job/bf533db8b06ba2e2862310a5921ec7fc"
             }
           ],
           "interpreterSettingId": "flink"
@@ -255,9 +291,9 @@
       "jobName": "paragraph_1614267128467_2138149264",
       "id": "paragraph_1614267128467_2138149264",
       "dateCreated": "2021-02-25 23:32:08.467",
-      "dateStarted": "2021-03-06 12:53:27.733",
+      "dateStarted": "2021-06-17 10:28:18.081",
       "dateFinished": "2021-03-06 12:53:34.465",
-      "status": "ABORT"
+      "status": "RUNNING"
     },
     {
       "text": "%flink.ssql\n",
@@ -284,7 +320,16 @@
   "version": "0.10.0-SNAPSHOT",
   "noteParams": {},
   "noteForms": {},
-  "angularObjects": {},
+  "angularObjects": {
+    "flink-shared_process": [
+      {
+        "name": "duration",
+        "object": "11 minutes 48 seconds",
+        "noteId": "2G1MEGYE2",
+        "paragraphId": "paragraph_1614267128467_2138149264"
+      }
+    ]
+  },
   "config": {
     "isZeppelinNotebookCronEnable": false
   },

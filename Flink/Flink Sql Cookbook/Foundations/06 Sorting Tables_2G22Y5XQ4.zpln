@@ -1,9 +1,9 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n\nThis example will show how you can sort a table, particularly unbounded tables. \n\nFlink SQL supports `ORDER BY`. Bounded Tables can be sorted by any column, descending or ascending. \n\nTo use `ORDER BY` on unbounded tables like `server_logs` the primary sorting key needs to be a [time attribute](https://docs.ververica.com/user_guide/sql_development/table_view.html#time-attributes) like `log_time`.\n\nIn first example below, we are sorting the `server_logs` by `log_time`. The second example is a bit more advanced: It sorts the number of logs per minute and browser by the `window_time` (a time attribute) and the `cnt_browser` (descending), so that the browser with the highest number of logs is at the top of each window.\n",
+      "text": "%md\n\nThis example will show how you can sort a table, particularly unbounded tables. \n\nFlink SQL supports `ORDER BY`. Bounded Tables can be sorted by any column, descending or ascending. \n\nTo use `ORDER BY` on unbounded tables like `server_logs` the primary sorting key needs to be a [time attribute](https://docs.ververica.com/user_guide/sql_development/table_view.html#time-attributes) like `log_time`.\n\nIn first example below, we are sorting the `server_logs` by `log_time`. The second example is a bit more advanced: It sorts the number of logs per minute and browser by the `window_time` (a time attribute) and the `cnt_browser` (descending), so that the browser with the highest number of logs is at the top of each window.\n\n## Screenshot of this tutorial\n![FlinkSqlCook-Foudation-06SortingTable](https://user-images.githubusercontent.com/164491/122321021-c6d5c400-cf55-11eb-8c09-30d38b241c3d.gif)\n",
       "user": "anonymous",
-      "dateUpdated": "2021-03-18 15:27:10.598",
+      "dateUpdated": "2021-06-17 10:21:48.619",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -29,7 +29,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eThis example will show how you can sort a table, particularly unbounded tables.\u003c/p\u003e\n\u003cp\u003eFlink SQL supports \u003ccode\u003eORDER BY\u003c/code\u003e. Bounded Tables can be sorted by any column, descending or ascending.\u003c/p\u003e\n\u003cp\u003eTo use \u003ccode\u003eORDER BY\u003c/code\u003e on unbounded tables like \u003ccode\u003eserver_logs\u003c/code\u003e the primary sorting key needs to be a \u003ca href\u003d\"https://docs.ververica.com/user_guide/sql_development/table_view.html#time-attributes\"\u003etime attribute\u003c/a\u003e like \u003ccode\u003elog_time\u003c/code\u003e.\u003c/p\u003e\n\u003cp\u003eIn first example below, we are sorting the \u003ccode\u003eserver_logs\u003c/code\u003e by \u003ccode\u003elog_time\u003c/code\u003e. The second example is a bit more advanced: It sorts the number of logs per minute and browser by the \u003ccode\u003ewindow_time\u003c/code\u003e (a time attribute) and the \u003ccode\u003ecnt_browser\u003c/code\u003e (descending), so that the browser with the highest number of logs is at the top of each window.\u003c/p\u003e\n\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eThis example will show how you can sort a table, particularly unbounded tables.\u003c/p\u003e\n\u003cp\u003eFlink SQL supports \u003ccode\u003eORDER BY\u003c/code\u003e. Bounded Tables can be sorted by any column, descending or ascending.\u003c/p\u003e\n\u003cp\u003eTo use \u003ccode\u003eORDER BY\u003c/code\u003e on unbounded tables like \u003ccode\u003eserver_logs\u003c/code\u003e the primary sorting key needs to be a \u003ca href\u003d\"https://docs.ververica.com/user_guide/sql_development/table_view.html#time-attributes\"\u003etime attribute\u003c/a\u003e like \u003ccode\u003elog_time\u003c/code\u003e.\u003c/p\u003e\n\u003cp\u003eIn first example below, we are sorting the \u003ccode\u003eserver_logs\u003c/code\u003e by \u003ccode\u003elog_time\u003c/code\u003e. The second example is a bit more advanced: It sorts the number of logs per minute and browser by the \u003ccode\u003ewindow_time\u003c/code\u003e (a time attribute) and the \u003ccode\u003ecnt_browser\u003c/code\u003e (descending), so that the browser with the highest number of logs is at the top of each window.\u003c/p\u003e\n\u003ch2\u003eScreenshot of this tutorial\u003c/h2\u003e\n\u003cp\u003e\u003cimg src\u003d\"https://user-images.githubusercontent.com/164491/122321021-c6d5c400-cf55-11eb-8c09-30d38b241c3d.gif\" alt\u003d\"FlinkSqlCook-Foudation-06SortingTable\" /\u003e\u003c/p\u003e\n\n\u003c/div\u003e"
           }
         ]
       },
@@ -39,8 +39,8 @@
       "jobName": "paragraph_1614268041202_1817551626",
       "id": "paragraph_1614268041202_1817551626",
       "dateCreated": "2021-02-25 23:47:21.202",
-      "dateStarted": "2021-03-18 15:27:10.600",
-      "dateFinished": "2021-03-18 15:27:10.620",
+      "dateStarted": "2021-06-17 10:21:48.621",
+      "dateFinished": "2021-06-17 10:21:48.641",
       "status": "FINISHED"
     },
     {
@@ -89,7 +89,7 @@
     {
       "text": "%flink.ssql\n\n\nDROP TEMPORARY TABLE IF EXISTS server_logs_temp;\n\nCREATE TEMPORARY TABLE server_logs_temp ( \n    client_ip STRING,\n    client_identity STRING, \n    userid STRING, \n    user_agent STRING,\n    log_time TIMESTAMP(3),\n    request_line STRING, \n    status_code STRING, \n    size INT, \n    WATERMARK FOR log_time AS log_time - INTERVAL \u002715\u0027 SECONDS\n) WITH (\n  \u0027connector\u0027 \u003d \u0027faker\u0027, \n  \u0027fields.client_ip.expression\u0027 \u003d \u0027#{Internet.publicIpV4Address}\u0027,\n  \u0027fields.client_identity.expression\u0027 \u003d  \u0027-\u0027,\n  \u0027fields.userid.expression\u0027 \u003d  \u0027-\u0027,\n  \u0027fields.user_agent.expression\u0027 \u003d \u0027#{Internet.userAgentAny}\u0027,\n  \u0027fields.log_time.expression\u0027 \u003d  \u0027#{date.past \u0027\u002715\u0027\u0027,\u0027\u00275\u0027\u0027,\u0027\u0027SECONDS\u0027\u0027}\u0027,\n  \u0027fields.request_line.expression\u0027 \u003d \u0027#{regexify \u0027\u0027(GET|POST|PUT|PATCH){1}\u0027\u0027} #{regexify \u0027\u0027(/search\\.html|/login\\.html|/prod\\.html|cart\\.html|/order\\.html){1}\u0027\u0027} #{regexify \u0027\u0027(HTTP/1\\.1|HTTP/2|/HTTP/1\\.0){1}\u0027\u0027}\u0027,\n  \u0027fields.status_code.expression\u0027 \u003d \u0027#{regexify \u0027\u0027(200|201|204|400|401|403|301){1}\u0027\u0027}\u0027,\n  \u0027fields.size.expression\u0027 \u003d \u0027#{number.numberBetween \u0027\u0027100\u0027\u0027,\u0027\u002710000000\u0027\u0027}\u0027\n);",
       "user": "anonymous",
-      "dateUpdated": "2021-02-26 11:51:44.113",
+      "dateUpdated": "2021-06-17 10:19:47.395",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -108,20 +108,29 @@
         "params": {},
         "forms": {}
       },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Table has been dropped.\nTable has been created.\n"
+          }
+        ]
+      },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1614265728664_1117299697",
       "id": "paragraph_1614265728664_1117299697",
       "dateCreated": "2021-02-25 23:08:48.664",
-      "dateStarted": "2021-02-26 11:51:44.117",
-      "dateFinished": "2021-02-26 11:51:44.904",
+      "dateStarted": "2021-06-17 10:19:47.398",
+      "dateFinished": "2021-06-17 10:19:47.631",
       "status": "FINISHED"
     },
     {
       "text": "%flink.ssql(type\u003dupdate)\n\nSELECT * FROM server_logs_temp \nORDER BY log_time desc limit 10;\n",
       "user": "anonymous",
-      "dateUpdated": "2021-02-26 11:51:48.528",
+      "dateUpdated": "2021-06-17 10:19:53.207",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -176,32 +185,19 @@
         "forms": {}
       },
       "apps": [],
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "FLINK JOB",
-          "tooltip": "View in Flink web UI",
-          "group": "flink",
-          "values": [
-            {
-              "jobUrl": "http://localhost:8081#/job/3d2fe144d9fe2c37c84f7a2f2da42cd9"
-            }
-          ],
-          "interpreterSettingId": "flink"
-        }
-      },
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1614265748275_1173150160",
       "id": "paragraph_1614265748275_1173150160",
       "dateCreated": "2021-02-25 23:09:08.275",
-      "dateStarted": "2021-02-26 11:51:48.536",
-      "dateFinished": "2021-02-26 11:52:06.329",
+      "dateStarted": "2021-06-17 10:19:53.209",
+      "dateFinished": "2021-06-17 10:23:24.818",
       "status": "ABORT"
     },
     {
       "text": "%flink.ssql\n\nDROP TEMPORARY TABLE IF EXISTS server_logs_temp;\n\nCREATE TEMPORARY TABLE server_logs_temp ( \n    client_ip STRING,\n    client_identity STRING, \n    userid STRING, \n    user_agent STRING,\n    log_time TIMESTAMP(3),\n    request_line STRING, \n    status_code STRING, \n    size INT, \n    WATERMARK FOR log_time AS log_time - INTERVAL \u002715\u0027 SECONDS\n) WITH (\n  \u0027connector\u0027 \u003d \u0027faker\u0027, \n  \u0027fields.client_ip.expression\u0027 \u003d \u0027#{Internet.publicIpV4Address}\u0027,\n  \u0027fields.client_identity.expression\u0027 \u003d  \u0027-\u0027,\n  \u0027fields.userid.expression\u0027 \u003d  \u0027-\u0027,\n  \u0027fields.user_agent.expression\u0027 \u003d \u0027#{Internet.userAgentAny}\u0027,\n  \u0027fields.log_time.expression\u0027 \u003d  \u0027#{date.past \u0027\u002715\u0027\u0027,\u0027\u00275\u0027\u0027,\u0027\u0027SECONDS\u0027\u0027}\u0027,\n  \u0027fields.request_line.expression\u0027 \u003d \u0027#{regexify \u0027\u0027(GET|POST|PUT|PATCH){1}\u0027\u0027} #{regexify \u0027\u0027(/search\\.html|/login\\.html|/prod\\.html|cart\\.html|/order\\.html){1}\u0027\u0027} #{regexify \u0027\u0027(HTTP/1\\.1|HTTP/2|/HTTP/1\\.0){1}\u0027\u0027}\u0027,\n  \u0027fields.status_code.expression\u0027 \u003d \u0027#{regexify \u0027\u0027(200|201|204|400|401|403|301){1}\u0027\u0027}\u0027,\n  \u0027fields.size.expression\u0027 \u003d \u0027#{number.numberBetween \u0027\u0027100\u0027\u0027,\u0027\u002710000000\u0027\u0027}\u0027\n);\n",
       "user": "anonymous",
-      "dateUpdated": "2021-02-26 11:51:58.634",
+      "dateUpdated": "2021-06-17 10:20:18.334",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -220,20 +216,29 @@
         "params": {},
         "forms": {}
       },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Table has been dropped.\nTable has been created.\n"
+          }
+        ]
+      },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1614265830633_644386006",
       "id": "paragraph_1614265830633_644386006",
       "dateCreated": "2021-02-25 23:10:30.633",
-      "dateStarted": "2021-02-26 11:51:58.640",
-      "dateFinished": "2021-02-26 11:51:59.530",
+      "dateStarted": "2021-06-17 10:20:18.336",
+      "dateFinished": "2021-06-17 10:20:18.513",
       "status": "FINISHED"
     },
     {
-      "text": "%flink.ssql(type\u003dupdate)\n\nSELECT \n  TUMBLE_ROWTIME(log_time, INTERVAL \u00271\u0027 MINUTE) AS window_time,\n  REGEXP_EXTRACT(user_agent,\u0027[^\\/]+\u0027) AS browser,\n  COUNT(*) AS cnt_browser\nFROM server_logs_temp\nGROUP BY \n  REGEXP_EXTRACT(user_agent,\u0027[^\\/]+\u0027),\n  TUMBLE(log_time, INTERVAL \u00271\u0027 MINUTE)\nORDER BY\n  window_time,\n  cnt_browser DESC\nLIMIT 10\n",
+      "text": "%flink.ssql(type\u003dupdate)\n\nSELECT \n  TUMBLE_ROWTIME(log_time, INTERVAL \u00275\u0027 SECONDS) AS window_time,\n  REGEXP_EXTRACT(user_agent,\u0027[^\\/]+\u0027) AS browser,\n  COUNT(*) AS cnt_browser\nFROM server_logs_temp\nGROUP BY \n  REGEXP_EXTRACT(user_agent,\u0027[^\\/]+\u0027),\n  TUMBLE(log_time, INTERVAL \u00275\u0027 SECONDS)\nORDER BY\n  window_time,\n  cnt_browser DESC\nLIMIT 10\n",
       "user": "anonymous",
-      "dateUpdated": "2021-02-26 11:52:03.138",
+      "dateUpdated": "2021-06-17 10:20:35.285",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -282,6 +287,19 @@
         "params": {},
         "forms": {}
       },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "window_time\tbrowser\tcnt_browser\n2021-06-17 15:20:24.999\tMozilla\t249\n2021-06-17 15:20:24.999\tOpera\t9\n2021-06-17 15:20:29.999\tMozilla\t900\n2021-06-17 15:20:29.999\tOpera\t43\n2021-06-17 15:20:34.999\tMozilla\t1311\n2021-06-17 15:20:34.999\tOpera\t50\n2021-06-17 15:20:39.999\tOpera\t58\n2021-06-17 15:20:39.999\tMozilla\t1175\n2021-06-17 15:20:44.999\tOpera\t58\n2021-06-17 15:20:44.999\tMozilla\t1200\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "Fail to run sql command: SELECT \n  TUMBLE_ROWTIME(log_time, INTERVAL \u00275\u0027 SECONDS) AS window_time,\n  REGEXP_EXTRACT(user_agent,\u0027[^\\/]+\u0027) AS browser,\n  COUNT(*) AS cnt_browser\nFROM server_logs_temp\nGROUP BY \n  REGEXP_EXTRACT(user_agent,\u0027[^\\/]+\u0027),\n  TUMBLE(log_time, INTERVAL \u00275\u0027 SECONDS)\nORDER BY\n  window_time,\n  cnt_browser DESC\nLIMIT 10\njava.io.IOException: Fail to run stream sql job\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:172)\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:105)\n\tat org.apache.zeppelin.flink.FlinkStreamSqlInterpreter.callInnerSelect(FlinkStreamSqlInterpreter.java:89)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.callSelect(FlinkSqlInterrpeter.java:495)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.callCommand(FlinkSqlInterrpeter.java:258)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.runSqlList(FlinkSqlInterrpeter.java:152)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.internalInterpret(FlinkSqlInterrpeter.java:110)\n\tat org.apache.zeppelin.interpreter.AbstractInterpreter.interpret(AbstractInterpreter.java:47)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:110)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:849)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:741)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:172)\n\tat org.apache.zeppelin.scheduler.AbstractScheduler.runJob(AbstractScheduler.java:132)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler.lambda$runJobInScheduler$0(ParallelScheduler.java:46)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.flink.client.program.ProgramInvocationException: Job failed (JobID: 9780f4da5e7564783ce220394264a501)\n\tat org.apache.flink.client.deployment.ClusterClientJobClientAdapter.lambda$null$6(ClusterClientJobClientAdapter.java:125)\n\tat java.util.concurrent.CompletableFuture.uniApply(CompletableFuture.java:616)\n\tat java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:591)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:1975)\n\tat org.apache.flink.runtime.concurrent.FutureUtils.lambda$retryOperationWithDelay$9(FutureUtils.java:394)\n\tat java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:774)\n\tat java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:750)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:1975)\n\tat org.apache.flink.client.program.rest.RestClusterClient.lambda$pollResourceAsync$24(RestClusterClient.java:670)\n\tat java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:774)\n\tat java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:750)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:1975)\n\tat org.apache.flink.runtime.concurrent.FutureUtils.lambda$retryOperationWithDelay$9(FutureUtils.java:394)\n\tat java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:774)\n\tat java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:750)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:575)\n\tat java.util.concurrent.CompletableFuture$UniCompose.tryFire(CompletableFuture.java:943)\n\tat java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:456)\n\t... 3 more\nCaused by: org.apache.flink.runtime.client.JobCancellationException: Job was cancelled.\n\tat org.apache.flink.runtime.jobmaster.JobResult.toJobExecutionResult(JobResult.java:146)\n\tat org.apache.flink.client.deployment.ClusterClientJobClientAdapter.lambda$null$6(ClusterClientJobClientAdapter.java:123)\n\t... 24 more\n\n"
+          }
+        ]
+      },
       "apps": [],
       "runtimeInfos": {
         "jobUrl": {
@@ -291,7 +309,7 @@
           "group": "flink",
           "values": [
             {
-              "jobUrl": "http://localhost:8081#/job/342fe8e8d29aa087ed832cc53449cad6"
+              "jobUrl": "http://localhost:8085#/job/9780f4da5e7564783ce220394264a501"
             }
           ],
           "interpreterSettingId": "flink"
@@ -301,8 +319,8 @@
       "jobName": "paragraph_1614311113990_225571058",
       "id": "paragraph_1614311113990_225571058",
       "dateCreated": "2021-02-26 11:45:13.995",
-      "dateStarted": "2021-02-26 11:52:03.142",
-      "dateFinished": "2021-02-26 11:52:13.863",
+      "dateStarted": "2021-06-17 10:20:35.288",
+      "dateFinished": "2021-06-17 10:23:29.933",
       "status": "ABORT"
     },
     {
