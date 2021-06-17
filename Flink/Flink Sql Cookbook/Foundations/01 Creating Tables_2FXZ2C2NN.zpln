@@ -1,9 +1,9 @@
 {
   "paragraphs": [
     {
-      "text": "%md\n\nThis example will show how to create a table using SQL DDL.\n\nFlink SQL operates against logical tables, just like a traditional database. However, it does not maintain tables internally but always operates against external systems.\n\nTable definitions are in two parts; the logical schema and connector configuration. The logical schema defines the columns and types in the table and is what queries operate against. The connector configuration is contained in the `WITH` clause and defines the physical system that backs this table. This example uses the `datagen` connector which generates rows in memory and is convenient for testing queries.\n\nYou can test the table is properly created by running a simple `SELECT` statement. In Zeppelin you will see the results printed to the UI. In this example below you would see the latest 10 records.\n",
+      "text": "%md\n\nThis example will show how to create a table using SQL DDL.\n\nFlink SQL operates against logical tables, just like a traditional database. However, it does not maintain tables internally but always operates against external systems.\n\nTable definitions are in two parts; the logical schema and connector configuration. The logical schema defines the columns and types in the table and is what queries operate against. The connector configuration is contained in the `WITH` clause and defines the physical system that backs this table. This example uses the `datagen` connector which generates rows in memory and is convenient for testing queries.\n\nYou can test the table is properly created by running a simple `SELECT` statement. In Zeppelin you will see the results printed to the UI. In this example below you would see the latest 10 records.\n\n## Screenshot of this tutorial note\n\n![FlinkSqlCook-Foudation-01CreatingTable](https://user-images.githubusercontent.com/164491/122317880-cab31780-cf50-11eb-83ef-df6432e22448.gif)",
       "user": "anonymous",
-      "dateUpdated": "2021-03-18 15:05:48.624",
+      "dateUpdated": "2021-06-17 09:46:59.551",
       "progress": 0,
       "config": {
         "tableHide": false,
@@ -30,7 +30,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eThis example will show how to create a table using SQL DDL.\u003c/p\u003e\n\u003cp\u003eFlink SQL operates against logical tables, just like a traditional database. However, it does not maintain tables internally but always operates against external systems.\u003c/p\u003e\n\u003cp\u003eTable definitions are in two parts; the logical schema and connector configuration. The logical schema defines the columns and types in the table and is what queries operate against. The connector configuration is contained in the \u003ccode\u003eWITH\u003c/code\u003e clause and defines the physical system that backs this table. This example uses the \u003ccode\u003edatagen\u003c/code\u003e connector which generates rows in memory and is convenient for testing queries.\u003c/p\u003e\n\u003cp\u003eYou can test the table is properly created by running a simple \u003ccode\u003eSELECT\u003c/code\u003e statement. In Zeppelin you will see the results printed to the UI. In this example below you would see the latest 10 records.\u003c/p\u003e\n\n\u003c/div\u003e"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eThis example will show how to create a table using SQL DDL.\u003c/p\u003e\n\u003cp\u003eFlink SQL operates against logical tables, just like a traditional database. However, it does not maintain tables internally but always operates against external systems.\u003c/p\u003e\n\u003cp\u003eTable definitions are in two parts; the logical schema and connector configuration. The logical schema defines the columns and types in the table and is what queries operate against. The connector configuration is contained in the \u003ccode\u003eWITH\u003c/code\u003e clause and defines the physical system that backs this table. This example uses the \u003ccode\u003edatagen\u003c/code\u003e connector which generates rows in memory and is convenient for testing queries.\u003c/p\u003e\n\u003cp\u003eYou can test the table is properly created by running a simple \u003ccode\u003eSELECT\u003c/code\u003e statement. In Zeppelin you will see the results printed to the UI. In this example below you would see the latest 10 records.\u003c/p\u003e\n\u003ch2\u003eScreenshot of this tutorial note\u003c/h2\u003e\n\u003cp\u003e\u003cimg src\u003d\"https://user-images.githubusercontent.com/164491/122317880-cab31780-cf50-11eb-83ef-df6432e22448.gif\" alt\u003d\"FlinkSqlCook-Foudation-01CreatingTable\" /\u003e\u003c/p\u003e\n\n\u003c/div\u003e"
           }
         ]
       },
@@ -40,14 +40,14 @@
       "jobName": "paragraph_1614267718812_631245959",
       "id": "paragraph_1614267718812_631245959",
       "dateCreated": "2021-02-25 23:41:58.812",
-      "dateStarted": "2021-03-18 15:05:48.625",
-      "dateFinished": "2021-03-18 15:05:48.655",
+      "dateStarted": "2021-06-17 09:46:59.551",
+      "dateFinished": "2021-06-17 09:46:59.563",
       "status": "FINISHED"
     },
     {
       "text": "%md\n本例子将展示怎么使用 DDL SQL 来创建表\n\nFlink SQL 能像操作传统数据库一样操作逻辑表。 但是他并不维护表本身，而是通过操作外部系统来变更表的数据。\n\n定义表分为2部分；分别是设计逻辑 schema 和 connector 的配置。逻辑 schema 定义了表中的字段及其类型它也是查询操作的对象。连接器配置在 `WITH` 语句中，它定义了逻辑表依赖的物理储存。本例使用 `datagen` 连接器的在内存中生成数据，便于测试查询。\n\n你可以通过运行一条简单的 `SELETE` 语句来测试这个表。在 `Zeppelin` 中你可以在UI上看到查询的结果。在下面的例子中你将看到最近的10条记录。",
       "user": "anonymous",
-      "dateUpdated": "2021-03-18 15:07:01.050",
+      "dateUpdated": "2021-06-17 09:47:32.424",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -83,14 +83,14 @@
       "jobName": "paragraph_1615106915535_2015311282",
       "id": "paragraph_1615106915535_2015311282",
       "dateCreated": "2021-03-07 08:48:35.535",
-      "dateStarted": "2021-03-18 15:07:01.049",
-      "dateFinished": "2021-03-18 15:07:01.074",
+      "dateStarted": "2021-06-17 09:47:32.424",
+      "dateFinished": "2021-06-17 09:47:32.439",
       "status": "FINISHED"
     },
     {
       "text": "%flink.ssql\n\n\nDROP TABLE IF EXISTS orders;\n\nCREATE TABLE orders (\n    order_uid  BIGINT,\n    product_id BIGINT,\n    price      DOUBLE,\n    order_time TIMESTAMP(3)\n) WITH (\n    \u0027connector\u0027 \u003d \u0027datagen\u0027\n);\n\n",
       "user": "anonymous",
-      "dateUpdated": "2021-03-04 10:53:48.061",
+      "dateUpdated": "2021-06-17 09:43:45.539",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -109,20 +109,29 @@
         "params": {},
         "forms": {}
       },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Table has been dropped.\nTable has been created.\n"
+          }
+        ]
+      },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1614263971802_451683322",
       "id": "paragraph_1614263971802_451683322",
       "dateCreated": "2021-02-25 22:39:31.803",
-      "dateStarted": "2021-03-04 10:53:48.142",
-      "dateFinished": "2021-03-04 10:54:14.637",
+      "dateStarted": "2021-06-17 09:43:45.541",
+      "dateFinished": "2021-06-17 09:43:45.697",
       "status": "FINISHED"
     },
     {
       "text": "%flink.ssql(type\u003dupdate)\n\nSELECT * FROM orders \nORDER BY order_time DESC LIMIT 10;\n",
       "user": "anonymous",
-      "dateUpdated": "2021-02-26 11:16:27.636",
+      "dateUpdated": "2021-06-17 09:43:57.295",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -163,7 +172,8 @@
                 }
               },
               "commonSetting": {}
-            }
+            },
+            "helium": {}
           }
         },
         "enabled": true
@@ -171,6 +181,19 @@
       "settings": {
         "params": {},
         "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "order_uid\tproduct_id\tprice\torder_time\n-115146255956311362\t8384024875946446625\t1.2778169225279555E308\t2021-06-17T01:45:06.815\n-2437223765170764667\t-5126236286952473705\t9.05634937938631E307\t2021-06-17T01:45:06.815\n-2664216747080255173\t8173880163262675187\t4.3137961144495367E307\t2021-06-17T01:45:06.815\n-8333421588478730426\t-3998985024037917040\t1.9939179684322032E307\t2021-06-17T01:45:06.815\n-928921473959501068\t-4794395694773461324\t1.7204806599432541E308\t2021-06-17T01:45:06.815\n1649796419181487464\t3820565828870201806\t2.4460415672237293E307\t2021-06-17T01:45:06.815\n293765212149468982\t3424710795179698534\t4.648542302429343E307\t2021-06-17T01:45:06.815\n7437332148125785538\t4351313655812151429\t1.4067896645521685E308\t2021-06-17T01:45:06.815\n8291265901698704891\t3877159529034257001\t8.664121891386682E307\t2021-06-17T01:45:06.815\n8723934782480994521\t-2842381473285737492\t8.559276113521531E307\t2021-06-17T01:45:06.815\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "Fail to run sql command: SELECT * FROM orders \nORDER BY order_time DESC LIMIT 10\njava.io.IOException: Fail to run stream sql job\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:172)\n\tat org.apache.zeppelin.flink.sql.AbstractStreamSqlJob.run(AbstractStreamSqlJob.java:105)\n\tat org.apache.zeppelin.flink.FlinkStreamSqlInterpreter.callInnerSelect(FlinkStreamSqlInterpreter.java:89)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.callSelect(FlinkSqlInterrpeter.java:495)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.callCommand(FlinkSqlInterrpeter.java:258)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.runSqlList(FlinkSqlInterrpeter.java:152)\n\tat org.apache.zeppelin.flink.FlinkSqlInterrpeter.internalInterpret(FlinkSqlInterrpeter.java:110)\n\tat org.apache.zeppelin.interpreter.AbstractInterpreter.interpret(AbstractInterpreter.java:47)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:110)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:849)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:741)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:172)\n\tat org.apache.zeppelin.scheduler.AbstractScheduler.runJob(AbstractScheduler.java:132)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler.lambda$runJobInScheduler$0(ParallelScheduler.java:46)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.flink.client.program.ProgramInvocationException: Job failed (JobID: 2da58196f9e3afdb42fe81808121fe47)\n\tat org.apache.flink.client.deployment.ClusterClientJobClientAdapter.lambda$null$6(ClusterClientJobClientAdapter.java:125)\n\tat java.util.concurrent.CompletableFuture.uniApply(CompletableFuture.java:616)\n\tat java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:591)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:1975)\n\tat org.apache.flink.client.program.rest.RestClusterClient.lambda$pollResourceAsync$22(RestClusterClient.java:665)\n\tat java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:774)\n\tat java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:750)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.complete(CompletableFuture.java:1975)\n\tat org.apache.flink.runtime.concurrent.FutureUtils.lambda$retryOperationWithDelay$9(FutureUtils.java:394)\n\tat java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:774)\n\tat java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:750)\n\tat java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)\n\tat java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:575)\n\tat java.util.concurrent.CompletableFuture$UniCompose.tryFire(CompletableFuture.java:943)\n\tat java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:456)\n\t... 3 more\nCaused by: org.apache.flink.runtime.client.JobCancellationException: Job was cancelled.\n\tat org.apache.flink.runtime.jobmaster.JobResult.toJobExecutionResult(JobResult.java:146)\n\tat org.apache.flink.client.deployment.ClusterClientJobClientAdapter.lambda$null$6(ClusterClientJobClientAdapter.java:123)\n\t... 19 more\n\n"
+          }
+        ]
       },
       "apps": [],
       "runtimeInfos": {
@@ -181,7 +204,7 @@
           "group": "flink",
           "values": [
             {
-              "jobUrl": "http://localhost:8081#/job/9c231364f3c735c1d66d1477a4ac1135"
+              "jobUrl": "http://localhost:8085#/job/2da58196f9e3afdb42fe81808121fe47"
             }
           ],
           "interpreterSettingId": "flink"
@@ -191,8 +214,8 @@
       "jobName": "paragraph_1614264008246_345717910",
       "id": "paragraph_1614264008246_345717910",
       "dateCreated": "2021-02-25 22:40:08.246",
-      "dateStarted": "2021-02-26 11:16:27.652",
-      "dateFinished": "2021-02-26 11:16:48.392",
+      "dateStarted": "2021-06-17 09:43:57.297",
+      "dateFinished": "2021-06-17 09:45:11.656",
       "status": "ABORT"
     },
     {
