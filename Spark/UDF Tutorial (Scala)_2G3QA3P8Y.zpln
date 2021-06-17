@@ -1,0 +1,283 @@
+{
+  "paragraphs": [
+    {
+      "title": "Define and Register UDF",
+      "text": "%spark\n\n\nval addOne \u003d (s: Long) \u003d\u003e {\n  s + 1\n}\nspark.udf.register(\"addOne\", addOne)\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-17 08:32:55.225",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34maddOne\u001b[0m: \u001b[1m\u001b[32mLong \u003d\u003e Long\u001b[0m \u003d \u003cfunction1\u003e\n\u001b[1m\u001b[34mres1\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.expressions.UserDefinedFunction\u001b[0m \u003d UserDefinedFunction(\u003cfunction1\u003e,LongType,Some(List(LongType)))\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1616472437836_1838624748",
+      "id": "paragraph_1616472437836_1838624748",
+      "dateCreated": "2021-03-23 12:07:17.836",
+      "dateStarted": "2021-06-17 08:32:55.239",
+      "dateFinished": "2021-06-17 08:33:10.530",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Create Spark Table",
+      "text": "%spark\n\nspark.range(1, 10).toDF(\"num\").createOrReplaceTempView(\"test\")",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-17 08:33:10.562",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1616484941193_1612137004",
+      "id": "paragraph_1616484941193_1612137004",
+      "dateCreated": "2021-03-23 15:35:41.193",
+      "dateStarted": "2021-06-17 08:33:10.564",
+      "dateFinished": "2021-06-17 08:33:12.151",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Use UDF in Spark Sql",
+      "text": "%spark.sql\n\nselect num, addOne(num) as num2 from test",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-17 08:33:12.165",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "num": "string",
+                      "num2": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "num\tnum2\n1\t2\n2\t3\n3\t4\n4\t5\n5\t6\n6\t7\n7\t8\n8\t9\n9\t10\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.239:4041/jobs/job?id\u003d0"
+            },
+            {
+              "jobUrl": "http://192.168.0.239:4041/jobs/job?id\u003d1"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1616485076495_104689376",
+      "id": "paragraph_1616485076495_104689376",
+      "dateCreated": "2021-03-23 15:37:56.495",
+      "dateStarted": "2021-06-17 08:33:12.176",
+      "dateFinished": "2021-06-17 08:33:15.575",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Use UDF in DataFrame API",
+      "text": "%spark\n\nimport org.apache.spark.sql.functions.{col, udf}\nval addOne \u003d udf((i: Long) \u003d\u003e i + 1)\nspark.range(1, 10).toDF(\"num\").select(col(\"num\"), addOne(col(\"num\")) as \"num2\").show()\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-17 08:33:15.575",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+----+\n|num|num2|\n+---+----+\n|  1|   2|\n|  2|   3|\n|  3|   4|\n|  4|   5|\n|  5|   6|\n|  6|   7|\n|  7|   8|\n|  8|   9|\n|  9|  10|\n+---+----+\n\nimport org.apache.spark.sql.functions.{col, udf}\n\u001b[1m\u001b[34maddOne\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.expressions.UserDefinedFunction\u001b[0m \u003d UserDefinedFunction(\u003cfunction1\u003e,LongType,Some(List(LongType)))\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.239:4041/jobs/job?id\u003d2"
+            },
+            {
+              "jobUrl": "http://192.168.0.239:4041/jobs/job?id\u003d3"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1616485134182_916789626",
+      "id": "paragraph_1616485134182_916789626",
+      "dateCreated": "2021-03-23 15:38:54.182",
+      "dateStarted": "2021-06-17 08:33:15.580",
+      "dateFinished": "2021-06-17 08:33:16.376",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-17 08:33:16.379",
+      "progress": 0,
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1616485440717_1788684093",
+      "id": "paragraph_1616485440717_1788684093",
+      "dateCreated": "2021-03-23 15:44:00.717",
+      "dateStarted": "2021-06-17 08:33:16.387",
+      "dateFinished": "2021-06-17 08:33:16.554",
+      "status": "FINISHED"
+    }
+  ],
+  "name": "UDF Tutorial (Scala)",
+  "id": "2G3QA3P8Y",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.1-SNAPSHOT",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {
+    "isRunning": true
+  }
+}

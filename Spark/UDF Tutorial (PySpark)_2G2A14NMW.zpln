@@ -1,0 +1,283 @@
+{
+  "paragraphs": [
+    {
+      "title": "Define and Register UDF",
+      "text": "%spark.pyspark\n\nfrom pyspark.sql.types import LongType\n\ndef add_one(s):\n  return s + 1\n  \nspark.udf.register(\"add_one\", add_one)",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-17 08:34:08.076",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u003cfunction add_one at 0x7fe36b461a28\u003e\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1616485623111_1399267847",
+      "id": "paragraph_1616485623111_1399267847",
+      "dateCreated": "2021-03-23 15:47:03.112",
+      "dateStarted": "2021-06-17 08:34:08.079",
+      "dateFinished": "2021-06-17 08:34:09.076",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Create Spark Table",
+      "text": "%spark.pyspark\n\nspark.range(1, 10).toDF(\"num\").createOrReplaceTempView(\"test\")",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-17 08:34:09.079",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1616485822379_2020691333",
+      "id": "paragraph_1616485822379_2020691333",
+      "dateCreated": "2021-03-23 15:50:22.379",
+      "dateStarted": "2021-06-17 08:34:09.080",
+      "dateFinished": "2021-06-17 08:34:09.177",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Use UDF in Spark SQL",
+      "text": "%spark.sql\n\nselect num, add_one(num) as num2 from test",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-17 08:34:09.180",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "num": "string",
+                      "num2": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "num\tnum2\n1\t2\n2\t3\n3\t4\n4\t5\n5\t6\n6\t7\n7\t8\n8\t9\n9\t10\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.239:4041/jobs/job?id\u003d4"
+            },
+            {
+              "jobUrl": "http://192.168.0.239:4041/jobs/job?id\u003d5"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1616487144128_1166166400",
+      "id": "paragraph_1616487144128_1166166400",
+      "dateCreated": "2021-03-23 16:12:24.128",
+      "dateStarted": "2021-06-17 08:34:09.183",
+      "dateFinished": "2021-06-17 08:34:09.946",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Use UDF in DataFrame API",
+      "text": "%spark.pyspark\n\nfrom pyspark.sql.functions import udf\n@udf(\"long\")\ndef add_one_udf(s):\n  return s + 1\n  \ndf \u003d spark.table(\"test\")\ndf.select(\"num\", add_one_udf(\"num\").alias(\"num2\")).show()\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-17 08:34:09.983",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+----+\n|num|num2|\n+---+----+\n|  1|   2|\n|  2|   3|\n|  3|   4|\n|  4|   5|\n|  5|   6|\n|  6|   7|\n|  7|   8|\n|  8|   9|\n|  9|  10|\n+---+----+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.239:4041/jobs/job?id\u003d6"
+            },
+            {
+              "jobUrl": "http://192.168.0.239:4041/jobs/job?id\u003d7"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1616487156214_1757104655",
+      "id": "paragraph_1616487156214_1757104655",
+      "dateCreated": "2021-03-23 16:12:36.214",
+      "dateStarted": "2021-06-17 08:34:09.985",
+      "dateFinished": "2021-06-17 08:34:10.460",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.pyspark\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-17 08:34:10.485",
+      "progress": 0,
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/python"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1616487240543_1838702502",
+      "id": "paragraph_1616487240543_1838702502",
+      "dateCreated": "2021-03-23 16:14:00.543",
+      "dateStarted": "2021-06-17 08:34:10.488",
+      "dateFinished": "2021-06-17 08:34:10.500",
+      "status": "FINISHED"
+    }
+  ],
+  "name": "UDF Tutorial (PySpark)",
+  "id": "2G2A14NMW",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.1-SNAPSHOT",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {
+    "isRunning": true
+  }
+}
