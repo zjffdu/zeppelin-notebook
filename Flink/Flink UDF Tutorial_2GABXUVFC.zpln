@@ -1,0 +1,764 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\nThis is a tutorial note for how to use UDF in Flink. Basically there\u0027re 3 ways to use UDF in Flink on Zeppelin:\n\n* Write your UDF in Zeppelin.\n* Create UDF via SQL\n* Create UDF via `flink.udf.jars`\n\n### Write your UDF in Zeppelin.\n\nYou can write Scala/Python UDF (ScalarFunction/AggregateFunction/TableFunction/TableAggregateFunction) in Zeppelin and use them directly in flink table api or flink sql. In this note, we have 3 examples for you.\n\n### Create UDF via SQL\n\nYou can also write Java/Scala UDF in IDE and then build an udf jar. In Zeppelin, you can import this udf jar to flink interpreter via `flink.execution.jars`, and then use Flink SQL to create UDF. `flink.execution.jars` can be local file or hdfs file, and use comma to separate multiple files.\n\n### Create UDF via `flink.udf.jars`\n\nIf you have many udf classes in your udf jar, it will be annoying to create udf via SQL. Luckily, Zeppelin has a configuration `flink.udf.jars` to detect and register UDF for you\nautomatailly. Sometimes your udf may depend on other third party libraires, and you will pack them in the udf jar as well. In this case, you can specify `flink.udf.jars.packages` to  \nrestrict the packages to scan\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-29 14:16:32.278",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9.0,
+        "editorHide": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eThis is a tutorial note for how to use UDF in Flink. Basically there\u0026rsquo;re 3 ways to use UDF in Flink on Zeppelin:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eWrite your UDF in Zeppelin.\u003c/li\u003e\n\u003cli\u003eCreate UDF via SQL\u003c/li\u003e\n\u003cli\u003eCreate UDF via \u003ccode\u003eflink.udf.jars\u003c/code\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3\u003eWrite your UDF in Zeppelin.\u003c/h3\u003e\n\u003cp\u003eYou can write Scala/Python UDF (ScalarFunction/AggregateFunction/TableFunction/TableAggregateFunction) in Zeppelin and use them directly in flink table api or flink sql. In this note, we have 3 examples for you.\u003c/p\u003e\n\u003ch3\u003eCreate UDF via SQL\u003c/h3\u003e\n\u003cp\u003eYou can also write Java/Scala UDF in IDE and then build an udf jar. In Zeppelin, you can import this udf jar to flink interpreter via \u003ccode\u003eflink.execution.jars\u003c/code\u003e, and then use Flink SQL to create UDF. \u003ccode\u003eflink.execution.jars\u003c/code\u003e can be local file or hdfs file, and use comma to separate multiple files.\u003c/p\u003e\n\u003ch3\u003eCreate UDF via \u003ccode\u003eflink.udf.jars\u003c/code\u003e\u003c/h3\u003e\n\u003cp\u003eIf you have many udf classes in your udf jar, it will be annoying to create udf via SQL. Luckily, Zeppelin has a configuration \u003ccode\u003eflink.udf.jars\u003c/code\u003e to detect and register UDF for you\u003cbr /\u003e\nautomatailly. Sometimes your udf may depend on other third party libraires, and you will pack them in the udf jar as well. In this case, you can specify \u003ccode\u003eflink.udf.jars.packages\u003c/code\u003e to\u003cbr /\u003e\nrestrict the packages to scan\u003c/p\u003e\n\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1624524242817_742900584",
+      "id": "paragraph_1624524242817_742900584",
+      "dateCreated": "2021-06-24 16:44:02.817",
+      "dateStarted": "2021-06-29 14:16:32.279",
+      "dateFinished": "2021-06-29 14:16:32.293",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Configure Flink Interpreter",
+      "text": "%flink.conf\n\nflink.execution.mode yarn-application\n\n# This udf jar is built from this project: https://github.com/zjffdu/flink-udf\n# flink.execution.jars hdfs:///user/hadoop/flink-udf-1.0-SNAPSHOT.jar\n\nflink.udf.jars hdfs:///user/hadoop/flink-udf-1.0-SNAPSHOT.jar\n# flink.udf.jars.packages org.apache.zeppelin.flink.udf\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-07-23 00:38:10.784",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/text",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1624526337492_1463176738",
+      "id": "paragraph_1624526337492_1463176738",
+      "dateCreated": "2021-06-24 17:18:57.492",
+      "dateStarted": "2021-07-23 00:38:10.788",
+      "dateFinished": "2021-07-23 00:38:10.791",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Define Scala UDF",
+      "text": "%flink\n\n\nclass ScalaUpper extends ScalarFunction {\n  def eval(str: String) \u003d str.toUpperCase\n}\n\nbtenv.registerFunction(\"scala_upper\", new ScalaUpper())\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-07-22 21:49:05.208",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "defined class ScalaUpper\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1624524286013_1786515853",
+      "id": "paragraph_1624524286013_1786515853",
+      "dateCreated": "2021-06-24 16:44:46.013",
+      "dateStarted": "2021-07-22 21:49:05.209",
+      "dateFinished": "2021-07-22 21:49:37.356",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Use Scala UDF in SQL",
+      "text": "%flink.bsql\n\nselect scala_upper(\u0027hello world\u0027)\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-07-22 21:51:30.990",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "EXPR$0": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "EXPR$0\nHELLO WORLD\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "FLINK JOB",
+          "tooltip": "View in Flink web UI",
+          "group": "flink",
+          "values": [
+            {
+              "jobUrl": "https://knox.c-fa375384f1f481e0.cn-hongkong.emr.aliyuncs.com:8443/gateway/cluster-topo/yarn/proxy/application_1626074007058_0021/#/job/fc3d9b46ca63f0b0c2cba3464db1d2ac"
+            }
+          ],
+          "interpreterSettingId": "flink"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1624526395186_1385091966",
+      "id": "paragraph_1624526395186_1385091966",
+      "dateCreated": "2021-06-24 17:19:55.186",
+      "dateStarted": "2021-07-22 21:51:30.992",
+      "dateFinished": "2021-07-22 21:51:39.021",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Define PyFlink UDF",
+      "text": "%flink.pyflink\n\n# Make sure you have pyflink installed in all nodes if you are using yarn or yarn-application mode\nclass PythonUpper(ScalarFunction):\n  def eval(self, s):\n    return s.upper()\n\nbt_env.register_function(\"python_upper\", udf(PythonUpper(), DataTypes.STRING(), DataTypes.STRING()))\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-07-20 17:10:06.565",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "org.apache.zeppelin.interpreter.InterpreterException: org.apache.zeppelin.interpreter.InterpreterException: Fail to bootstrap pyflink\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.open(LazyOpenInterpreter.java:76)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:833)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:741)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:172)\n\tat org.apache.zeppelin.scheduler.AbstractScheduler.runJob(AbstractScheduler.java:132)\n\tat org.apache.zeppelin.scheduler.FIFOScheduler.lambda$runJobInScheduler$0(FIFOScheduler.java:42)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.zeppelin.interpreter.InterpreterException: Fail to bootstrap pyflink\n\tat org.apache.zeppelin.flink.PyFlinkInterpreter.open(PyFlinkInterpreter.java:97)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.open(LazyOpenInterpreter.java:70)\n\t... 8 more\nCaused by: java.io.IOException: Fail to run bootstrap script: python/zeppelin_pyflink.py\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "Fail to execute line 18: from pyflink.common import *\nTraceback (most recent call last):\n  File \"/tmp/1626772207101-0/zeppelin_python.py\", line 153, in \u003cmodule\u003e\n    exec(code, _zcUserQueryNameSpace)\n  File \"\u003cstdin\u003e\", line 18, in \u003cmodule\u003e\n  File \"/mnt/disk4/yarn/usercache/hadoop/appcache/application_1626074007058_0018/container_1626074007058_0018_01_000001/lib/python/pyflink.zip/pyflink/__init__.py\", line 26, in \u003cmodule\u003e\nRuntimeError: Python versions prior to 3.6 are not supported for PyFlink [sys.version_info(major\u003d2, minor\u003d7, micro\u003d5, releaselevel\u003d\u0027final\u0027, serial\u003d0)].\n\n\tat org.apache.zeppelin.python.PythonInterpreter.bootstrapInterpreter(PythonInterpreter.java:570)\n\tat org.apache.zeppelin.flink.PyFlinkInterpreter.open(PyFlinkInterpreter.java:95)\n\t... 9 more\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1624524301094_776753066",
+      "id": "paragraph_1624524301094_776753066",
+      "dateCreated": "2021-06-24 16:45:01.094",
+      "dateStarted": "2021-07-20 17:10:06.566",
+      "dateFinished": "2021-07-20 17:10:07.213",
+      "status": "ERROR"
+    },
+    {
+      "title": "Use Python UDF in SQL",
+      "text": "%flink.bsql\n\nselect python_upper(\u0027hello world\u0027)\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-29 14:10:54.597",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1624944387935_883682942",
+      "id": "paragraph_1624944387935_883682942",
+      "dateCreated": "2021-06-29 13:26:27.935",
+      "status": "READY"
+    },
+    {
+      "title": "Create Scala Table Function",
+      "text": "%flink\n\nimport org.apache.flink.table.annotation.FunctionHint\nimport org.apache.flink.table.functions.TableFunction\nimport org.apache.flink.types.Row\nimport org.apache.flink.api.scala._\nimport org.apache.flink.table.annotation.DataTypeHint\n\n@FunctionHint(output \u003d new DataTypeHint(\"ROW\u003csum STRING, result INT\u003e\"))\nclass OverloadedFunction extends TableFunction[Row] {\n   def eval(a: Int, b: Int): Unit \u003d {\n      collect(Row.of(\"Sum\", Int.box(a + b)))\n   }\n}\n\nbtenv.createTemporarySystemFunction(\"SumUdf\", new OverloadedFunction())\n                    ",
+      "user": "anonymous",
+      "dateUpdated": "2021-07-22 21:52:05.384",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.flink.table.annotation.FunctionHint\nimport org.apache.flink.table.functions.TableFunction\nimport org.apache.flink.types.Row\nimport org.apache.flink.api.scala._\nimport org.apache.flink.table.annotation.DataTypeHint\ndefined class OverloadedFunction\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1624947124606_136018093",
+      "id": "paragraph_1624947124606_136018093",
+      "dateCreated": "2021-06-29 14:12:04.606",
+      "dateStarted": "2021-07-22 21:52:05.386",
+      "dateFinished": "2021-07-22 21:52:07.715",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Use Table Function in SQL",
+      "text": "%flink.bsql\n\nselect * FROM LATERAL TABLE(SumUdf(1,2))\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-07-22 21:52:10.354",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "sum": "string",
+                      "result": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "sum\tresult\nSum\t3\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "FLINK JOB",
+          "tooltip": "View in Flink web UI",
+          "group": "flink",
+          "values": [
+            {
+              "jobUrl": "https://knox.c-fa375384f1f481e0.cn-hongkong.emr.aliyuncs.com:8443/gateway/cluster-topo/yarn/proxy/application_1626074007058_0021/#/job/fcfebc0353a73a596bd7aa5a6dd65586"
+            }
+          ],
+          "interpreterSettingId": "flink"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1624947216402_410397401",
+      "id": "paragraph_1624947216402_410397401",
+      "dateCreated": "2021-06-29 14:13:36.402",
+      "dateStarted": "2021-07-22 21:52:10.356",
+      "dateFinished": "2021-07-22 21:52:11.116",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Create UDF via SQL",
+      "text": "%flink.bsql\n\n-- Create Java UDF\nCREATE FUNCTION java_upper AS \u0027org.apache.zeppelin.flink.udf.JavaUpper\u0027;\n\n-- Create Scala UDF\nCREATE FUNCTION scala_upper AS \u0027org.apache.zeppelin.flink.udf.ScalaUpper\u0027;\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-07-22 21:52:13.620",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Function has been created.\nFunction has been created.\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1624944413769_1688960316",
+      "id": "paragraph_1624944413769_1688960316",
+      "dateCreated": "2021-06-29 13:26:53.769",
+      "dateStarted": "2021-07-22 21:52:13.622",
+      "dateFinished": "2021-07-22 21:52:13.974",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Use UDF in SQL",
+      "text": "%flink.bsql\n\nselect java_upper(\u0027hello java\u0027);\nselect scala_upper(\u0027hello scala\u0027);\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-07-22 21:52:15.675",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "EXPR$0": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          },
+          "1": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "EXPR$0": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "EXPR$0\nHELLO JAVA\n"
+          },
+          {
+            "type": "TABLE",
+            "data": "EXPR$0\nHELLO SCALA\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "FLINK JOB",
+          "tooltip": "View in Flink web UI",
+          "group": "flink",
+          "values": [
+            {
+              "jobUrl": "https://knox.c-fa375384f1f481e0.cn-hongkong.emr.aliyuncs.com:8443/gateway/cluster-topo/yarn/proxy/application_1626074007058_0021/#/job/0ba378397386d0d06d77e0ed0895bef1"
+            },
+            {
+              "jobUrl": "https://knox.c-fa375384f1f481e0.cn-hongkong.emr.aliyuncs.com:8443/gateway/cluster-topo/yarn/proxy/application_1626074007058_0021/#/job/aa692b603706472f6656a89ab25d75b6"
+            }
+          ],
+          "interpreterSettingId": "flink"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1624524665585_568764478",
+      "id": "paragraph_1624524665585_568764478",
+      "dateCreated": "2021-06-24 16:51:05.586",
+      "dateStarted": "2021-07-22 21:52:15.677",
+      "dateFinished": "2021-07-22 21:52:16.739",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Create UDF via flink.udf.jars",
+      "text": "%flink.ssql\n\n-- list all the functions defined in the jars of flink.udf.jars\nshow functions\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-07-23 00:38:23.832",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "function": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "org.apache.zeppelin.interpreter.InterpreterException: java.io.IOException: Fail to launch interpreter process:\nInterpreter download command: /usr/lib/jvm/java-1.8.0/bin/java -Dfile.encoding\u003dUTF-8 -Dlog4j.configuration\u003dfile:///mnt/disk1/jzhang/zeppelin/conf/log4j.properties -Dlog4j.configurationFile\u003dfile:///mnt/disk1/jzhang/zeppelin/conf/log4j2.properties -Dzeppelin.log.file\u003d/mnt/disk1/jzhang/zeppelin/logs/zeppelin-interpreter-flink-2GABXUVFC-hadoop-emr-header-1.cluster-46718.log -cp :/mnt/disk1/jzhang/flink-1.12.2/lib/log4j-slf4j-impl-2.12.1.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/log4j-core-2.12.1.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/log4j-api-2.12.1.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/log4j-1.2-api-2.12.1.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/hudi-flink-bundle_2.11-0.9.0-SNAPSHOT.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/flink-table-blink_2.11-1.12.2.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/flink-table_2.11-1.12.2.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/flink-shaded-zookeeper-3.4.14.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/flink-python_2.11-1.12.2.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/flink-json-1.12.2.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/flink-dist_2.11-1.12.2.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/flink-csv-1.12.2.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/flink-connector-hive_2.11-1.12.2.jar:/mnt/disk1/jzhang/zeppelin/zeppelin-interpreter-shaded/target/*:/mnt/disk1/jzhang/zeppelin/zeppelin-zengine/target/test-classes/*:::/mnt/disk1/jzhang/zeppelin/interpreter/zeppelin-interpreter-shaded-0.10.0-SNAPSHOT.jar:/mnt/disk1/jzhang/zeppelin/zeppelin-interpreter/target/classes:/mnt/disk1/jzhang/zeppelin/zeppelin-zengine/target/test-classes:/mnt/disk1/jzhang/flink-1.12.2/opt/flink-python_2.11-1.12.2.jar:/mnt/disk1/jzhang/zeppelin/interpreter/flink/zeppelin-flink-0.10.0-SNAPSHOT-2.11.jar:/etc/ecm/hadoop-conf:/etc/ecm/hadoop-conf:/opt/apps/ecm/service/hadoop/2.8.5-1.6.1/package/hadoop-2.8.5-1.6.1/share/hadoop/common/lib/*:/opt/apps/ecm/service/hadoop/2.8.5-1.6.1/package/hadoop-2.8.5-1.6.1/share/hadoop/common/*:/opt/apps/ecm/service/hadoop/2.8.5-1.6.1/package/hadoop-2.8.5-1.6.1/share/hadoop/hdfs:/opt/apps/ecm/service/hadoop/2.8.5-1.6.1/package/hadoop-2.8.5-1.6.1/share/hadoop/hdfs/lib/*:/opt/apps/ecm/service/hadoop/2.8.5-1.6.1/package/hadoop-2.8.5-1.6.1/share/hadoop/hdfs/*:/opt/apps/ecm/service/hadoop/2.8.5-1.6.1/package/hadoop-2.8.5-1.6.1/share/hadoop/yarn/lib/*:/opt/apps/ecm/service/hadoop/2.8.5-1.6.1/package/hadoop-2.8.5-1.6.1/share/hadoop/yarn/*:/opt/apps/ecm/service/hadoop/2.8.5-1.6.1/package/hadoop-2.8.5-1.6.1/share/hadoop/mapreduce/lib/*:/opt/apps/ecm/service/hadoop/2.8.5-1.6.1/package/hadoop-2.8.5-1.6.1/share/hadoop/mapreduce/*:/usr/lib/hadoop-current/lib/*:/usr/lib/tez-current/*:/usr/lib/tez-current/lib/*:/etc/ecm/tez-conf:/opt/apps/extra-jars/*:/usr/lib/spark-current/yarn/spark-2.4.5-yarn-shuffle.jar:/usr/lib/hadoop-current/contrib/capacity-scheduler/*.jar org.apache.zeppelin.interpreter.remote.RemoteInterpreterDownloader 192.168.0.239 37685 flink /mnt/disk1/jzhang/zeppelin/local-repo/flink\nSLF4J: Class path contains multiple SLF4J bindings.\nSLF4J: Found binding in [jar:file:/mnt/disk1/jzhang/flink-1.12.2/lib/log4j-slf4j-impl-2.12.1.jar!/org/slf4j/impl/StaticLoggerBinder.class]\nSLF4J: Found binding in [jar:file:/mnt/disk1/jzhang/zeppelin/zeppelin-zengine/target/test-classes/slf4j-log4j12-1.7.10.jar!/org/slf4j/impl/StaticLoggerBinder.class]\nSLF4J: Found binding in [jar:file:/mnt/disk1/jzhang/zeppelin/interpreter/flink/zeppelin-flink-0.10.0-SNAPSHOT-2.11.jar!/org/slf4j/impl/StaticLoggerBinder.class]\nSLF4J: Found binding in [jar:file:/opt/apps/ecm/service/hadoop/2.8.5-1.6.1/package/hadoop-2.8.5-1.6.1/share/hadoop/common/lib/slf4j-log4j12-1.7.10.jar!/org/slf4j/impl/StaticLoggerBinder.class]\nSLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.\nSLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]\n[INFO] Interpreter launch command: /mnt/disk1/jzhang/flink-1.12.2/bin/flink run-application -c org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer -t yarn-application -D yarn.application.name\u003dZeppelin_Flink_Session -D flink.jm.memory\u003d1024 -D flink.yarn.queue\u003ddefault -D taskmanager.numberOfTaskSlots\u003d1 -D flink.tm.slot\u003d1 -D FLINK_CONF_DIR\u003d/mnt/disk1/jzhang/flink-1.12.2/conf -D flink.webui.yarn.useProxy\u003dfalse -D flink.interpreter.close.shutdown_cluster\u003dtrue -D jobmanager.memory.process.size\u003d1024mb -D local.number-taskmanager\u003d4 -D zeppelin.flink.concurrentStreamSql.max\u003d10 -D zeppelin.interpreter.localRepo\u003d/mnt/disk1/jzhang/zeppelin/local-repo/flink -D zeppelin.flink.enableHive\u003dfalse -D FLINK_HOME\u003d/mnt/disk1/jzhang/flink-1.12.2 -D flink.execution.mode\u003dyarn-application -D zeppelin.flink.job.check_interval\u003d1000 -D zeppelin.interpreter.output.limit\u003d102400 -D zeppelin.flink.module.enableHive\u003dfalse -D flink.udf.jars\u003dhdfs:///user/hadoop/flink-udf-1.0-SNAPSHOT.jar -D zeppelin.pyflink.python\u003dpython -D zeppelin.flink.hive.version\u003d2.3.4 -D zeppelin.flink.printREPLOutput\u003dtrue -D zeppelin.interpreter.close.cancel_job\u003dtrue -D zeppelin.flink.run.asLoginUser\u003dtrue -D flink.tm.memory\u003d1024 -D zeppelin.flink.concurrentBatchSql.max\u003d10 -D zeppelin.flink.uiWebUrl\u003dhttps://knox.c-fa375384f1f481e0.cn-hongkong.emr.aliyuncs.com:8443/gateway/cluster-topo/yarn/proxy/{{applicationId}}/ -D taskmanager.memory.process.size\u003d1024mb -D yarn.application.queue\u003ddefault -D zeppelin.interpreter.connection.poolsize\u003d100 -D zeppelin.flink.maxResult\u003d1000 -D zeppelin.flink.scala.color\u003dtrue /mnt/disk1/jzhang/zeppelin/interpreter/flink/zeppelin-flink-0.10.0-SNAPSHOT-2.11.jar 192.168.0.239 37685 flink-2GABXUVFC :\n2021-07-23 00:38:26,014 WARN  org.apache.flink.yarn.configuration.YarnLogConfigUtil        [] - The configuration directory (\u0027/mnt/disk1/jzhang/flink-1.12.2/conf\u0027) already contains a LOG4J config file.If you want to use logback, then please delete or rename the log configuration file.\n2021-07-23 00:38:26,214 INFO  org.apache.hadoop.yarn.client.RMProxy                        [] - Connecting to ResourceManager at emr-header-1.cluster-46718/192.168.0.239:8032\n2021-07-23 00:38:26,360 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - No path for the flink jar passed. Using the location of class org.apache.flink.yarn.YarnClusterDescriptor to locate the jar\n2021-07-23 00:38:26,497 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Cluster specification: ClusterSpecification{masterMemoryMB\u003d1024, taskManagerMemoryMB\u003d1024, slotsPerTaskManager\u003d1}\n2021-07-23 00:38:26,753 WARN  org.apache.hadoop.hdfs.shortcircuit.DomainSocketFactory      [] - The short-circuit local reads feature cannot be used because libhadoop cannot be loaded.\n2021-07-23 00:38:28,165 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Submitting application master application_1626074007058_0027\n2021-07-23 00:38:28,195 INFO  org.apache.hadoop.yarn.client.api.impl.YarnClientImpl        [] - Submitted application application_1626074007058_0027\n2021-07-23 00:38:28,195 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Waiting for the cluster to be allocated\n2021-07-23 00:38:28,196 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Deploying cluster, current state ACCEPTED\n\n------------------------------------------------------------\n The program finished with the following exception:\n\norg.apache.flink.client.deployment.ClusterDeploymentException: Couldn\u0027t deploy Yarn Application Cluster\n\tat org.apache.flink.yarn.YarnClusterDescriptor.deployApplicationCluster(YarnClusterDescriptor.java:465)\n\tat org.apache.flink.client.deployment.application.cli.ApplicationClusterDeployer.run(ApplicationClusterDeployer.java:67)\n\tat org.apache.flink.client.cli.CliFrontend.runApplication(CliFrontend.java:213)\n\tat org.apache.flink.client.cli.CliFrontend.parseAndRun(CliFrontend.java:1057)\n\tat org.apache.flink.client.cli.CliFrontend.lambda$main$10(CliFrontend.java:1132)\n\tat java.security.AccessController.doPrivileged(Native Method)\n\tat javax.security.auth.Subject.doAs(Subject.java:422)\n\tat org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1911)\n\tat org.apache.flink.runtime.security.contexts.HadoopSecurityContext.runSecured(HadoopSecurityContext.java:41)\n\tat org.apache.flink.client.cli.CliFrontend.main(CliFrontend.java:1132)\nCaused by: org.apache.flink.yarn.YarnClusterDescriptor$YarnDeploymentException: The YARN application unexpectedly switched to state FAILED during deployment. \nDiagnostics from YARN: Application application_1626074007058_0027 failed 1 times (global limit \u003d2; local limit is \u003d1) due to AM Container for appattempt_1626074007058_0027_000001 exited with  exitCode: 1\nFailing this attempt.Diagnostics: Exception from container-launch.\nContainer id: container_1626074007058_0027_01_000001\nExit code: 1\nStack trace: ExitCodeException exitCode\u003d1: \n\tat org.apache.hadoop.util.Shell.runCommand(Shell.java:972)\n\tat org.apache.hadoop.util.Shell.run(Shell.java:869)\n\tat org.apache.hadoop.util.Shell$ShellCommandExecutor.execute(Shell.java:1170)\n\tat org.apache.hadoop.yarn.server.nodemanager.DefaultContainerExecutor.launchContainer(DefaultContainerExecutor.java:235)\n\tat org.apache.hadoop.yarn.server.nodemanager.containermanager.launcher.ContainerLaunch.call(ContainerLaunch.java:299)\n\tat org.apache.hadoop.yarn.server.nodemanager.containermanager.launcher.ContainerLaunch.call(ContainerLaunch.java:83)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\n\n\nContainer exited with a non-zero exit code 1\nFor more detailed output, check the application tracking page: http://emr-header-1.cluster-46718:8088/cluster/app/application_1626074007058_0027 Then click on links to logs of each attempt.\n. Failing the application.\nIf log aggregation is enabled on your cluster, use this command to further investigate the issue:\nyarn logs -applicationId application_1626074007058_0027\n\tat org.apache.flink.yarn.YarnClusterDescriptor.startAppMaster(YarnClusterDescriptor.java:1200)\n\tat org.apache.flink.yarn.YarnClusterDescriptor.deployInternal(YarnClusterDescriptor.java:592)\n\tat org.apache.flink.yarn.YarnClusterDescriptor.deployApplicationCluster(YarnClusterDescriptor.java:458)\n\t... 9 more\n2021-07-23 00:38:32,823 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Cancelling deployment from Deployment Failure Hook\n2021-07-23 00:38:32,824 INFO  org.apache.hadoop.yarn.client.RMProxy                        [] - Connecting to ResourceManager at emr-header-1.cluster-46718/192.168.0.239:8032\n2021-07-23 00:38:32,825 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Killing YARN application\n2021-07-23 00:38:32,831 INFO  org.apache.hadoop.yarn.client.api.impl.YarnClientImpl        [] - Killed application application_1626074007058_0027\n2021-07-23 00:38:32,932 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Deleting files in hdfs://emr-header-1.cluster-46718:9000/user/hadoop/.flink/application_1626074007058_0027.\n\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter.open(RemoteInterpreter.java:129)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter.getFormType(RemoteInterpreter.java:271)\n\tat org.apache.zeppelin.notebook.Paragraph.jobRun(Paragraph.java:440)\n\tat org.apache.zeppelin.notebook.Paragraph.jobRun(Paragraph.java:71)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:172)\n\tat org.apache.zeppelin.scheduler.AbstractScheduler.runJob(AbstractScheduler.java:132)\n\tat org.apache.zeppelin.scheduler.RemoteScheduler$JobRunner.run(RemoteScheduler.java:182)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: java.io.IOException: Fail to launch interpreter process:\nInterpreter download command: /usr/lib/jvm/java-1.8.0/bin/java -Dfile.encoding\u003dUTF-8 -Dlog4j.configuration\u003dfile:///mnt/disk1/jzhang/zeppelin/conf/log4j.properties -Dlog4j.configurationFile\u003dfile:///mnt/disk1/jzhang/zeppelin/conf/log4j2.properties -Dzeppelin.log.file\u003d/mnt/disk1/jzhang/zeppelin/logs/zeppelin-interpreter-flink-2GABXUVFC-hadoop-emr-header-1.cluster-46718.log -cp :/mnt/disk1/jzhang/flink-1.12.2/lib/log4j-slf4j-impl-2.12.1.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/log4j-core-2.12.1.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/log4j-api-2.12.1.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/log4j-1.2-api-2.12.1.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/hudi-flink-bundle_2.11-0.9.0-SNAPSHOT.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/flink-table-blink_2.11-1.12.2.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/flink-table_2.11-1.12.2.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/flink-shaded-zookeeper-3.4.14.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/flink-python_2.11-1.12.2.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/flink-json-1.12.2.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/flink-dist_2.11-1.12.2.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/flink-csv-1.12.2.jar:/mnt/disk1/jzhang/flink-1.12.2/lib/flink-connector-hive_2.11-1.12.2.jar:/mnt/disk1/jzhang/zeppelin/zeppelin-interpreter-shaded/target/*:/mnt/disk1/jzhang/zeppelin/zeppelin-zengine/target/test-classes/*:::/mnt/disk1/jzhang/zeppelin/interpreter/zeppelin-interpreter-shaded-0.10.0-SNAPSHOT.jar:/mnt/disk1/jzhang/zeppelin/zeppelin-interpreter/target/classes:/mnt/disk1/jzhang/zeppelin/zeppelin-zengine/target/test-classes:/mnt/disk1/jzhang/flink-1.12.2/opt/flink-python_2.11-1.12.2.jar:/mnt/disk1/jzhang/zeppelin/interpreter/flink/zeppelin-flink-0.10.0-SNAPSHOT-2.11.jar:/etc/ecm/hadoop-conf:/etc/ecm/hadoop-conf:/opt/apps/ecm/service/hadoop/2.8.5-1.6.1/package/hadoop-2.8.5-1.6.1/share/hadoop/common/lib/*:/opt/apps/ecm/service/hadoop/2.8.5-1.6.1/package/hadoop-2.8.5-1.6.1/share/hadoop/common/*:/opt/apps/ecm/service/hadoop/2.8.5-1.6.1/package/hadoop-2.8.5-1.6.1/share/hadoop/hdfs:/opt/apps/ecm/service/hadoop/2.8.5-1.6.1/package/hadoop-2.8.5-1.6.1/share/hadoop/hdfs/lib/*:/opt/apps/ecm/service/hadoop/2.8.5-1.6.1/package/hadoop-2.8.5-1.6.1/share/hadoop/hdfs/*:/opt/apps/ecm/service/hadoop/2.8.5-1.6.1/package/hadoop-2.8.5-1.6.1/share/hadoop/yarn/lib/*:/opt/apps/ecm/service/hadoop/2.8.5-1.6.1/package/hadoop-2.8.5-1.6.1/share/hadoop/yarn/*:/opt/apps/ecm/service/hadoop/2.8.5-1.6.1/package/hadoop-2.8.5-1.6.1/share/hadoop/mapreduce/lib/*:/opt/apps/ecm/service/hadoop/2.8.5-1.6.1/package/hadoop-2.8.5-1.6.1/share/hadoop/mapreduce/*:/usr/lib/hadoop-current/lib/*:/usr/lib/tez-current/*:/usr/lib/tez-current/lib/*:/etc/ecm/tez-conf:/opt/apps/extra-jars/*:/usr/lib/spark-current/yarn/spark-2.4.5-yarn-shuffle.jar:/usr/lib/hadoop-current/contrib/capacity-scheduler/*.jar org.apache.zeppelin.interpreter.remote.RemoteInterpreterDownloader 192.168.0.239 37685 flink /mnt/disk1/jzhang/zeppelin/local-repo/flink\nSLF4J: Class path contains multiple SLF4J bindings.\nSLF4J: Found binding in [jar:file:/mnt/disk1/jzhang/flink-1.12.2/lib/log4j-slf4j-impl-2.12.1.jar!/org/slf4j/impl/StaticLoggerBinder.class]\nSLF4J: Found binding in [jar:file:/mnt/disk1/jzhang/zeppelin/zeppelin-zengine/target/test-classes/slf4j-log4j12-1.7.10.jar!/org/slf4j/impl/StaticLoggerBinder.class]\nSLF4J: Found binding in [jar:file:/mnt/disk1/jzhang/zeppelin/interpreter/flink/zeppelin-flink-0.10.0-SNAPSHOT-2.11.jar!/org/slf4j/impl/StaticLoggerBinder.class]\nSLF4J: Found binding in [jar:file:/opt/apps/ecm/service/hadoop/2.8.5-1.6.1/package/hadoop-2.8.5-1.6.1/share/hadoop/common/lib/slf4j-log4j12-1.7.10.jar!/org/slf4j/impl/StaticLoggerBinder.class]\nSLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.\nSLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]\n[INFO] Interpreter launch command: /mnt/disk1/jzhang/flink-1.12.2/bin/flink run-application -c org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer -t yarn-application -D yarn.application.name\u003dZeppelin_Flink_Session -D flink.jm.memory\u003d1024 -D flink.yarn.queue\u003ddefault -D taskmanager.numberOfTaskSlots\u003d1 -D flink.tm.slot\u003d1 -D FLINK_CONF_DIR\u003d/mnt/disk1/jzhang/flink-1.12.2/conf -D flink.webui.yarn.useProxy\u003dfalse -D flink.interpreter.close.shutdown_cluster\u003dtrue -D jobmanager.memory.process.size\u003d1024mb -D local.number-taskmanager\u003d4 -D zeppelin.flink.concurrentStreamSql.max\u003d10 -D zeppelin.interpreter.localRepo\u003d/mnt/disk1/jzhang/zeppelin/local-repo/flink -D zeppelin.flink.enableHive\u003dfalse -D FLINK_HOME\u003d/mnt/disk1/jzhang/flink-1.12.2 -D flink.execution.mode\u003dyarn-application -D zeppelin.flink.job.check_interval\u003d1000 -D zeppelin.interpreter.output.limit\u003d102400 -D zeppelin.flink.module.enableHive\u003dfalse -D flink.udf.jars\u003dhdfs:///user/hadoop/flink-udf-1.0-SNAPSHOT.jar -D zeppelin.pyflink.python\u003dpython -D zeppelin.flink.hive.version\u003d2.3.4 -D zeppelin.flink.printREPLOutput\u003dtrue -D zeppelin.interpreter.close.cancel_job\u003dtrue -D zeppelin.flink.run.asLoginUser\u003dtrue -D flink.tm.memory\u003d1024 -D zeppelin.flink.concurrentBatchSql.max\u003d10 -D zeppelin.flink.uiWebUrl\u003dhttps://knox.c-fa375384f1f481e0.cn-hongkong.emr.aliyuncs.com:8443/gateway/cluster-topo/yarn/proxy/{{applicationId}}/ -D taskmanager.memory.process.size\u003d1024mb -D yarn.application.queue\u003ddefault -D zeppelin.interpreter.connection.poolsize\u003d100 -D zeppelin.flink.maxResult\u003d1000 -D zeppelin.flink.scala.color\u003dtrue /mnt/disk1/jzhang/zeppelin/interpreter/flink/zeppelin-flink-0.10.0-SNAPSHOT-2.11.jar 192.168.0.239 37685 flink-2GABXUVFC :\n2021-07-23 00:38:26,014 WARN  org.apache.flink.yarn.configuration.YarnLogConfigUtil        [] - The configuration directory (\u0027/mnt/disk1/jzhang/flink-1.12.2/conf\u0027) already contains a LOG4J config file.If you want to use logback, then please delete or rename the log configuration file.\n2021-07-23 00:38:26,214 INFO  org.apache.hadoop.yarn.client.RMProxy                        [] - Connecting to ResourceManager at emr-header-1.cluster-46718/192.168.0.239:8032\n2021-07-23 00:38:26,360 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - No path for the flink jar passed. Using the location of class org.apache.flink.yarn.YarnClusterDescriptor to locate the jar\n2021-07-23 00:38:26,497 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Cluster specification: ClusterSpecification{masterMemoryMB\u003d1024, taskManagerMemoryMB\u003d1024, slotsPerTaskManager\u003d1}\n2021-07-23 00:38:26,753 WARN  org.apache.hadoop.hdfs.shortcircuit.DomainSocketFactory      [] - The short-circuit local reads feature cannot be used because libhadoop cannot be loaded.\n2021-07-23 00:38:28,165 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Submitting application master application_1626074007058_0027\n2021-07-23 00:38:28,195 INFO  org.apache.hadoop.yarn.client.api.impl.YarnClientImpl        [] - Submitted application application_1626074007058_0027\n2021-07-23 00:38:28,195 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Waiting for the cluster to be allocated\n2021-07-23 00:38:28,196 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Deploying cluster, current state ACCEPTED\n\n------------------------------------------------------------\n The program finished with the following exception:\n\norg.apache.flink.client.deployment.ClusterDeploymentException: Couldn\u0027t deploy Yarn Application Cluster\n\tat org.apache.flink.yarn.YarnClusterDescriptor.deployApplicationCluster(YarnClusterDescriptor.java:465)\n\tat org.apache.flink.client.deployment.application.cli.ApplicationClusterDeployer.run(ApplicationClusterDeployer.java:67)\n\tat org.apache.flink.client.cli.CliFrontend.runApplication(CliFrontend.java:213)\n\tat org.apache.flink.client.cli.CliFrontend.parseAndRun(CliFrontend.java:1057)\n\tat org.apache.flink.client.cli.CliFrontend.lambda$main$10(CliFrontend.java:1132)\n\tat java.security.AccessController.doPrivileged(Native Method)\n\tat javax.security.auth.Subject.doAs(Subject.java:422)\n\tat org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1911)\n\tat org.apache.flink.runtime.security.contexts.HadoopSecurityContext.runSecured(HadoopSecurityContext.java:41)\n\tat org.apache.flink.client.cli.CliFrontend.main(CliFrontend.java:1132)\nCaused by: org.apache.flink.yarn.YarnClusterDescriptor$YarnDeploymentException: The YARN application unexpectedly switched to state FAILED during deployment. \nDiagnostics from YARN: Application application_1626074007058_0027 failed 1 times (global limit \u003d2; local limit is \u003d1) due to AM Container for appattempt_1626074007058_0027_000001 exited with  exitCode: 1\nFailing this attempt.Diagnostics: Exception from container-launch.\nContainer id: container_1626074007058_0027_01_000001\nExit code: 1\nStack trace: ExitCodeException exitCode\u003d1: \n\tat org.apache.hadoop.util.Shell.runCommand(Shell.java:972)\n\tat org.apache.hadoop.util.Shell.run(Shell.java:869)\n\tat org.apache.hadoop.util.Shell$ShellCommandExecutor.execute(Shell.java:1170)\n\tat org.apache.hadoop.yarn.server.nodemanager.DefaultContainerExecutor.launchContainer(DefaultContainerExecutor.java:235)\n\tat org.apache.hadoop.yarn.server.nodemanager.containermanager.launcher.ContainerLaunch.call(ContainerLaunch.java:299)\n\tat org.apache.hadoop.yarn.server.nodemanager.containermanager.launcher.ContainerLaunch.call(ContainerLaunch.java:83)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\n\n\nContainer exited with a non-zero exit code 1\nFor more detailed output, check the application tracking page: http://emr-header-1.cluster-46718:8088/cluster/app/application_1626074007058_0027 Then click on links to logs of each attempt.\n. Failing the application.\nIf log aggregation is enabled on your cluster, use this command to further investigate the issue:\nyarn logs -applicationId application_1626074007058_0027\n\tat org.apache.flink.yarn.YarnClusterDescriptor.startAppMaster(YarnClusterDescriptor.java:1200)\n\tat org.apache.flink.yarn.YarnClusterDescriptor.deployInternal(YarnClusterDescriptor.java:592)\n\tat org.apache.flink.yarn.YarnClusterDescriptor.deployApplicationCluster(YarnClusterDescriptor.java:458)\n\t... 9 more\n2021-07-23 00:38:32,823 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Cancelling deployment from Deployment Failure Hook\n2021-07-23 00:38:32,824 INFO  org.apache.hadoop.yarn.client.RMProxy                        [] - Connecting to ResourceManager at emr-header-1.cluster-46718/192.168.0.239:8032\n2021-07-23 00:38:32,825 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Killing YARN application\n2021-07-23 00:38:32,831 INFO  org.apache.hadoop.yarn.client.api.impl.YarnClientImpl        [] - Killed application application_1626074007058_0027\n2021-07-23 00:38:32,932 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Deleting files in hdfs://emr-header-1.cluster-46718:9000/user/hadoop/.flink/application_1626074007058_0027.\n\n\tat org.apache.zeppelin.interpreter.remote.ExecRemoteInterpreterProcess.start(ExecRemoteInterpreterProcess.java:97)\n\tat org.apache.zeppelin.interpreter.ManagedInterpreterGroup.getOrCreateInterpreterProcess(ManagedInterpreterGroup.java:68)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter.getOrCreateInterpreterProcess(RemoteInterpreter.java:104)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter.internal_create(RemoteInterpreter.java:154)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreter.open(RemoteInterpreter.java:126)\n\t... 13 more\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1624526264463_203521096",
+      "id": "paragraph_1624526264463_203521096",
+      "dateCreated": "2021-06-24 17:17:44.463",
+      "dateStarted": "2021-07-23 00:38:23.835",
+      "dateFinished": "2021-07-23 00:38:33.074",
+      "status": "ERROR"
+    },
+    {
+      "title": "Use UDF in SQL",
+      "text": "%flink.bsql\n\nselect java_upper(\u0027hello java\u0027)\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-07-22 21:52:31.515",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "EXPR$0": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "EXPR$0\nHELLO JAVA\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "FLINK JOB",
+          "tooltip": "View in Flink web UI",
+          "group": "flink",
+          "values": [
+            {
+              "jobUrl": "https://knox.c-fa375384f1f481e0.cn-hongkong.emr.aliyuncs.com:8443/gateway/cluster-topo/yarn/proxy/application_1626074007058_0016/#/job/08fa2a4ea440bb84853eb559f83245b9"
+            }
+          ],
+          "interpreterSettingId": "flink"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1624945806184_642563444",
+      "id": "paragraph_1624945806184_642563444",
+      "dateCreated": "2021-06-29 13:50:06.184",
+      "dateStarted": "2021-07-20 14:44:48.026",
+      "dateFinished": "2021-07-20 14:44:48.676",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%flink.ssql\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-06-29 13:52:10.365",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1624945930364_726239540",
+      "id": "paragraph_1624945930364_726239540",
+      "dateCreated": "2021-06-29 13:52:10.365",
+      "status": "READY"
+    }
+  ],
+  "name": "Flink UDF Tutorial",
+  "id": "2GABXUVFC",
+  "defaultInterpreterGroup": "flink",
+  "version": "0.10.0-SNAPSHOT",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
