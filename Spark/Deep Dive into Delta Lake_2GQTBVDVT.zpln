@@ -1,0 +1,1022 @@
+{
+  "paragraphs": [
+    {
+      "title": "Configure Spark Interpreter",
+      "text": "%spark.conf\n\nspark.jars.packages io.delta:delta-core_2.12:1.0.0\nspark.sql.extensions io.delta.sql.DeltaSparkSessionExtension\nspark.sql.catalog.spark_catalog org.apache.spark.sql.delta.catalog.DeltaCatalog\nspark.sql.warehouse.dir /tmp/warehouse\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-28 14:30:54.417",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/text",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637939454119_853260448",
+      "id": "paragraph_1637823857073_1402198166",
+      "dateCreated": "2021-11-26 23:10:54.119",
+      "dateStarted": "2021-11-28 14:30:54.424",
+      "dateFinished": "2021-11-28 14:30:54.435",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Create Delta Table",
+      "text": "%spark.sql\n\nCREATE TABLE IF NOT EXISTS events (\n  id INT,\n  data STRING)\nUSING DELTA\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-28 14:30:58.501",
+      "progress": 98,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d0"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637939454120_751410126",
+      "id": "paragraph_1637823873165_1235458809",
+      "dateCreated": "2021-11-26 23:10:54.120",
+      "dateStarted": "2021-11-28 14:30:58.509",
+      "dateFinished": "2021-11-28 14:31:47.319",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Check delta log",
+      "text": "%sh\n\nls -l /tmp/warehouse/events/_delta_log\ncat /tmp/warehouse/events/_delta_log/00000000000000000000.json\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-28 14:31:50.529",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "total 4\n-rw-r--r-- 1 hadoop hadoop 641 Nov 28 14:31 00000000000000000000.json\n{\"commitInfo\":{\"timestamp\":1638081090748,\"operation\":\"CREATE TABLE\",\"operationParameters\":{\"isManaged\":\"true\",\"description\":null,\"partitionBy\":\"[]\",\"properties\":\"{}\"},\"isBlindAppend\":true,\"operationMetrics\":{}}}\n{\"protocol\":{\"minReaderVersion\":1,\"minWriterVersion\":2}}\n{\"metaData\":{\"id\":\"744fddc6-7ce4-4392-8e41-012058fca0fd\",\"format\":{\"provider\":\"parquet\",\"options\":{}},\"schemaString\":\"{\\\"type\\\":\\\"struct\\\",\\\"fields\\\":[{\\\"name\\\":\\\"id\\\",\\\"type\\\":\\\"integer\\\",\\\"nullable\\\":true,\\\"metadata\\\":{}},{\\\"name\\\":\\\"data\\\",\\\"type\\\":\\\"string\\\",\\\"nullable\\\":true,\\\"metadata\\\":{}}]}\",\"partitionColumns\":[],\"configuration\":{},\"createdTime\":1638081090418}}\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637939485702_48893515",
+      "id": "paragraph_1637939485702_48893515",
+      "dateCreated": "2021-11-26 23:11:25.702",
+      "dateStarted": "2021-11-28 14:31:50.531",
+      "dateFinished": "2021-11-28 14:31:50.561",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Insert 2 rows",
+      "text": "%spark.sql\n\nINSERT INTO events values (1, \u0027data_1\u0027), (2, \u0027data_2\u0027)\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-28 14:31:53.331",
+      "progress": 75,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "date": "string",
+                      "eventId": "string",
+                      "eventType": "string",
+                      "data": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d1"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d2"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637939454121_1818255447",
+      "id": "paragraph_1637850601188_1821524381",
+      "dateCreated": "2021-11-26 23:10:54.121",
+      "dateStarted": "2021-11-28 14:31:53.335",
+      "dateFinished": "2021-11-28 14:32:00.880",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Select from delta table",
+      "text": "%spark.sql\n\nSELECT * FROM events\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-28 14:32:33.650",
+      "progress": 48,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "id": "string",
+                      "data": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "id\tdata\n1\tdata_1\n2\tdata_2\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d7"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d8"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d9"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637939766693_1524904746",
+      "id": "paragraph_1637939766693_1524904746",
+      "dateCreated": "2021-11-26 23:16:06.693",
+      "dateStarted": "2021-11-28 14:32:33.652",
+      "dateFinished": "2021-11-28 14:32:35.658",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Check delta log after insert",
+      "text": "%sh\n\nls -l /tmp/warehouse/events/\nls -l /tmp/warehouse/events/_delta_log\ncat /tmp/warehouse/events/_delta_log/00000000000000000001.json",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-28 14:32:07.578",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "total 12\ndrwxr-xr-x 2 hadoop hadoop 4096 Nov 28 14:31 _delta_log\n-rw-r--r-- 1 hadoop hadoop  654 Nov 28 14:31 part-00000-52fc1ce8-a242-4d55-a115-a60eb2300e7b-c000.snappy.parquet\n-rw-r--r-- 1 hadoop hadoop  654 Nov 28 14:31 part-00001-82861f6d-e804-4d6f-9cef-b658e9cc1bb1-c000.snappy.parquet\ntotal 8\n-rw-r--r-- 1 hadoop hadoop 641 Nov 28 14:31 00000000000000000000.json\n-rw-r--r-- 1 hadoop hadoop 579 Nov 28 14:31 00000000000000000001.json\n{\"commitInfo\":{\"timestamp\":1638081116110,\"operation\":\"WRITE\",\"operationParameters\":{\"mode\":\"Append\",\"partitionBy\":\"[]\"},\"readVersion\":0,\"isBlindAppend\":true,\"operationMetrics\":{\"numFiles\":\"2\",\"numOutputBytes\":\"1308\",\"numOutputRows\":\"2\"}}}\n{\"add\":{\"path\":\"part-00000-52fc1ce8-a242-4d55-a115-a60eb2300e7b-c000.snappy.parquet\",\"partitionValues\":{},\"size\":654,\"modificationTime\":1638081116000,\"dataChange\":true}}\n{\"add\":{\"path\":\"part-00001-82861f6d-e804-4d6f-9cef-b658e9cc1bb1-c000.snappy.parquet\",\"partitionValues\":{},\"size\":654,\"modificationTime\":1638081116000,\"dataChange\":true}}\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637939678419_690139713",
+      "id": "paragraph_1637939678419_690139713",
+      "dateCreated": "2021-11-26 23:14:38.419",
+      "dateStarted": "2021-11-28 14:32:07.580",
+      "dateFinished": "2021-11-28 14:32:07.593",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark\n\nvar df \u003d spark.read.format(\"parquet\")\n    .load(\"/tmp/warehouse/events/part-00000-52fc1ce8-a242-4d55-a115-a60eb2300e7b-c000.snappy.parquet\")\ndf.show()\n\ndf \u003d spark.read.format(\"parquet\")\n    .load(\"/tmp/warehouse/events/part-00001-82861f6d-e804-4d6f-9cef-b658e9cc1bb1-c000.snappy.parquet\")\ndf.show()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-28 14:32:28.678",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+------+\n| id|  data|\n+---+------+\n|  1|data_1|\n+---+------+\n\n+---+------+\n| id|  data|\n+---+------+\n|  2|data_2|\n+---+------+\n\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [id: int, data: string]\ndf: org.apache.spark.sql.DataFrame \u003d [id: int, data: string]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d3"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d4"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d5"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d6"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637940870759_1028577542",
+      "id": "paragraph_1637940870759_1028577542",
+      "dateCreated": "2021-11-26 23:34:30.759",
+      "dateStarted": "2021-11-28 14:32:28.680",
+      "dateFinished": "2021-11-28 14:32:30.832",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Update one row in delta table",
+      "text": "%spark.sql\n\nUPDATE events SET data\u003d\u0027data_2_updated\u0027 WHERE id\u003d2\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-28 14:32:57.285",
+      "progress": 81,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d10"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d11"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d12"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d13"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637939454121_1529420740",
+      "id": "paragraph_1637824145664_1165820064",
+      "dateCreated": "2021-11-26 23:10:54.121",
+      "dateStarted": "2021-11-28 14:32:57.287",
+      "dateFinished": "2021-11-28 14:33:06.691",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.sql\n\nselect * from events\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-28 14:33:10.481",
+      "progress": 73,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "id": "string",
+                      "data": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "id\tdata\n2\tdata_2_updated\n1\tdata_1\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d14"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d15"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d16"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637939454121_866837837",
+      "id": "paragraph_1637850574356_2078707089",
+      "dateCreated": "2021-11-26 23:10:54.121",
+      "dateStarted": "2021-11-28 14:33:10.484",
+      "dateFinished": "2021-11-28 14:33:11.684",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Check delta logs after update",
+      "text": "%sh\n\nls -l /tmp/warehouse/events/\nls -l /tmp/warehouse/events/_delta_log\ncat /tmp/warehouse/events/_delta_log/00000000000000000002.json\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-28 14:33:16.069",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "total 16\ndrwxr-xr-x 2 hadoop hadoop 4096 Nov 28 14:33 _delta_log\n-rw-r--r-- 1 hadoop hadoop  654 Nov 28 14:31 part-00000-52fc1ce8-a242-4d55-a115-a60eb2300e7b-c000.snappy.parquet\n-rw-r--r-- 1 hadoop hadoop  726 Nov 28 14:33 part-00000-80c80da0-1941-4cb7-812b-39c93cf68022-c000.snappy.parquet\n-rw-r--r-- 1 hadoop hadoop  654 Nov 28 14:31 part-00001-82861f6d-e804-4d6f-9cef-b658e9cc1bb1-c000.snappy.parquet\ntotal 12\n-rw-r--r-- 1 hadoop hadoop 641 Nov 28 14:31 00000000000000000000.json\n-rw-r--r-- 1 hadoop hadoop 579 Nov 28 14:31 00000000000000000001.json\n-rw-r--r-- 1 hadoop hadoop 696 Nov 28 14:33 00000000000000000002.json\n{\"commitInfo\":{\"timestamp\":1638081181822,\"operation\":\"UPDATE\",\"operationParameters\":{\"predicate\":\"(id#913 \u003d 2)\"},\"readVersion\":1,\"isBlindAppend\":false,\"operationMetrics\":{\"numRemovedFiles\":\"1\",\"numCopiedRows\":\"0\",\"executionTimeMs\":\"4325\",\"scanTimeMs\":\"3755\",\"numAddedFiles\":\"1\",\"numUpdatedRows\":\"1\",\"rewriteTimeMs\":\"569\"}}}\n{\"remove\":{\"path\":\"part-00001-82861f6d-e804-4d6f-9cef-b658e9cc1bb1-c000.snappy.parquet\",\"deletionTimestamp\":1638081181247,\"dataChange\":true,\"extendedFileMetadata\":true,\"partitionValues\":{},\"size\":654}}\n{\"add\":{\"path\":\"part-00000-80c80da0-1941-4cb7-812b-39c93cf68022-c000.snappy.parquet\",\"partitionValues\":{},\"size\":726,\"modificationTime\":1638081181000,\"dataChange\":true}}\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637939936233_1796976295",
+      "id": "paragraph_1637939936233_1796976295",
+      "dateCreated": "2021-11-26 23:18:56.233",
+      "dateStarted": "2021-11-28 14:33:16.072",
+      "dateFinished": "2021-11-28 14:33:16.114",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark\n\nvar df \u003d spark.read.format(\"parquet\")\n    .load(\"/tmp/warehouse/events/part-00001-82861f6d-e804-4d6f-9cef-b658e9cc1bb1-c000.snappy.parquet\")\ndf.show()\n\ndf \u003d spark.read.format(\"parquet\")\n    .load(\"/tmp/warehouse/events/part-00000-80c80da0-1941-4cb7-812b-39c93cf68022-c000.snappy.parquet\")\ndf.show()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-28 14:33:55.340",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+------+\n| id|  data|\n+---+------+\n|  2|data_2|\n+---+------+\n\n+---+--------------+\n| id|          data|\n+---+--------------+\n|  2|data_2_updated|\n+---+--------------+\n\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [id: int, data: string]\ndf: org.apache.spark.sql.DataFrame \u003d [id: int, data: string]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d17"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d18"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d19"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d20"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637940912136_898458538",
+      "id": "paragraph_1637940912136_898458538",
+      "dateCreated": "2021-11-26 23:35:12.136",
+      "dateStarted": "2021-11-28 14:33:55.342",
+      "dateFinished": "2021-11-28 14:33:56.648",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Time Travel",
+      "text": "%spark\n\ndf \u003d spark.read.format(\"delta\").option(\"versionAsOf\", 1).load(\"/tmp/warehouse/events\")\ndf.show()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-28 14:34:09.886",
+      "progress": 46,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+------+\n| id|  data|\n+---+------+\n|  1|data_1|\n|  2|data_2|\n+---+------+\n\ndf: org.apache.spark.sql.DataFrame \u003d [id: int, data: string]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d21"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d22"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d23"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d24"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637940137435_761798740",
+      "id": "paragraph_1637940137435_761798740",
+      "dateCreated": "2021-11-26 23:22:17.435",
+      "dateStarted": "2021-11-28 14:34:01.665",
+      "dateFinished": "2021-11-28 14:34:06.490",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Delete one row",
+      "text": "%spark.sql\n\nDELETE FROM events where id\u003d1",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-28 14:34:28.747",
+      "progress": 76,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d28"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d29"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d30"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d31"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637939454121_1011373963",
+      "id": "paragraph_1637851193413_669849394",
+      "dateCreated": "2021-11-26 23:10:54.121",
+      "dateStarted": "2021-11-28 14:34:28.749",
+      "dateFinished": "2021-11-28 14:34:34.101",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.sql\n\nSELECT * from events",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-28 14:34:35.399",
+      "progress": 92,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "id": "string",
+                      "data": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "id\tdata\n2\tdata_2_updated\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d32"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d33"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d34"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1638078656072_1712501198",
+      "id": "paragraph_1638078656072_1712501198",
+      "dateCreated": "2021-11-28 13:50:56.072",
+      "dateStarted": "2021-11-28 14:34:35.401",
+      "dateFinished": "2021-11-28 14:34:36.053",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%sh\n\nls -l /tmp/warehouse/events/\nls -l /tmp/warehouse/events/_delta_log\ncat /tmp/warehouse/events/_delta_log/00000000000000000003.json",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-28 14:34:38.758",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "total 20\ndrwxr-xr-x 2 hadoop hadoop 4096 Nov 28 14:34 _delta_log\n-rw-r--r-- 1 hadoop hadoop  378 Nov 28 14:34 part-00000-0223a3fc-fdfb-46d8-9978-c15832605206-c000.snappy.parquet\n-rw-r--r-- 1 hadoop hadoop  654 Nov 28 14:31 part-00000-52fc1ce8-a242-4d55-a115-a60eb2300e7b-c000.snappy.parquet\n-rw-r--r-- 1 hadoop hadoop  726 Nov 28 14:33 part-00000-80c80da0-1941-4cb7-812b-39c93cf68022-c000.snappy.parquet\n-rw-r--r-- 1 hadoop hadoop  654 Nov 28 14:31 part-00001-82861f6d-e804-4d6f-9cef-b658e9cc1bb1-c000.snappy.parquet\ntotal 16\n-rw-r--r-- 1 hadoop hadoop 641 Nov 28 14:31 00000000000000000000.json\n-rw-r--r-- 1 hadoop hadoop 579 Nov 28 14:31 00000000000000000001.json\n-rw-r--r-- 1 hadoop hadoop 696 Nov 28 14:33 00000000000000000002.json\n-rw-r--r-- 1 hadoop hadoop 729 Nov 28 14:34 00000000000000000003.json\n{\"commitInfo\":{\"timestamp\":1638081270824,\"operation\":\"DELETE\",\"operationParameters\":{\"predicate\":\"[\\\"(spark_catalog.default.events.`id` \u003d 1)\\\"]\"},\"readVersion\":2,\"isBlindAppend\":false,\"operationMetrics\":{\"numRemovedFiles\":\"1\",\"numCopiedRows\":\"0\",\"executionTimeMs\":\"2000\",\"numDeletedRows\":\"1\",\"scanTimeMs\":\"1736\",\"numAddedFiles\":\"1\",\"rewriteTimeMs\":\"264\"}}}\n{\"remove\":{\"path\":\"part-00000-52fc1ce8-a242-4d55-a115-a60eb2300e7b-c000.snappy.parquet\",\"deletionTimestamp\":1638081270813,\"dataChange\":true,\"extendedFileMetadata\":true,\"partitionValues\":{},\"size\":654}}\n{\"add\":{\"path\":\"part-00000-0223a3fc-fdfb-46d8-9978-c15832605206-c000.snappy.parquet\",\"partitionValues\":{},\"size\":378,\"modificationTime\":1638081270000,\"dataChange\":true}}\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637940612045_2041623212",
+      "id": "paragraph_1637940612045_2041623212",
+      "dateCreated": "2021-11-26 23:30:12.045",
+      "dateStarted": "2021-11-28 14:34:38.760",
+      "dateFinished": "2021-11-28 14:34:38.799",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark\n\nvar df \u003d spark.read.format(\"parquet\")\n    .load(\"/tmp/warehouse/events/part-00000-52fc1ce8-a242-4d55-a115-a60eb2300e7b-c000.snappy.parquet\")\ndf.show()\n\ndf \u003d spark.read.format(\"parquet\")\n    .load(\"/tmp/warehouse/events/part-00000-0223a3fc-fdfb-46d8-9978-c15832605206-c000.snappy.parquet\")\ndf.show()",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-28 14:34:57.730",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+------+\n| id|  data|\n+---+------+\n|  1|data_1|\n+---+------+\n\n+---+----+\n| id|data|\n+---+----+\n+---+----+\n\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [id: int, data: string]\ndf: org.apache.spark.sql.DataFrame \u003d [id: int, data: string]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d35"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d36"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d37"
+            },
+            {
+              "jobUrl": "http://emr-header-1.cluster-46718:4042/jobs/job?id\u003d38"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637940633531_930979910",
+      "id": "paragraph_1637940633531_930979910",
+      "dateCreated": "2021-11-26 23:30:33.531",
+      "dateStarted": "2021-11-28 14:34:57.742",
+      "dateFinished": "2021-11-28 14:34:58.787",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-26 23:33:01.963",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637940781963_1433353582",
+      "id": "paragraph_1637940781963_1433353582",
+      "dateCreated": "2021-11-26 23:33:01.963",
+      "status": "READY"
+    }
+  ],
+  "name": "Deep Dive into Delta Lake",
+  "id": "2GQTBVDVT",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.11.0-SNAPSHOT",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {
+    "isRunning": false
+  }
+}
