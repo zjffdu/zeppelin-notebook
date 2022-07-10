@@ -1,0 +1,1886 @@
+{
+  "paragraphs": [
+    {
+      "title": "Clean Data warehouse folder",
+      "text": "%sh\n\nrm -rf /tmp/warehouse\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 01:52:37.060",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1644817871204_1730169777",
+      "id": "paragraph_1644817871204_1730169777",
+      "dateCreated": "2022-02-14 05:51:11.000",
+      "dateStarted": "2022-07-10 01:52:37.080",
+      "dateFinished": "2022-07-10 01:52:37.148",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Download avro tools jar",
+      "text": "%sh\n\nwget --no-check-certificate https://dlcdn.apache.org/avro/avro-1.11.0/java/avro-tools-1.11.0.jar ",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-08 08:19:49.616",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637748980743_169842152",
+      "id": "paragraph_1637748980743_169842152",
+      "dateCreated": "2021-11-24 10:16:20.000",
+      "dateStarted": "2022-07-08 08:19:49.629",
+      "dateFinished": "2022-07-08 08:22:44.564",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Download jq for json pretty print",
+      "text": "%sh\n\nwget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64\nchmod +x ./jq-linux64\nmv jq-linux64 ~/jq\n\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-08 08:25:23.505",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656308039312_440338246",
+      "id": "paragraph_1656308039312_440338246",
+      "dateCreated": "2022-06-27 05:33:59.312",
+      "dateStarted": "2022-07-08 08:25:23.526",
+      "dateFinished": "2022-07-08 08:27:10.667",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Set up Iceberg in Spark configuration",
+      "text": "%spark.conf\n\nspark.master local[*]\nspark.jars.packages org.apache.iceberg:iceberg-spark-runtime-3.2_2.12:0.13.2\nspark.sql.extensions org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions\nspark.sql.catalog.spark_catalog org.apache.iceberg.spark.SparkSessionCatalog\nspark.sql.catalog.spark_catalog.type hive\nspark.sql.catalog.local org.apache.iceberg.spark.SparkCatalog\nspark.sql.catalog.local.type hadoop\nspark.sql.catalog.local.warehouse /tmp/warehouse\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 01:52:55.274",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/text",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637735254516_968181745",
+      "id": "paragraph_1637735254516_968181745",
+      "dateCreated": "2021-11-24 06:27:34.000",
+      "dateStarted": "2022-07-10 01:52:55.304",
+      "dateFinished": "2022-07-10 01:52:55.310",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Create Iceberg table",
+      "text": "%spark.sql\n\n-- local is the path-based catalog defined above\nCREATE TABLE local.db.events (id bigint, data string) USING iceberg\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 01:58:26.421",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Table db.events already exists"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637735353561_445718092",
+      "id": "paragraph_1637735353561_445718092",
+      "dateCreated": "2021-11-24 06:29:13.000",
+      "dateStarted": "2022-07-10 01:58:26.442",
+      "dateFinished": "2022-07-10 01:58:26.588",
+      "status": "ERROR"
+    },
+    {
+      "title": "Describe Iceberg table",
+      "text": "%spark.sql\n\nuse local.db;\ndescribe extended events;\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 03:27:22.139",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "col_name": "string",
+                      "data_type": "string",
+                      "comment": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          },
+          "1": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "col_name": "string",
+                      "data_type": "string",
+                      "comment": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "col_name\tdata_type\tcomment\nid\tbigint\t\ndata\tstring\t\n\t\t\n# Partitioning\t\t\nNot partitioned\t\t\n\t\t\n# Metadata Columns\t\t\n_spec_id\tint\t\n_partition\tstruct\u003c\u003e\t\n_file\tstring\t\n_pos\tbigint\t\n\t\t\n# Detailed Table Information\t\t\nName\tlocal.db.events\t\nLocation\t/tmp/warehouse/db/events\t\nProvider\ticeberg\t\nOwner\tzeppelin\t\nTable Properties\t[current-snapshot-id\u003dnone,format\u003diceberg/parquet]\t\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1644305447131_1564912933",
+      "id": "paragraph_1644305447131_1564912933",
+      "dateCreated": "2022-02-08 07:30:47.000",
+      "dateStarted": "2022-07-10 01:58:29.408",
+      "dateFinished": "2022-07-10 01:58:30.421",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Check files under table folder",
+      "text": "%sh\n\nls -l /tmp/warehouse/db/events\nls -l /tmp/warehouse/db/events/metadata\n\necho \"*********************** version-hint ***************************\"\ncat /tmp/warehouse/db/events/metadata/version-hint.text\n\necho \"\"\necho \"*********************** Table Schema ***************************\"\ncat /tmp/warehouse/db/events/metadata/v1.metadata.json\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 02:26:26.973",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "total 8\ndrwxr-xr-x 2 zeppelin root 4096 Jul 10 02:03 data\ndrwxr-xr-x 2 zeppelin root 4096 Jul 10 02:08 metadata\ntotal 64\n-rw-r--r-- 1 zeppelin root 5873 Jul 10 02:03 10e3f936-0d3e-4f43-b257-8fef44bf34e6-m0.avro\n-rw-r--r-- 1 zeppelin root 5777 Jul 10 02:03 10e3f936-0d3e-4f43-b257-8fef44bf34e6-m1.avro\n-rw-r--r-- 1 zeppelin root 5829 Jul 10 02:08 386475d9-62a0-4aa5-bc8a-ea7ca5f0bf95-m0.avro\n-rw-r--r-- 1 zeppelin root 5851 Jul 10 01:58 df7157f3-8700-410d-b4aa-2471eb113d56-m0.avro\n-rw-r--r-- 1 zeppelin root 3746 Jul 10 01:58 snap-4053879780177651980-1-df7157f3-8700-410d-b4aa-2471eb113d56.avro\n-rw-r--r-- 1 zeppelin root 3824 Jul 10 02:08 snap-4672191299963005851-1-386475d9-62a0-4aa5-bc8a-ea7ca5f0bf95.avro\n-rw-r--r-- 1 zeppelin root 3780 Jul 10 02:03 snap-5145784663145387334-1-10e3f936-0d3e-4f43-b257-8fef44bf34e6.avro\n-rw-r--r-- 1 zeppelin root 1165 Jul 10 01:53 v1.metadata.json\n-rw-r--r-- 1 zeppelin root 2053 Jul 10 01:58 v2.metadata.json\n-rw-r--r-- 1 zeppelin root 3078 Jul 10 02:03 v3.metadata.json\n-rw-r--r-- 1 zeppelin root 4005 Jul 10 02:08 v4.metadata.json\n-rw-r--r-- 1 zeppelin root    1 Jul 10 02:08 version-hint.text\n*********************** version-hint ***************************\n4\n*********************** Table Schema ***************************\n{\n  \"format-version\" : 1,\n  \"table-uuid\" : \"ffeb6464-365a-4f09-9651-9721702a0dd2\",\n  \"location\" : \"/tmp/warehouse/db/events\",\n  \"last-updated-ms\" : 1657417999222,\n  \"last-column-id\" : 2,\n  \"schema\" : {\n    \"type\" : \"struct\",\n    \"schema-id\" : 0,\n    \"fields\" : [ {\n      \"id\" : 1,\n      \"name\" : \"id\",\n      \"required\" : false,\n      \"type\" : \"long\"\n    }, {\n      \"id\" : 2,\n      \"name\" : \"data\",\n      \"required\" : false,\n      \"type\" : \"string\"\n    } ]\n  },\n  \"current-schema-id\" : 0,\n  \"schemas\" : [ {\n    \"type\" : \"struct\",\n    \"schema-id\" : 0,\n    \"fields\" : [ {\n      \"id\" : 1,\n      \"name\" : \"id\",\n      \"required\" : false,\n      \"type\" : \"long\"\n    }, {\n      \"id\" : 2,\n      \"name\" : \"data\",\n      \"required\" : false,\n      \"type\" : \"string\"\n    } ]\n  } ],\n  \"partition-spec\" : [ ],\n  \"default-spec-id\" : 0,\n  \"partition-specs\" : [ {\n    \"spec-id\" : 0,\n    \"fields\" : [ ]\n  } ],\n  \"last-partition-id\" : 999,\n  \"default-sort-order-id\" : 0,\n  \"sort-orders\" : [ {\n    \"order-id\" : 0,\n    \"fields\" : [ ]\n  } ],\n  \"properties\" : {\n    \"owner\" : \"zeppelin\"\n  },\n  \"current-snapshot-id\" : -1,\n  \"snapshots\" : [ ],\n  \"snapshot-log\" : [ ],\n  \"metadata-log\" : [ ]\n}"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1638180005317_738795567",
+      "id": "paragraph_1638180005317_738795567",
+      "dateCreated": "2021-11-29 10:00:05.000",
+      "dateStarted": "2022-07-10 02:26:26.984",
+      "dateFinished": "2022-07-10 02:26:27.011",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Insert new records",
+      "text": "%spark.sql\n\nINSERT INTO local.db.events VALUES (1, \u0027a\u0027), (2, \u0027b\u0027), (3, \u0027c\u0027)\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 01:58:37.400",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d0"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637735379341_984553445",
+      "id": "paragraph_1637735379341_984553445",
+      "dateCreated": "2021-11-24 06:29:39.000",
+      "dateStarted": "2022-07-10 01:58:37.412",
+      "dateFinished": "2022-07-10 01:58:41.540",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Check insertion result",
+      "text": "%spark.sql\n\nselect * from local.db.events\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 03:27:17.902",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "id": "string",
+                      "data": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "id\tdata\n1\ta\n2\tb\n3\tc\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [id: bigint, data: string]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d51"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1638181091615_2007340381",
+      "id": "paragraph_1638181091615_2007340381",
+      "dateCreated": "2021-11-29 10:18:11.000",
+      "dateStarted": "2022-07-10 02:27:59.972",
+      "dateFinished": "2022-07-10 02:28:00.221",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Check files under table folder",
+      "text": "%sh\n\necho \"*********************** List /tmp/warehouse/db/events ***************************\"\nls -l /tmp/warehouse/db/events\necho \"\"\n\necho \"*********************** List /tmp/warehouse/db/events/data ***************************\"\nls -l /tmp/warehouse/db/events/data\necho \"\"\n\necho \"*********************** List /tmp/warehouse/db/events/metadata ***************************\"\nls -l /tmp/warehouse/db/events/metadata\necho \"\"\n\necho \"*********************** version-hint ***************************\"\ncat /tmp/warehouse/db/events/metadata/version-hint.text\necho \"\"\n\necho \"*********************** v2.metadata.json  ***************************\"\ncat /tmp/warehouse/db/events/metadata/v2.metadata.json\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 01:58:48.120",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "*********************** List /tmp/warehouse/db/events ***************************\ntotal 8\ndrwxr-xr-x 2 zeppelin root 4096 Jul 10 01:58 data\ndrwxr-xr-x 2 zeppelin root 4096 Jul 10 01:58 metadata\n\n*********************** List /tmp/warehouse/db/events/data ***************************\ntotal 12\n-rw-r--r-- 1 zeppelin root 643 Jul 10 01:58 00000-0-848f884a-cae1-4e89-aca1-1d3ee9962aaa-00001.parquet\n-rw-r--r-- 1 zeppelin root 643 Jul 10 01:58 00001-1-10b6f1bd-eb41-45f9-8394-3eb5adfbc293-00001.parquet\n-rw-r--r-- 1 zeppelin root 643 Jul 10 01:58 00002-2-691e18d8-7d67-4a06-951a-9fbf9c264978-00001.parquet\n\n*********************** List /tmp/warehouse/db/events/metadata ***************************\ntotal 24\n-rw-r--r-- 1 zeppelin root 5851 Jul 10 01:58 df7157f3-8700-410d-b4aa-2471eb113d56-m0.avro\n-rw-r--r-- 1 zeppelin root 3746 Jul 10 01:58 snap-4053879780177651980-1-df7157f3-8700-410d-b4aa-2471eb113d56.avro\n-rw-r--r-- 1 zeppelin root 1165 Jul 10 01:53 v1.metadata.json\n-rw-r--r-- 1 zeppelin root 2053 Jul 10 01:58 v2.metadata.json\n-rw-r--r-- 1 zeppelin root    1 Jul 10 01:58 version-hint.text\n\n*********************** version-hint ***************************\n2\n*********************** v2.metadata.json  ***************************\n{\n  \"format-version\" : 1,\n  \"table-uuid\" : \"ffeb6464-365a-4f09-9651-9721702a0dd2\",\n  \"location\" : \"/tmp/warehouse/db/events\",\n  \"last-updated-ms\" : 1657418321091,\n  \"last-column-id\" : 2,\n  \"schema\" : {\n    \"type\" : \"struct\",\n    \"schema-id\" : 0,\n    \"fields\" : [ {\n      \"id\" : 1,\n      \"name\" : \"id\",\n      \"required\" : false,\n      \"type\" : \"long\"\n    }, {\n      \"id\" : 2,\n      \"name\" : \"data\",\n      \"required\" : false,\n      \"type\" : \"string\"\n    } ]\n  },\n  \"current-schema-id\" : 0,\n  \"schemas\" : [ {\n    \"type\" : \"struct\",\n    \"schema-id\" : 0,\n    \"fields\" : [ {\n      \"id\" : 1,\n      \"name\" : \"id\",\n      \"required\" : false,\n      \"type\" : \"long\"\n    }, {\n      \"id\" : 2,\n      \"name\" : \"data\",\n      \"required\" : false,\n      \"type\" : \"string\"\n    } ]\n  } ],\n  \"partition-spec\" : [ ],\n  \"default-spec-id\" : 0,\n  \"partition-specs\" : [ {\n    \"spec-id\" : 0,\n    \"fields\" : [ ]\n  } ],\n  \"last-partition-id\" : 999,\n  \"default-sort-order-id\" : 0,\n  \"sort-orders\" : [ {\n    \"order-id\" : 0,\n    \"fields\" : [ ]\n  } ],\n  \"properties\" : {\n    \"owner\" : \"zeppelin\"\n  },\n  \"current-snapshot-id\" : 4053879780177651980,\n  \"snapshots\" : [ {\n    \"snapshot-id\" : 4053879780177651980,\n    \"timestamp-ms\" : 1657418321091,\n    \"summary\" : {\n      \"operation\" : \"append\",\n      \"spark.app.id\" : \"local-1657417990765\",\n      \"added-data-files\" : \"3\",\n      \"added-records\" : \"3\",\n      \"added-files-size\" : \"1929\",\n      \"changed-partition-count\" : \"1\",\n      \"total-records\" : \"3\",\n      \"total-files-size\" : \"1929\",\n      \"total-data-files\" : \"3\",\n      \"total-delete-files\" : \"0\",\n      \"total-position-deletes\" : \"0\",\n      \"total-equality-deletes\" : \"0\"\n    },\n    \"manifest-list\" : \"/tmp/warehouse/db/events/metadata/snap-4053879780177651980-1-df7157f3-8700-410d-b4aa-2471eb113d56.avro\",\n    \"schema-id\" : 0\n  } ],\n  \"snapshot-log\" : [ {\n    \"timestamp-ms\" : 1657418321091,\n    \"snapshot-id\" : 4053879780177651980\n  } ],\n  \"metadata-log\" : [ {\n    \"timestamp-ms\" : 1657417999222,\n    \"metadata-file\" : \"/tmp/warehouse/db/events/metadata/v1.metadata.json\"\n  } ]\n}"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637833753073_184698490",
+      "id": "paragraph_1637833753073_184698490",
+      "dateCreated": "2021-11-25 09:49:13.000",
+      "dateStarted": "2022-07-10 01:58:48.134",
+      "dateFinished": "2022-07-10 01:58:48.166",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Check snapshot file",
+      "text": "%sh\n\necho \"*********************** Check snapshot avro file ***************************\"\n# Update the snapshot file name based on the previous paragraph output\njava -jar avro-tools-1.11.0.jar tojson  /tmp/warehouse/db/events/metadata/snap-4053879780177651980-1-df7157f3-8700-410d-b4aa-2471eb113d56.avro | ~/jq\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 01:59:03.334",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "*********************** Check snapshot avro file ***************************\n22/07/10 01:59:03 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable\n{\n  \"manifest_path\": \"/tmp/warehouse/db/events/metadata/df7157f3-8700-410d-b4aa-2471eb113d56-m0.avro\",\n  \"manifest_length\": 5851,\n  \"partition_spec_id\": 0,\n  \"added_snapshot_id\": {\n    \"long\": 4053879780177652000\n  },\n  \"added_data_files_count\": {\n    \"int\": 3\n  },\n  \"existing_data_files_count\": {\n    \"int\": 0\n  },\n  \"deleted_data_files_count\": {\n    \"int\": 0\n  },\n  \"partitions\": {\n    \"array\": []\n  },\n  \"added_rows_count\": {\n    \"long\": 3\n  },\n  \"existing_rows_count\": {\n    \"long\": 0\n  },\n  \"deleted_rows_count\": {\n    \"long\": 0\n  }\n}\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1638180474265_1221622635",
+      "id": "paragraph_1638180474265_1221622635",
+      "dateCreated": "2021-11-29 10:07:54.000",
+      "dateStarted": "2022-07-10 01:59:03.348",
+      "dateFinished": "2022-07-10 01:59:04.125",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Check manifest file",
+      "text": "%sh\n\necho \"*********************** Check manifest avro file ***************************\"\njava -jar avro-tools-1.11.0.jar tojson /tmp/warehouse/db/events/metadata/df7157f3-8700-410d-b4aa-2471eb113d56-m0.avro | ~/jq\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 02:34:04.774",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "*********************** Check manifest avro file ***************************\n22/07/10 02:34:05 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable\n{\n  \"status\": 1,\n  \"snapshot_id\": {\n    \"long\": 4053879780177652000\n  },\n  \"data_file\": {\n    \"file_path\": \"/tmp/warehouse/db/events/data/00000-0-848f884a-cae1-4e89-aca1-1d3ee9962aaa-00001.parquet\",\n    \"file_format\": \"PARQUET\",\n    \"partition\": {},\n    \"record_count\": 1,\n    \"file_size_in_bytes\": 643,\n    \"block_size_in_bytes\": 67108864,\n    \"column_sizes\": {\n      \"array\": [\n        {\n          \"key\": 1,\n          \"value\": 46\n        },\n        {\n          \"key\": 2,\n          \"value\": 48\n        }\n      ]\n    },\n    \"value_counts\": {\n      \"array\": [\n        {\n          \"key\": 1,\n          \"value\": 1\n        },\n        {\n          \"key\": 2,\n          \"value\": 1\n        }\n      ]\n    },\n    \"null_value_counts\": {\n      \"array\": [\n        {\n          \"key\": 1,\n          \"value\": 0\n        },\n        {\n          \"key\": 2,\n          \"value\": 0\n        }\n      ]\n    },\n    \"nan_value_counts\": {\n      \"array\": []\n    },\n    \"lower_bounds\": {\n      \"array\": [\n        {\n          \"key\": 1,\n          \"value\": \"\\u0001\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\"\n        },\n        {\n          \"key\": 2,\n          \"value\": \"a\"\n        }\n      ]\n    },\n    \"upper_bounds\": {\n      \"array\": [\n        {\n          \"key\": 1,\n          \"value\": \"\\u0001\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\"\n        },\n        {\n          \"key\": 2,\n          \"value\": \"a\"\n        }\n      ]\n    },\n    \"key_metadata\": null,\n    \"split_offsets\": {\n      \"array\": [\n        4\n      ]\n    },\n    \"sort_order_id\": {\n      \"int\": 0\n    }\n  }\n}\n{\n  \"status\": 1,\n  \"snapshot_id\": {\n    \"long\": 4053879780177652000\n  },\n  \"data_file\": {\n    \"file_path\": \"/tmp/warehouse/db/events/data/00001-1-10b6f1bd-eb41-45f9-8394-3eb5adfbc293-00001.parquet\",\n    \"file_format\": \"PARQUET\",\n    \"partition\": {},\n    \"record_count\": 1,\n    \"file_size_in_bytes\": 643,\n    \"block_size_in_bytes\": 67108864,\n    \"column_sizes\": {\n      \"array\": [\n        {\n          \"key\": 1,\n          \"value\": 46\n        },\n        {\n          \"key\": 2,\n          \"value\": 48\n        }\n      ]\n    },\n    \"value_counts\": {\n      \"array\": [\n        {\n          \"key\": 1,\n          \"value\": 1\n        },\n        {\n          \"key\": 2,\n          \"value\": 1\n        }\n      ]\n    },\n    \"null_value_counts\": {\n      \"array\": [\n        {\n          \"key\": 1,\n          \"value\": 0\n        },\n        {\n          \"key\": 2,\n          \"value\": 0\n        }\n      ]\n    },\n    \"nan_value_counts\": {\n      \"array\": []\n    },\n    \"lower_bounds\": {\n      \"array\": [\n        {\n          \"key\": 1,\n          \"value\": \"\\u0002\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\"\n        },\n        {\n          \"key\": 2,\n          \"value\": \"b\"\n        }\n      ]\n    },\n    \"upper_bounds\": {\n      \"array\": [\n        {\n          \"key\": 1,\n          \"value\": \"\\u0002\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\"\n        },\n        {\n          \"key\": 2,\n          \"value\": \"b\"\n        }\n      ]\n    },\n    \"key_metadata\": null,\n    \"split_offsets\": {\n      \"array\": [\n        4\n      ]\n    },\n    \"sort_order_id\": {\n      \"int\": 0\n    }\n  }\n}\n{\n  \"status\": 1,\n  \"snapshot_id\": {\n    \"long\": 4053879780177652000\n  },\n  \"data_file\": {\n    \"file_path\": \"/tmp/warehouse/db/events/data/00002-2-691e18d8-7d67-4a06-951a-9fbf9c264978-00001.parquet\",\n    \"file_format\": \"PARQUET\",\n    \"partition\": {},\n    \"record_count\": 1,\n    \"file_size_in_bytes\": 643,\n    \"block_size_in_bytes\": 67108864,\n    \"column_sizes\": {\n      \"array\": [\n        {\n          \"key\": 1,\n          \"value\": 46\n        },\n        {\n          \"key\": 2,\n          \"value\": 48\n        }\n      ]\n    },\n    \"value_counts\": {\n      \"array\": [\n        {\n          \"key\": 1,\n          \"value\": 1\n        },\n        {\n          \"key\": 2,\n          \"value\": 1\n        }\n      ]\n    },\n    \"null_value_counts\": {\n      \"array\": [\n        {\n          \"key\": 1,\n          \"value\": 0\n        },\n        {\n          \"key\": 2,\n          \"value\": 0\n        }\n      ]\n    },\n    \"nan_value_counts\": {\n      \"array\": []\n    },\n    \"lower_bounds\": {\n      \"array\": [\n        {\n          \"key\": 1,\n          \"value\": \"\\u0003\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\"\n        },\n        {\n          \"key\": 2,\n          \"value\": \"c\"\n        }\n      ]\n    },\n    \"upper_bounds\": {\n      \"array\": [\n        {\n          \"key\": 1,\n          \"value\": \"\\u0003\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\"\n        },\n        {\n          \"key\": 2,\n          \"value\": \"c\"\n        }\n      ]\n    },\n    \"key_metadata\": null,\n    \"split_offsets\": {\n      \"array\": [\n        4\n      ]\n    },\n    \"sort_order_id\": {\n      \"int\": 0\n    }\n  }\n}\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1638180498813_362684508",
+      "id": "paragraph_1638180498813_362684508",
+      "dateCreated": "2021-11-29 10:08:18.000",
+      "dateStarted": "2022-07-10 02:34:04.787",
+      "dateFinished": "2022-07-10 02:34:05.509",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Read data files",
+      "text": "%spark\n\nvar df \u003d spark.read.format(\"parquet\")\n    .load(\"/tmp/warehouse/db/events/data/00000-0-848f884a-cae1-4e89-aca1-1d3ee9962aaa-00001.parquet\")\ndf.show()\n\ndf \u003d spark.read.format(\"parquet\")\n    .load(\"/tmp/warehouse/db/events/data/00001-1-10b6f1bd-eb41-45f9-8394-3eb5adfbc293-00001.parquet\")\ndf.show()\n\ndf \u003d spark.read.format(\"parquet\")\n    .load(\"/tmp/warehouse/db/events/data/00002-2-691e18d8-7d67-4a06-951a-9fbf9c264978-00001.parquet\")\ndf.show()\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 02:32:38.700",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+----+\n| id|data|\n+---+----+\n|  1|   a|\n+---+----+\n\n+---+----+\n| id|data|\n+---+----+\n|  2|   b|\n+---+----+\n\n+---+----+\n| id|data|\n+---+----+\n|  3|   c|\n+---+----+\n\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [id: bigint, data: string]\ndf: org.apache.spark.sql.DataFrame \u003d [id: bigint, data: string]\ndf: org.apache.spark.sql.DataFrame \u003d [id: bigint, data: string]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d52"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d53"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d54"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d55"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d56"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d57"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1638180574308_503324336",
+      "id": "paragraph_1638180574308_503324336",
+      "dateCreated": "2021-11-29 10:09:34.000",
+      "dateStarted": "2022-07-10 02:32:38.714",
+      "dateFinished": "2022-07-10 02:32:39.338",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Update one row",
+      "text": "%spark.sql\n\nUPDATE local.db.events set data\u003d\u0027c_updated\u0027 where id\u003d3\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 02:03:53.050",
+      "progress": 99,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d14"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d15"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d16"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1638180868987_110065277",
+      "id": "paragraph_1638180868987_110065277",
+      "dateCreated": "2021-11-29 10:14:28.000",
+      "dateStarted": "2022-07-10 02:03:53.064",
+      "dateFinished": "2022-07-10 02:03:55.685",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Check data after updating",
+      "text": "%spark.sql\n\nSELECT * from local.db.events\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 03:27:11.455",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "id": "string",
+                      "data": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "id\tdata\n3\tc_updated\n1\ta\n2\tb\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d17"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1638180974601_683845347",
+      "id": "paragraph_1638180974601_683845347",
+      "dateCreated": "2021-11-29 10:16:14.000",
+      "dateStarted": "2022-07-10 02:03:56.611",
+      "dateFinished": "2022-07-10 02:03:56.743",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Check files under table folder",
+      "text": "%sh\n\necho \"*********************** List /tmp/warehouse/db/events ***************************\"\nls -l /tmp/warehouse/db/events\necho \"\"\n\necho \"*********************** List /tmp/warehouse/db/events/data ***************************\"\nls -l /tmp/warehouse/db/events/data\necho \"\"\n\necho \"*********************** List /tmp/warehouse/db/events/metadata ***************************\"\nls -l /tmp/warehouse/db/events/metadata\necho \"\"\n\necho \"*********************** version-hint ***************************\"\ncat /tmp/warehouse/db/events/metadata/version-hint.text\necho \"\"\n\necho \"*********************** v3.metadata.json ***************************\"\ncat /tmp/warehouse/db/events/metadata/v3.metadata.json\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 02:35:51.634",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 374.006,
+              "optionOpen": false
+            }
+          }
+        },
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "*********************** List /tmp/warehouse/db/events ***************************\ntotal 8\ndrwxr-xr-x 2 zeppelin root 4096 Jul 10 02:03 data\ndrwxr-xr-x 2 zeppelin root 4096 Jul 10 02:03 metadata\n\n*********************** List /tmp/warehouse/db/events/data ***************************\ntotal 16\n-rw-r--r-- 1 zeppelin root 643 Jul 10 01:58 00000-0-848f884a-cae1-4e89-aca1-1d3ee9962aaa-00001.parquet\n-rw-r--r-- 1 zeppelin root 643 Jul 10 01:58 00001-1-10b6f1bd-eb41-45f9-8394-3eb5adfbc293-00001.parquet\n-rw-r--r-- 1 zeppelin root 643 Jul 10 01:58 00002-2-691e18d8-7d67-4a06-951a-9fbf9c264978-00001.parquet\n-rw-r--r-- 1 zeppelin root 714 Jul 10 02:03 00129-18-065537c3-f309-4238-a474-3fdce031799e-00001.parquet\n\n*********************** List /tmp/warehouse/db/events/metadata ***************************\ntotal 48\n-rw-r--r-- 1 zeppelin root 5873 Jul 10 02:03 10e3f936-0d3e-4f43-b257-8fef44bf34e6-m0.avro\n-rw-r--r-- 1 zeppelin root 5777 Jul 10 02:03 10e3f936-0d3e-4f43-b257-8fef44bf34e6-m1.avro\n-rw-r--r-- 1 zeppelin root 5851 Jul 10 01:58 df7157f3-8700-410d-b4aa-2471eb113d56-m0.avro\n-rw-r--r-- 1 zeppelin root 3746 Jul 10 01:58 snap-4053879780177651980-1-df7157f3-8700-410d-b4aa-2471eb113d56.avro\n-rw-r--r-- 1 zeppelin root 3780 Jul 10 02:03 snap-5145784663145387334-1-10e3f936-0d3e-4f43-b257-8fef44bf34e6.avro\n-rw-r--r-- 1 zeppelin root 1165 Jul 10 01:53 v1.metadata.json\n-rw-r--r-- 1 zeppelin root 2053 Jul 10 01:58 v2.metadata.json\n-rw-r--r-- 1 zeppelin root 3078 Jul 10 02:03 v3.metadata.json\n-rw-r--r-- 1 zeppelin root    1 Jul 10 02:03 version-hint.text\n\n*********************** version-hint ***************************\n3\n*********************** v4.metadata.json ***************************\n{\n  \"format-version\" : 1,\n  \"table-uuid\" : \"ffeb6464-365a-4f09-9651-9721702a0dd2\",\n  \"location\" : \"/tmp/warehouse/db/events\",\n  \"last-updated-ms\" : 1657418635655,\n  \"last-column-id\" : 2,\n  \"schema\" : {\n    \"type\" : \"struct\",\n    \"schema-id\" : 0,\n    \"fields\" : [ {\n      \"id\" : 1,\n      \"name\" : \"id\",\n      \"required\" : false,\n      \"type\" : \"long\"\n    }, {\n      \"id\" : 2,\n      \"name\" : \"data\",\n      \"required\" : false,\n      \"type\" : \"string\"\n    } ]\n  },\n  \"current-schema-id\" : 0,\n  \"schemas\" : [ {\n    \"type\" : \"struct\",\n    \"schema-id\" : 0,\n    \"fields\" : [ {\n      \"id\" : 1,\n      \"name\" : \"id\",\n      \"required\" : false,\n      \"type\" : \"long\"\n    }, {\n      \"id\" : 2,\n      \"name\" : \"data\",\n      \"required\" : false,\n      \"type\" : \"string\"\n    } ]\n  } ],\n  \"partition-spec\" : [ ],\n  \"default-spec-id\" : 0,\n  \"partition-specs\" : [ {\n    \"spec-id\" : 0,\n    \"fields\" : [ ]\n  } ],\n  \"last-partition-id\" : 999,\n  \"default-sort-order-id\" : 0,\n  \"sort-orders\" : [ {\n    \"order-id\" : 0,\n    \"fields\" : [ ]\n  } ],\n  \"properties\" : {\n    \"owner\" : \"zeppelin\"\n  },\n  \"current-snapshot-id\" : 5145784663145387334,\n  \"snapshots\" : [ {\n    \"snapshot-id\" : 4053879780177651980,\n    \"timestamp-ms\" : 1657418321091,\n    \"summary\" : {\n      \"operation\" : \"append\",\n      \"spark.app.id\" : \"local-1657417990765\",\n      \"added-data-files\" : \"3\",\n      \"added-records\" : \"3\",\n      \"added-files-size\" : \"1929\",\n      \"changed-partition-count\" : \"1\",\n      \"total-records\" : \"3\",\n      \"total-files-size\" : \"1929\",\n      \"total-data-files\" : \"3\",\n      \"total-delete-files\" : \"0\",\n      \"total-position-deletes\" : \"0\",\n      \"total-equality-deletes\" : \"0\"\n    },\n    \"manifest-list\" : \"/tmp/warehouse/db/events/metadata/snap-4053879780177651980-1-df7157f3-8700-410d-b4aa-2471eb113d56.avro\",\n    \"schema-id\" : 0\n  }, {\n    \"snapshot-id\" : 5145784663145387334,\n    \"parent-snapshot-id\" : 4053879780177651980,\n    \"timestamp-ms\" : 1657418635655,\n    \"summary\" : {\n      \"operation\" : \"overwrite\",\n      \"spark.app.id\" : \"local-1657417990765\",\n      \"added-data-files\" : \"1\",\n      \"deleted-data-files\" : \"1\",\n      \"added-records\" : \"1\",\n      \"deleted-records\" : \"1\",\n      \"added-files-size\" : \"714\",\n      \"removed-files-size\" : \"643\",\n      \"changed-partition-count\" : \"1\",\n      \"total-records\" : \"3\",\n      \"total-files-size\" : \"2000\",\n      \"total-data-files\" : \"3\",\n      \"total-delete-files\" : \"0\",\n      \"total-position-deletes\" : \"0\",\n      \"total-equality-deletes\" : \"0\"\n    },\n    \"manifest-list\" : \"/tmp/warehouse/db/events/metadata/snap-5145784663145387334-1-10e3f936-0d3e-4f43-b257-8fef44bf34e6.avro\",\n    \"schema-id\" : 0\n  } ],\n  \"snapshot-log\" : [ {\n    \"timestamp-ms\" : 1657418321091,\n    \"snapshot-id\" : 4053879780177651980\n  }, {\n    \"timestamp-ms\" : 1657418635655,\n    \"snapshot-id\" : 5145784663145387334\n  } ],\n  \"metadata-log\" : [ {\n    \"timestamp-ms\" : 1657417999222,\n    \"metadata-file\" : \"/tmp/warehouse/db/events/metadata/v1.metadata.json\"\n  }, {\n    \"timestamp-ms\" : 1657418321091,\n    \"metadata-file\" : \"/tmp/warehouse/db/events/metadata/v2.metadata.json\"\n  } ]\n}"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1638180987850_1915913983",
+      "id": "paragraph_1638180987850_1915913983",
+      "dateCreated": "2021-11-29 10:16:27.000",
+      "dateStarted": "2022-07-10 02:06:08.215",
+      "dateFinished": "2022-07-10 02:06:08.250",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Read snapshot file",
+      "text": "%sh\n\njava -jar avro-tools-1.11.0.jar tojson /tmp/warehouse/db/events/metadata/snap-5145784663145387334-1-10e3f936-0d3e-4f43-b257-8fef44bf34e6.avro \n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 03:27:02.704",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "22/07/10 02:39:00 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable\n{\"manifest_path\":\"/tmp/warehouse/db/events/metadata/10e3f936-0d3e-4f43-b257-8fef44bf34e6-m1.avro\",\"manifest_length\":5777,\"partition_spec_id\":0,\"added_snapshot_id\":{\"long\":5145784663145387334},\"added_data_files_count\":{\"int\":1},\"existing_data_files_count\":{\"int\":0},\"deleted_data_files_count\":{\"int\":0},\"partitions\":{\"array\":[]},\"added_rows_count\":{\"long\":1},\"existing_rows_count\":{\"long\":0},\"deleted_rows_count\":{\"long\":0}}\n{\"manifest_path\":\"/tmp/warehouse/db/events/metadata/10e3f936-0d3e-4f43-b257-8fef44bf34e6-m0.avro\",\"manifest_length\":5873,\"partition_spec_id\":0,\"added_snapshot_id\":{\"long\":5145784663145387334},\"added_data_files_count\":{\"int\":0},\"existing_data_files_count\":{\"int\":2},\"deleted_data_files_count\":{\"int\":1},\"partitions\":{\"array\":[]},\"added_rows_count\":{\"long\":0},\"existing_rows_count\":{\"long\":2},\"deleted_rows_count\":{\"long\":1}}\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637833746802_14852905",
+      "id": "paragraph_1637833746802_14852905",
+      "dateCreated": "2021-11-25 09:49:06.000",
+      "dateStarted": "2022-07-10 02:38:59.977",
+      "dateFinished": "2022-07-10 02:39:00.675",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Check manifest files",
+      "text": "%sh\n\n\necho \"******************************* manifest file 1***************************************\"\njava -jar avro-tools-1.11.0.jar tojson /tmp/warehouse/db/events/metadata/10e3f936-0d3e-4f43-b257-8fef44bf34e6-m1.avro\n\necho \"******************************* manifest file 2***************************************\"\njava -jar avro-tools-1.11.0.jar tojson /tmp/warehouse/db/events/metadata/10e3f936-0d3e-4f43-b257-8fef44bf34e6-m0.avro \n\n\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 03:27:06.299",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 586.001,
+              "optionOpen": false
+            }
+          }
+        },
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "******************************* manifest file 1***************************************\n22/07/10 02:40:23 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable\n{\"status\":1,\"snapshot_id\":{\"long\":5145784663145387334},\"data_file\":{\"file_path\":\"/tmp/warehouse/db/events/data/00129-18-065537c3-f309-4238-a474-3fdce031799e-00001.parquet\",\"file_format\":\"PARQUET\",\"partition\":{},\"record_count\":1,\"file_size_in_bytes\":714,\"block_size_in_bytes\":67108864,\"column_sizes\":{\"array\":[{\"key\":1,\"value\":52},{\"key\":2,\"value\":60}]},\"value_counts\":{\"array\":[{\"key\":1,\"value\":1},{\"key\":2,\"value\":1}]},\"null_value_counts\":{\"array\":[{\"key\":1,\"value\":0},{\"key\":2,\"value\":0}]},\"nan_value_counts\":{\"array\":[]},\"lower_bounds\":{\"array\":[{\"key\":1,\"value\":\"\\u0003\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\"},{\"key\":2,\"value\":\"c_updated\"}]},\"upper_bounds\":{\"array\":[{\"key\":1,\"value\":\"\\u0003\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\"},{\"key\":2,\"value\":\"c_updated\"}]},\"key_metadata\":null,\"split_offsets\":{\"array\":[4]},\"sort_order_id\":{\"int\":0}}}\n******************************* manifest file 2***************************************\n22/07/10 02:40:23 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable\n{\"status\":0,\"snapshot_id\":{\"long\":4053879780177651980},\"data_file\":{\"file_path\":\"/tmp/warehouse/db/events/data/00000-0-848f884a-cae1-4e89-aca1-1d3ee9962aaa-00001.parquet\",\"file_format\":\"PARQUET\",\"partition\":{},\"record_count\":1,\"file_size_in_bytes\":643,\"block_size_in_bytes\":67108864,\"column_sizes\":{\"array\":[{\"key\":1,\"value\":46},{\"key\":2,\"value\":48}]},\"value_counts\":{\"array\":[{\"key\":1,\"value\":1},{\"key\":2,\"value\":1}]},\"null_value_counts\":{\"array\":[{\"key\":1,\"value\":0},{\"key\":2,\"value\":0}]},\"nan_value_counts\":{\"array\":[]},\"lower_bounds\":{\"array\":[{\"key\":1,\"value\":\"\\u0001\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\"},{\"key\":2,\"value\":\"a\"}]},\"upper_bounds\":{\"array\":[{\"key\":1,\"value\":\"\\u0001\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\"},{\"key\":2,\"value\":\"a\"}]},\"key_metadata\":null,\"split_offsets\":{\"array\":[4]},\"sort_order_id\":{\"int\":0}}}\n{\"status\":0,\"snapshot_id\":{\"long\":4053879780177651980},\"data_file\":{\"file_path\":\"/tmp/warehouse/db/events/data/00001-1-10b6f1bd-eb41-45f9-8394-3eb5adfbc293-00001.parquet\",\"file_format\":\"PARQUET\",\"partition\":{},\"record_count\":1,\"file_size_in_bytes\":643,\"block_size_in_bytes\":67108864,\"column_sizes\":{\"array\":[{\"key\":1,\"value\":46},{\"key\":2,\"value\":48}]},\"value_counts\":{\"array\":[{\"key\":1,\"value\":1},{\"key\":2,\"value\":1}]},\"null_value_counts\":{\"array\":[{\"key\":1,\"value\":0},{\"key\":2,\"value\":0}]},\"nan_value_counts\":{\"array\":[]},\"lower_bounds\":{\"array\":[{\"key\":1,\"value\":\"\\u0002\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\"},{\"key\":2,\"value\":\"b\"}]},\"upper_bounds\":{\"array\":[{\"key\":1,\"value\":\"\\u0002\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\"},{\"key\":2,\"value\":\"b\"}]},\"key_metadata\":null,\"split_offsets\":{\"array\":[4]},\"sort_order_id\":{\"int\":0}}}\n{\"status\":2,\"snapshot_id\":{\"long\":5145784663145387334},\"data_file\":{\"file_path\":\"/tmp/warehouse/db/events/data/00002-2-691e18d8-7d67-4a06-951a-9fbf9c264978-00001.parquet\",\"file_format\":\"PARQUET\",\"partition\":{},\"record_count\":1,\"file_size_in_bytes\":643,\"block_size_in_bytes\":67108864,\"column_sizes\":{\"array\":[{\"key\":1,\"value\":46},{\"key\":2,\"value\":48}]},\"value_counts\":{\"array\":[{\"key\":1,\"value\":1},{\"key\":2,\"value\":1}]},\"null_value_counts\":{\"array\":[{\"key\":1,\"value\":0},{\"key\":2,\"value\":0}]},\"nan_value_counts\":{\"array\":[]},\"lower_bounds\":{\"array\":[{\"key\":1,\"value\":\"\\u0003\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\"},{\"key\":2,\"value\":\"c\"}]},\"upper_bounds\":{\"array\":[{\"key\":1,\"value\":\"\\u0003\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\"},{\"key\":2,\"value\":\"c\"}]},\"key_metadata\":null,\"split_offsets\":{\"array\":[4]},\"sort_order_id\":{\"int\":0}}}\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637833778902_1481387840",
+      "id": "paragraph_1637833778902_1481387840",
+      "dateCreated": "2021-11-25 09:49:38.000",
+      "dateStarted": "2022-07-10 02:40:22.673",
+      "dateFinished": "2022-07-10 02:40:24.055",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Read parquet file of manifest files",
+      "text": "%spark\n\n// data files in manifest file 1\nvar df \u003d spark.read.format(\"parquet\")\n    .load(\"/tmp/warehouse/db/events/data/00129-18-065537c3-f309-4238-a474-3fdce031799e-00001.parquet\")\ndf.show()\n\n// data files in manifest file 2\ndf \u003d spark.read.format(\"parquet\")\n    .load(\"/tmp/warehouse/db/events/data/00000-0-848f884a-cae1-4e89-aca1-1d3ee9962aaa-00001.parquet\")\ndf.show()\n\ndf \u003d spark.read.format(\"parquet\")\n    .load(\"/tmp/warehouse/db/events/data/00001-1-10b6f1bd-eb41-45f9-8394-3eb5adfbc293-00001.parquet\")\ndf.show()\n\n// status is 2\ndf \u003d spark.read.format(\"parquet\")\n    .load(\"/tmp/warehouse/db/events/data/00002-2-691e18d8-7d67-4a06-951a-9fbf9c264978-00001.parquet\")\ndf.show()\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 02:07:44.451",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 474.006,
+              "optionOpen": false
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+---------+\n| id|     data|\n+---+---------+\n|  3|c_updated|\n+---+---------+\n\n+---+----+\n| id|data|\n+---+----+\n|  1|   a|\n+---+----+\n\n+---+----+\n| id|data|\n+---+----+\n|  2|   b|\n+---+----+\n\n+---+----+\n| id|data|\n+---+----+\n|  3|   c|\n+---+----+\n\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [id: bigint, data: string]\ndf: org.apache.spark.sql.DataFrame \u003d [id: bigint, data: string]\ndf: org.apache.spark.sql.DataFrame \u003d [id: bigint, data: string]\ndf: org.apache.spark.sql.DataFrame \u003d [id: bigint, data: string]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d26"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d27"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d28"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d29"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d30"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d31"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d32"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d33"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656309617218_331700051",
+      "id": "paragraph_1656309617218_331700051",
+      "dateCreated": "2022-06-27 06:00:17.218",
+      "dateStarted": "2022-07-10 02:07:44.463",
+      "dateFinished": "2022-07-10 02:07:45.553",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.sql\n\ndelete from local.db.events where id\u003d2",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 02:08:45.068",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1657418878277_1158772927",
+      "id": "paragraph_1657418878277_1158772927",
+      "dateCreated": "2022-07-10 02:07:58.278",
+      "dateStarted": "2022-07-10 02:08:45.080",
+      "dateFinished": "2022-07-10 02:08:45.320",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.sql\n\nselect * from local.db.events\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 03:26:55.348",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "id": "string",
+                      "data": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "id\tdata\n3\tc_updated\n1\ta\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d34"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1657418926994_1559056453",
+      "id": "paragraph_1657418926994_1559056453",
+      "dateCreated": "2022-07-10 02:08:46.994",
+      "dateStarted": "2022-07-10 02:08:53.751",
+      "dateFinished": "2022-07-10 02:08:53.853",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Check table folder",
+      "text": "%sh\n\necho \"*********************** List /tmp/warehouse/db/events ***************************\"\nls -l /tmp/warehouse/db/events\necho \"\"\n\necho \"*********************** List /tmp/warehouse/db/events/data ***************************\"\nls -l /tmp/warehouse/db/events/data\necho \"\"\n\necho \"*********************** List /tmp/warehouse/db/events/metadata ***************************\"\nls -l /tmp/warehouse/db/events/metadata\necho \"\"\n\necho \"*********************** version-hint ***************************\"\ncat /tmp/warehouse/db/events/metadata/version-hint.text\necho \"\"\n\necho \"*********************** v4.metadata.json ***************************\"\ncat /tmp/warehouse/db/events/metadata/v4.metadata.json\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 02:44:31.193",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 374.006,
+              "optionOpen": false
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "*********************** List /tmp/warehouse/db/events ***************************\ntotal 8\ndrwxr-xr-x 2 zeppelin root 4096 Jul 10 02:03 data\ndrwxr-xr-x 2 zeppelin root 4096 Jul 10 02:08 metadata\n\n*********************** List /tmp/warehouse/db/events/data ***************************\ntotal 16\n-rw-r--r-- 1 zeppelin root 643 Jul 10 01:58 00000-0-848f884a-cae1-4e89-aca1-1d3ee9962aaa-00001.parquet\n-rw-r--r-- 1 zeppelin root 643 Jul 10 01:58 00001-1-10b6f1bd-eb41-45f9-8394-3eb5adfbc293-00001.parquet\n-rw-r--r-- 1 zeppelin root 643 Jul 10 01:58 00002-2-691e18d8-7d67-4a06-951a-9fbf9c264978-00001.parquet\n-rw-r--r-- 1 zeppelin root 714 Jul 10 02:03 00129-18-065537c3-f309-4238-a474-3fdce031799e-00001.parquet\n\n*********************** List /tmp/warehouse/db/events/metadata ***************************\ntotal 64\n-rw-r--r-- 1 zeppelin root 5873 Jul 10 02:03 10e3f936-0d3e-4f43-b257-8fef44bf34e6-m0.avro\n-rw-r--r-- 1 zeppelin root 5777 Jul 10 02:03 10e3f936-0d3e-4f43-b257-8fef44bf34e6-m1.avro\n-rw-r--r-- 1 zeppelin root 5829 Jul 10 02:08 386475d9-62a0-4aa5-bc8a-ea7ca5f0bf95-m0.avro\n-rw-r--r-- 1 zeppelin root 5851 Jul 10 01:58 df7157f3-8700-410d-b4aa-2471eb113d56-m0.avro\n-rw-r--r-- 1 zeppelin root 3746 Jul 10 01:58 snap-4053879780177651980-1-df7157f3-8700-410d-b4aa-2471eb113d56.avro\n-rw-r--r-- 1 zeppelin root 3824 Jul 10 02:08 snap-4672191299963005851-1-386475d9-62a0-4aa5-bc8a-ea7ca5f0bf95.avro\n-rw-r--r-- 1 zeppelin root 3780 Jul 10 02:03 snap-5145784663145387334-1-10e3f936-0d3e-4f43-b257-8fef44bf34e6.avro\n-rw-r--r-- 1 zeppelin root 1165 Jul 10 01:53 v1.metadata.json\n-rw-r--r-- 1 zeppelin root 2053 Jul 10 01:58 v2.metadata.json\n-rw-r--r-- 1 zeppelin root 3078 Jul 10 02:03 v3.metadata.json\n-rw-r--r-- 1 zeppelin root 4005 Jul 10 02:08 v4.metadata.json\n-rw-r--r-- 1 zeppelin root    1 Jul 10 02:08 version-hint.text\n\n*********************** version-hint ***************************\n4\n*********************** v4.metadata.json ***************************\n{\n  \"format-version\" : 1,\n  \"table-uuid\" : \"ffeb6464-365a-4f09-9651-9721702a0dd2\",\n  \"location\" : \"/tmp/warehouse/db/events\",\n  \"last-updated-ms\" : 1657418925273,\n  \"last-column-id\" : 2,\n  \"schema\" : {\n    \"type\" : \"struct\",\n    \"schema-id\" : 0,\n    \"fields\" : [ {\n      \"id\" : 1,\n      \"name\" : \"id\",\n      \"required\" : false,\n      \"type\" : \"long\"\n    }, {\n      \"id\" : 2,\n      \"name\" : \"data\",\n      \"required\" : false,\n      \"type\" : \"string\"\n    } ]\n  },\n  \"current-schema-id\" : 0,\n  \"schemas\" : [ {\n    \"type\" : \"struct\",\n    \"schema-id\" : 0,\n    \"fields\" : [ {\n      \"id\" : 1,\n      \"name\" : \"id\",\n      \"required\" : false,\n      \"type\" : \"long\"\n    }, {\n      \"id\" : 2,\n      \"name\" : \"data\",\n      \"required\" : false,\n      \"type\" : \"string\"\n    } ]\n  } ],\n  \"partition-spec\" : [ ],\n  \"default-spec-id\" : 0,\n  \"partition-specs\" : [ {\n    \"spec-id\" : 0,\n    \"fields\" : [ ]\n  } ],\n  \"last-partition-id\" : 999,\n  \"default-sort-order-id\" : 0,\n  \"sort-orders\" : [ {\n    \"order-id\" : 0,\n    \"fields\" : [ ]\n  } ],\n  \"properties\" : {\n    \"owner\" : \"zeppelin\"\n  },\n  \"current-snapshot-id\" : 4672191299963005851,\n  \"snapshots\" : [ {\n    \"snapshot-id\" : 4053879780177651980,\n    \"timestamp-ms\" : 1657418321091,\n    \"summary\" : {\n      \"operation\" : \"append\",\n      \"spark.app.id\" : \"local-1657417990765\",\n      \"added-data-files\" : \"3\",\n      \"added-records\" : \"3\",\n      \"added-files-size\" : \"1929\",\n      \"changed-partition-count\" : \"1\",\n      \"total-records\" : \"3\",\n      \"total-files-size\" : \"1929\",\n      \"total-data-files\" : \"3\",\n      \"total-delete-files\" : \"0\",\n      \"total-position-deletes\" : \"0\",\n      \"total-equality-deletes\" : \"0\"\n    },\n    \"manifest-list\" : \"/tmp/warehouse/db/events/metadata/snap-4053879780177651980-1-df7157f3-8700-410d-b4aa-2471eb113d56.avro\",\n    \"schema-id\" : 0\n  }, {\n    \"snapshot-id\" : 5145784663145387334,\n    \"parent-snapshot-id\" : 4053879780177651980,\n    \"timestamp-ms\" : 1657418635655,\n    \"summary\" : {\n      \"operation\" : \"overwrite\",\n      \"spark.app.id\" : \"local-1657417990765\",\n      \"added-data-files\" : \"1\",\n      \"deleted-data-files\" : \"1\",\n      \"added-records\" : \"1\",\n      \"deleted-records\" : \"1\",\n      \"added-files-size\" : \"714\",\n      \"removed-files-size\" : \"643\",\n      \"changed-partition-count\" : \"1\",\n      \"total-records\" : \"3\",\n      \"total-files-size\" : \"2000\",\n      \"total-data-files\" : \"3\",\n      \"total-delete-files\" : \"0\",\n      \"total-position-deletes\" : \"0\",\n      \"total-equality-deletes\" : \"0\"\n    },\n    \"manifest-list\" : \"/tmp/warehouse/db/events/metadata/snap-5145784663145387334-1-10e3f936-0d3e-4f43-b257-8fef44bf34e6.avro\",\n    \"schema-id\" : 0\n  }, {\n    \"snapshot-id\" : 4672191299963005851,\n    \"parent-snapshot-id\" : 5145784663145387334,\n    \"timestamp-ms\" : 1657418925273,\n    \"summary\" : {\n      \"operation\" : \"delete\",\n      \"spark.app.id\" : \"local-1657417990765\",\n      \"deleted-data-files\" : \"1\",\n      \"deleted-records\" : \"1\",\n      \"removed-files-size\" : \"643\",\n      \"changed-partition-count\" : \"1\",\n      \"total-records\" : \"2\",\n      \"total-files-size\" : \"1357\",\n      \"total-data-files\" : \"2\",\n      \"total-delete-files\" : \"0\",\n      \"total-position-deletes\" : \"0\",\n      \"total-equality-deletes\" : \"0\"\n    },\n    \"manifest-list\" : \"/tmp/warehouse/db/events/metadata/snap-4672191299963005851-1-386475d9-62a0-4aa5-bc8a-ea7ca5f0bf95.avro\",\n    \"schema-id\" : 0\n  } ],\n  \"snapshot-log\" : [ {\n    \"timestamp-ms\" : 1657418321091,\n    \"snapshot-id\" : 4053879780177651980\n  }, {\n    \"timestamp-ms\" : 1657418635655,\n    \"snapshot-id\" : 5145784663145387334\n  }, {\n    \"timestamp-ms\" : 1657418925273,\n    \"snapshot-id\" : 4672191299963005851\n  } ],\n  \"metadata-log\" : [ {\n    \"timestamp-ms\" : 1657417999222,\n    \"metadata-file\" : \"/tmp/warehouse/db/events/metadata/v1.metadata.json\"\n  }, {\n    \"timestamp-ms\" : 1657418321091,\n    \"metadata-file\" : \"/tmp/warehouse/db/events/metadata/v2.metadata.json\"\n  }, {\n    \"timestamp-ms\" : 1657418635655,\n    \"metadata-file\" : \"/tmp/warehouse/db/events/metadata/v3.metadata.json\"\n  } ]\n}"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1657418937628_254114393",
+      "id": "paragraph_1657418937628_254114393",
+      "dateCreated": "2022-07-10 02:08:57.629",
+      "dateStarted": "2022-07-10 02:44:18.607",
+      "dateFinished": "2022-07-10 02:44:18.659",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Read snapshot file",
+      "text": "%sh\n\njava -jar avro-tools-1.11.0.jar tojson /tmp/warehouse/db/events/metadata/snap-4672191299963005851-1-386475d9-62a0-4aa5-bc8a-ea7ca5f0bf95.avro\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 03:26:49.456",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "22/07/10 02:44:56 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable\n{\"manifest_path\":\"/tmp/warehouse/db/events/metadata/10e3f936-0d3e-4f43-b257-8fef44bf34e6-m1.avro\",\"manifest_length\":5777,\"partition_spec_id\":0,\"added_snapshot_id\":{\"long\":5145784663145387334},\"added_data_files_count\":{\"int\":1},\"existing_data_files_count\":{\"int\":0},\"deleted_data_files_count\":{\"int\":0},\"partitions\":{\"array\":[]},\"added_rows_count\":{\"long\":1},\"existing_rows_count\":{\"long\":0},\"deleted_rows_count\":{\"long\":0}}\n{\"manifest_path\":\"/tmp/warehouse/db/events/metadata/386475d9-62a0-4aa5-bc8a-ea7ca5f0bf95-m0.avro\",\"manifest_length\":5829,\"partition_spec_id\":0,\"added_snapshot_id\":{\"long\":4672191299963005851},\"added_data_files_count\":{\"int\":0},\"existing_data_files_count\":{\"int\":1},\"deleted_data_files_count\":{\"int\":1},\"partitions\":{\"array\":[]},\"added_rows_count\":{\"long\":0},\"existing_rows_count\":{\"long\":1},\"deleted_rows_count\":{\"long\":1}}\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1657418991966_594588439",
+      "id": "paragraph_1657418991966_594588439",
+      "dateCreated": "2022-07-10 02:09:51.966",
+      "dateStarted": "2022-07-10 02:44:55.696",
+      "dateFinished": "2022-07-10 02:44:56.380",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Read manifest file",
+      "text": "%sh\n\necho \"******************************* manifest file 1***************************************\"\njava -jar avro-tools-1.11.0.jar tojson /tmp/warehouse/db/events/metadata/10e3f936-0d3e-4f43-b257-8fef44bf34e6-m1.avro\n\necho \"******************************* manifest file 2***************************************\"\njava -jar avro-tools-1.11.0.jar tojson /tmp/warehouse/db/events/metadata/386475d9-62a0-4aa5-bc8a-ea7ca5f0bf95-m0.avro \n\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 03:26:44.427",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sh",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 468.011,
+              "optionOpen": false
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "******************************* manifest file 1***************************************\n22/07/10 02:46:02 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable\n{\"status\":1,\"snapshot_id\":{\"long\":5145784663145387334},\"data_file\":{\"file_path\":\"/tmp/warehouse/db/events/data/00129-18-065537c3-f309-4238-a474-3fdce031799e-00001.parquet\",\"file_format\":\"PARQUET\",\"partition\":{},\"record_count\":1,\"file_size_in_bytes\":714,\"block_size_in_bytes\":67108864,\"column_sizes\":{\"array\":[{\"key\":1,\"value\":52},{\"key\":2,\"value\":60}]},\"value_counts\":{\"array\":[{\"key\":1,\"value\":1},{\"key\":2,\"value\":1}]},\"null_value_counts\":{\"array\":[{\"key\":1,\"value\":0},{\"key\":2,\"value\":0}]},\"nan_value_counts\":{\"array\":[]},\"lower_bounds\":{\"array\":[{\"key\":1,\"value\":\"\\u0003\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\"},{\"key\":2,\"value\":\"c_updated\"}]},\"upper_bounds\":{\"array\":[{\"key\":1,\"value\":\"\\u0003\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\"},{\"key\":2,\"value\":\"c_updated\"}]},\"key_metadata\":null,\"split_offsets\":{\"array\":[4]},\"sort_order_id\":{\"int\":0}}}\n******************************* manifest file 2***************************************\n22/07/10 02:46:03 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable\n{\"status\":0,\"snapshot_id\":{\"long\":4053879780177651980},\"data_file\":{\"file_path\":\"/tmp/warehouse/db/events/data/00000-0-848f884a-cae1-4e89-aca1-1d3ee9962aaa-00001.parquet\",\"file_format\":\"PARQUET\",\"partition\":{},\"record_count\":1,\"file_size_in_bytes\":643,\"block_size_in_bytes\":67108864,\"column_sizes\":{\"array\":[{\"key\":1,\"value\":46},{\"key\":2,\"value\":48}]},\"value_counts\":{\"array\":[{\"key\":1,\"value\":1},{\"key\":2,\"value\":1}]},\"null_value_counts\":{\"array\":[{\"key\":1,\"value\":0},{\"key\":2,\"value\":0}]},\"nan_value_counts\":{\"array\":[]},\"lower_bounds\":{\"array\":[{\"key\":1,\"value\":\"\\u0001\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\"},{\"key\":2,\"value\":\"a\"}]},\"upper_bounds\":{\"array\":[{\"key\":1,\"value\":\"\\u0001\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\"},{\"key\":2,\"value\":\"a\"}]},\"key_metadata\":null,\"split_offsets\":{\"array\":[4]},\"sort_order_id\":{\"int\":0}}}\n{\"status\":2,\"snapshot_id\":{\"long\":4672191299963005851},\"data_file\":{\"file_path\":\"/tmp/warehouse/db/events/data/00001-1-10b6f1bd-eb41-45f9-8394-3eb5adfbc293-00001.parquet\",\"file_format\":\"PARQUET\",\"partition\":{},\"record_count\":1,\"file_size_in_bytes\":643,\"block_size_in_bytes\":67108864,\"column_sizes\":{\"array\":[{\"key\":1,\"value\":46},{\"key\":2,\"value\":48}]},\"value_counts\":{\"array\":[{\"key\":1,\"value\":1},{\"key\":2,\"value\":1}]},\"null_value_counts\":{\"array\":[{\"key\":1,\"value\":0},{\"key\":2,\"value\":0}]},\"nan_value_counts\":{\"array\":[]},\"lower_bounds\":{\"array\":[{\"key\":1,\"value\":\"\\u0002\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\"},{\"key\":2,\"value\":\"b\"}]},\"upper_bounds\":{\"array\":[{\"key\":1,\"value\":\"\\u0002\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\"},{\"key\":2,\"value\":\"b\"}]},\"key_metadata\":null,\"split_offsets\":{\"array\":[4]},\"sort_order_id\":{\"int\":0}}}\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1657419049366_1347927929",
+      "id": "paragraph_1657419049366_1347927929",
+      "dateCreated": "2022-07-10 02:10:49.366",
+      "dateStarted": "2022-07-10 02:46:02.272",
+      "dateFinished": "2022-07-10 02:46:03.626",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Read data files",
+      "text": "%spark\n\n// data files in manifest file 1\nvar df \u003d spark.read.format(\"parquet\")\n    .load(\"/tmp/warehouse/db/events/data/00129-18-065537c3-f309-4238-a474-3fdce031799e-00001.parquet\")\ndf.show()\n\n// data files in manifest file 2\ndf \u003d spark.read.format(\"parquet\")\n    .load(\"/tmp/warehouse/db/events/data/00000-0-848f884a-cae1-4e89-aca1-1d3ee9962aaa-00001.parquet\")\ndf.show()\n\n// status is 2\ndf \u003d spark.read.format(\"parquet\")\n    .load(\"/tmp/warehouse/db/events/data/00001-1-10b6f1bd-eb41-45f9-8394-3eb5adfbc293-00001.parquet\")\ndf.show()\n\n\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 02:46:54.390",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+---------+\n| id|     data|\n+---+---------+\n|  3|c_updated|\n+---+---------+\n\n+---+----+\n| id|data|\n+---+----+\n|  1|   a|\n+---+----+\n\n+---+----+\n| id|data|\n+---+----+\n|  2|   b|\n+---+----+\n\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [id: bigint, data: string]\ndf: org.apache.spark.sql.DataFrame \u003d [id: bigint, data: string]\ndf: org.apache.spark.sql.DataFrame \u003d [id: bigint, data: string]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d58"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d59"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d60"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d61"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d62"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d63"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1657419104919_877547985",
+      "id": "paragraph_1657419104919_877547985",
+      "dateCreated": "2022-07-10 02:11:44.919",
+      "dateStarted": "2022-07-10 02:46:54.402",
+      "dateFinished": "2022-07-10 02:46:55.150",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Time travel",
+      "text": "%spark\n\nvar df \u003d spark.read\n            .option(\"snapshot-id\", 4053879780177651980L)\n            .format(\"iceberg\")\n            .load(\"local.db.events\")\ndf.show()\n\ndf \u003d spark.read\n            .option(\"snapshot-id\", 5145784663145387334L)\n            .format(\"iceberg\")\n            .load(\"local.db.events\")\ndf.show()\n\ndf \u003d spark.read\n            .option(\"snapshot-id\", 4672191299963005851L)\n            .format(\"iceberg\")\n            .load(\"local.db.events\")\ndf.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 02:17:06.597",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+----+\n| id|data|\n+---+----+\n|  1|   a|\n|  2|   b|\n|  3|   c|\n+---+----+\n\n+---+---------+\n| id|     data|\n+---+---------+\n|  3|c_updated|\n|  1|        a|\n|  2|        b|\n+---+---------+\n\n+---+---------+\n| id|     data|\n+---+---------+\n|  3|c_updated|\n|  1|        a|\n+---+---------+\n\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [id: bigint, data: string]\ndf: org.apache.spark.sql.DataFrame \u003d [id: bigint, data: string]\ndf: org.apache.spark.sql.DataFrame \u003d [id: bigint, data: string]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d42"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d43"
+            },
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d44"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656320983090_404972729",
+      "id": "paragraph_1656320983090_404972729",
+      "dateCreated": "2022-06-27 09:09:43.090",
+      "dateStarted": "2022-07-10 02:17:06.610",
+      "dateFinished": "2022-07-10 02:17:07.372",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Inspect history meta table",
+      "text": "%spark.sql\n\nSELECT * FROM local.db.events.history\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 03:26:39.339",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "made_current_at": "string",
+                      "snapshot_id": "string",
+                      "parent_id": "string",
+                      "is_current_ancestor": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "made_current_at\tsnapshot_id\tparent_id\tis_current_ancestor\n2022-07-10 01:58:41.091\t4053879780177651980\tnull\ttrue\n2022-07-10 02:03:55.655\t5145784663145387334\t4053879780177651980\ttrue\n2022-07-10 02:08:45.273\t4672191299963005851\t5145784663145387334\ttrue\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d45"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1656321109351_1781474212",
+      "id": "paragraph_1656321109351_1781474212",
+      "dateCreated": "2022-06-27 09:11:49.351",
+      "dateStarted": "2022-07-10 02:22:31.025",
+      "dateFinished": "2022-07-10 02:22:31.096",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Inspect snapshot meta table",
+      "text": "%spark.sql\n\n\nselect * from local.db.events.snapshots\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 03:26:34.849",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "committed_at": "string",
+                      "snapshot_id": "string",
+                      "parent_id": "string",
+                      "operation": "string",
+                      "manifest_list": "string",
+                      "summary": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          },
+          "1": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "committed_at": "string",
+                      "snapshot_id": "string",
+                      "parent_id": "string",
+                      "operation": "string",
+                      "manifest_list": "string",
+                      "summary": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "committed_at\tsnapshot_id\tparent_id\toperation\tmanifest_list\tsummary\n2022-07-10 01:58:41.091\t4053879780177651980\tnull\tappend\t/tmp/warehouse/db/events/metadata/snap-4053879780177651980-1-df7157f3-8700-410d-b4aa-2471eb113d56.avro\tMap(added-records -\u003e 3, total-equality-deletes -\u003e 0, changed-partition-count -\u003e 1, total-position-deletes -\u003e 0, total-files-size -\u003e 1929, total-records -\u003e 3, total-delete-files -\u003e 0, added-data-files -\u003e 3, total-data-files -\u003e 3, added-files-size -\u003e 1929, spark.app.id -\u003e local-1657417990765)\n2022-07-10 02:03:55.655\t5145784663145387334\t4053879780177651980\toverwrite\t/tmp/warehouse/db/events/metadata/snap-5145784663145387334-1-10e3f936-0d3e-4f43-b257-8fef44bf34e6.avro\tMap(added-records -\u003e 1, total-equality-deletes -\u003e 0, changed-partition-count -\u003e 1, removed-files-size -\u003e 643, total-position-deletes -\u003e 0, total-files-size -\u003e 2000, total-records -\u003e 3, total-delete-files -\u003e 0, added-data-files -\u003e 1, total-data-files -\u003e 3, added-files-size -\u003e 714, deleted-data-files -\u003e 1, deleted-records -\u003e 1, spark.app.id -\u003e local-1657417990765)\n2022-07-10 02:08:45.273\t4672191299963005851\t5145784663145387334\tdelete\t/tmp/warehouse/db/events/metadata/snap-4672191299963005851-1-386475d9-62a0-4aa5-bc8a-ea7ca5f0bf95.avro\tMap(total-equality-deletes -\u003e 0, changed-partition-count -\u003e 1, removed-files-size -\u003e 643, total-position-deletes -\u003e 0, total-files-size -\u003e 1357, total-records -\u003e 2, total-delete-files -\u003e 0, total-data-files -\u003e 2, deleted-data-files -\u003e 1, deleted-records -\u003e 1, spark.app.id -\u003e local-1657417990765)\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d46"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637833449048_1206405581",
+      "id": "paragraph_1637833449048_1206405581",
+      "dateCreated": "2021-11-25 09:44:09.000",
+      "dateStarted": "2022-07-10 02:22:35.194",
+      "dateFinished": "2022-07-10 02:22:35.393",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Inspect manifest meta table",
+      "text": "%spark.sql\n\nSELECT * FROM local.db.events.manifests where added_snapshot_id \u003d 5145784663145387334\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 03:26:29.703",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "path": "string",
+                      "length": "string",
+                      "partition_spec_id": "string",
+                      "added_snapshot_id": "string",
+                      "added_data_files_count": "string",
+                      "existing_data_files_count": "string",
+                      "deleted_data_files_count": "string",
+                      "partition_summaries": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "path\tlength\tpartition_spec_id\tadded_snapshot_id\tadded_data_files_count\texisting_data_files_count\tdeleted_data_files_count\tpartition_summaries\n/tmp/warehouse/db/events/metadata/10e3f936-0d3e-4f43-b257-8fef44bf34e6-m1.avro\t5777\t0\t5145784663145387334\t1\t0\t0\tWrappedArray()\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d48"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637740541535_441277477",
+      "id": "paragraph_1637740541535_441277477",
+      "dateCreated": "2021-11-24 07:55:41.000",
+      "dateStarted": "2022-07-10 02:23:12.747",
+      "dateFinished": "2022-07-10 02:23:12.895",
+      "status": "FINISHED"
+    },
+    {
+      "title": "Inspect files meta table",
+      "text": "%spark.sql\n\nSELECT * FROM local.db.events.files\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-07-10 03:26:24.828",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "content": "string",
+                      "file_path": "string",
+                      "file_format": "string",
+                      "spec_id": "string",
+                      "record_count": "string",
+                      "file_size_in_bytes": "string",
+                      "column_sizes": "string",
+                      "value_counts": "string",
+                      "null_value_counts": "string",
+                      "nan_value_counts": "string",
+                      "lower_bounds": "string",
+                      "upper_bounds": "string",
+                      "key_metadata": "string",
+                      "split_offsets": "string",
+                      "equality_ids": "string",
+                      "sort_order_id": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "content\tfile_path\tfile_format\tspec_id\trecord_count\tfile_size_in_bytes\tcolumn_sizes\tvalue_counts\tnull_value_counts\tnan_value_counts\tlower_bounds\tupper_bounds\tkey_metadata\tsplit_offsets\tequality_ids\tsort_order_id\n0\t/tmp/warehouse/db/events/data/00129-18-065537c3-f309-4238-a474-3fdce031799e-00001.parquet\tPARQUET\t0\t1\t714\tMap(1 -\u003e 52, 2 -\u003e 60)\tMap(1 -\u003e 1, 2 -\u003e 1)\tMap(1 -\u003e 0, 2 -\u003e 0)\tMap()\tMap(1 -\u003e [B@1c0380ba, 2 -\u003e [B@29f82f44)\tMap(1 -\u003e [B@486daf27, 2 -\u003e [B@4271529d)\tnull\tWrappedArray(4)\tnull\t0\n0\t/tmp/warehouse/db/events/data/00000-0-848f884a-cae1-4e89-aca1-1d3ee9962aaa-00001.parquet\tPARQUET\t0\t1\t643\tMap(1 -\u003e 46, 2 -\u003e 48)\tMap(1 -\u003e 1, 2 -\u003e 1)\tMap(1 -\u003e 0, 2 -\u003e 0)\tMap()\tMap(1 -\u003e [B@42771c39, 2 -\u003e [B@2a9d893c)\tMap(1 -\u003e [B@f2c1fdf, 2 -\u003e [B@4781411d)\tnull\tWrappedArray(4)\tnull\t0\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://e1efbd716bbc:4040/jobs/job?id\u003d49"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637735771606_866494830",
+      "id": "paragraph_1637735771606_866494830",
+      "dateCreated": "2021-11-24 06:36:11.000",
+      "dateStarted": "2022-07-10 02:23:16.525",
+      "dateFinished": "2022-07-10 02:23:16.756",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.sql\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-11-24 08:04:40.000",
+      "progress": 0,
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1637741080505_1398438398",
+      "id": "paragraph_1637741080505_1398438398",
+      "dateCreated": "2021-11-24 08:04:40.000",
+      "status": "READY"
+    }
+  ],
+  "name": "Deep Dive into Iceberg",
+  "id": "2GNNXUT7E",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.11.0-SNAPSHOT",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {}
+}
